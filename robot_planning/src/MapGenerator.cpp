@@ -14,7 +14,12 @@ struct Graph
 {
     std::map<Point, std::vector<Point>> adjVector;
 };
+/*
+    1. the communication between nodes: services, messages...
+    2. how to organize map generator with 2 diff aproaches (cell + sample)
+    3. discuss the algorithm (the paper)
 
+*/
 class MapGenerator
 {
     public:
