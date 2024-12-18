@@ -2,8 +2,9 @@
 #include <vector>
 #include <map>
 #include <iostream>
-#include <iostream>
 
+
+/* 
 struct Point
 {
     int x;
@@ -13,22 +14,23 @@ struct Point
 struct Graph
 {
     std::map<Point, std::vector<Point>> adjVector;
-};
+}; 
+*/
+
 /*
     1. the communication between nodes: services, messages...
     2. how to organize map generator with 2 diff aproaches (cell + sample)
     3. discuss the algorithm (the paper)
-
 */
-class MapGenerator
+class IMapGenerator
 {
     public:
         Graph G;
 
-    private:
-        Graph toGenerateMap(int interactions)
+        virtual Graph toGenerateMap(int interactions)
         {
-            int count = 0;
+            
+            /* int count = 0;
 
             Point init{0, 0};
 
@@ -50,29 +52,38 @@ class MapGenerator
                 {
                     return G;
                 }
-            }
-            return G;
+            }*/
+            return G; 
         };
-
-        float getRandPosition(float min, float max)
+        
+        std::vector<Obstacle> toGetObstacles()
         {
-            float random = min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
-            return random;
-        };
-
-        // think if service or message from the Obstacle node
+            return (new std::vector<Obstacle>());
+        }
+    
         bool isItInObstacle(Point p)
         {
             return false;
         };
 
-        Point toFindNearest(Graph g, Point p)
-        {
-            return (Point{0, 0});
-        };
-
-        bool isReachedGate(Point p)
+        bool isItSafe()
         {
             return true;
         };
+
+        /* float getRandPosition(float min, float max)
+        {
+            float random = min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
+            return random;
+        }; */
+
+        /* Point toFindNearest(Graph g, Point p)
+        {
+            return (Point{0, 0});
+        }; */
+
+        /* bool isReachedGate(Point p)
+        {
+            return true;
+        }; */
 }
