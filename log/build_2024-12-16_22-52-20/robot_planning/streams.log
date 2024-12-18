@@ -1,0 +1,35 @@
+[0.084s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8
+[0.465s] [ 16%] [32mBuilding CXX object CMakeFiles/borders.dir/src/listenerBorders.cpp.o[0m
+[0.480s] [ 33%] [32mBuilding CXX object CMakeFiles/gates.dir/src/listenerGates.cpp.o[0m
+[0.488s] [ 50%] [32mBuilding CXX object CMakeFiles/obstacles.dir/src/listenerObstacles.cpp.o[0m
+[16.316s] [ 66%] [32m[1mLinking CXX executable gates[0m
+[16.317s] [ 83%] [32m[1mLinking CXX executable borders[0m
+[16.732s] [100%] [32m[1mLinking CXX executable obstacles[0m
+[17.265s] [100%] Built target borders
+[17.265s] [100%] Built target gates
+[17.665s] [100%] Built target obstacles
+[17.679s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8
+[17.880s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/robot_planning
+[18.010s] -- Install configuration: ""
+[18.010s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/borders
+[18.018s] -- Set non-toolchain portion of runtime path of "/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/borders" to ""
+[18.019s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/gates
+[18.025s] -- Set non-toolchain portion of runtime path of "/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/gates" to ""
+[18.026s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/obstacles
+[18.032s] -- Set non-toolchain portion of runtime path of "/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/obstacles" to ""
+[18.033s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/ament_index/resource_index/package_run_dependencies/robot_planning
+[18.033s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/ament_index/resource_index/parent_prefix_path/robot_planning
+[18.033s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/ament_prefix_path.sh
+[18.034s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/ament_prefix_path.dsv
+[18.034s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/path.sh
+[18.034s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/path.dsv
+[18.035s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.bash
+[18.035s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.sh
+[18.035s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.zsh
+[18.035s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.dsv
+[18.036s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.dsv
+[18.036s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/ament_index/resource_index/packages/robot_planning
+[18.037s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/cmake/robot_planningConfig.cmake
+[18.037s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/cmake/robot_planningConfig-version.cmake
+[18.038s] -- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.xml
+[18.041s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/robot_planning

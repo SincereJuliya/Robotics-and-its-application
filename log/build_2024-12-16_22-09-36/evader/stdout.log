@@ -1,0 +1,3 @@
+[ 50%] [32mBuilding CXX object CMakeFiles/evader.dir/src/evader.cpp.o[0m
+[100%] [32m[1mLinking CXX executable evader[0m
+[100%] Built target evader

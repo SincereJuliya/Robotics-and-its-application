@@ -1,0 +1,39 @@
+[0.057s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
+[0.323s] [ 50%] [32mBuilding CXX object CMakeFiles/evader.dir/src/evader.cpp.o[0m
+[8.500s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:[m[K In member function ‘[01m[Kvoid Evader::start_callback(std::shared_ptr<std_srvs::srv::Empty_Request_<std::allocator<void> > >, std::shared_ptr<std_srvs::srv::Empty_Response_<std::allocator<void> > >)[m[K’:
+[8.500s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:159:67:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Krequest[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.500s]   159 | void Evader::start_callback([01;35m[Kconst std::shared_ptr<Empty::Request> request[m[K,
+[8.501s]       |                             [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[8.501s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:160:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kresponse[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.501s]   160 |             [01;35m[Kstd::shared_ptr<Empty::Response> response[m[K)
+[8.501s]       |             [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~[m[K
+[8.503s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:[m[K In member function ‘[01m[Kvoid Evader::feedback_path_planning_callback(rclcpp_action::ClientGoalHandle<nav2_msgs::action::ComputePathToPose>::SharedPtr, std::shared_ptr<const nav2_msgs::action::ComputePathToPose_Feedback_<std::allocator<void> > >)[m[K’:
+[8.503s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:202:60:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kfeedback[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.503s]   202 |   [01;35m[Kconst std::shared_ptr<const ComputePathToPose::Feedback> feedback[m[K)
+[8.504s]       |   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~[m[K
+[8.568s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:[m[K In member function ‘[01m[Kvoid Evader::feedback_path_following_callback(rclcpp_action::ClientGoalHandle<nav2_msgs::action::FollowPath>::SharedPtr, std::shared_ptr<const nav2_msgs::action::FollowPath_Feedback_<std::allocator<void> > >)[m[K’:
+[8.568s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader/src/evader.cpp:261:53:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kfeedback[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[8.569s]   261 |   [01;35m[Kconst std::shared_ptr<const FollowPath::Feedback> feedback[m[K)
+[8.569s]       |   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~[m[K
+[34.925s] [100%] [32m[1mLinking CXX executable evader[0m
+[36.922s] [100%] Built target evader
+[36.951s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/evader' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
+[37.131s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/evader
+[37.274s] -- Install configuration: ""
+[37.275s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/lib/evader/evader
+[37.291s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/ament_index/resource_index/package_run_dependencies/evader
+[37.291s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/ament_index/resource_index/parent_prefix_path/evader
+[37.292s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/ament_prefix_path.sh
+[37.292s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/ament_prefix_path.dsv
+[37.293s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/path.sh
+[37.293s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/path.dsv
+[37.294s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.bash
+[37.294s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.sh
+[37.294s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.zsh
+[37.295s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.dsv
+[37.295s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/package.dsv
+[37.295s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/ament_index/resource_index/packages/evader
+[37.296s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/cmake/evaderConfig.cmake
+[37.296s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/cmake/evaderConfig-version.cmake
+[37.297s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/package.xml
+[37.302s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/evader' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/evader

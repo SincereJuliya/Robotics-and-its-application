@@ -1,0 +1,57 @@
+[0.058s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/robot_planning -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning
+[0.267s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.268s]   Compatibility with CMake < 3.10 will be removed from a future version of
+[0.268s]   CMake.
+[0.268s] 
+[0.268s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[0.269s]   CMake that the project does not need compatibility with older versions.
+[0.269s] 
+[0.269s] [0m
+[0.396s] -- The C compiler identification is GNU 11.4.0
+[0.543s] -- The CXX compiler identification is GNU 11.4.0
+[0.564s] -- Detecting C compiler ABI info
+[0.730s] -- Detecting C compiler ABI info - done
+[0.777s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.778s] -- Detecting C compile features
+[0.782s] -- Detecting C compile features - done
+[0.819s] -- Detecting CXX compiler ABI info
+[1.014s] -- Detecting CXX compiler ABI info - done
+[1.060s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.062s] -- Detecting CXX compile features
+[1.066s] -- Detecting CXX compile features - done
+[1.086s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.438s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter
+[1.664s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[1.794s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.811s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.837s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.879s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.938s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.092s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.100s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.360s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")
+[2.444s] -- Found FastRTPS: /opt/ros/humble/include
+[2.550s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.570s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.758s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.759s] -- Found Threads: TRUE
+[2.940s] -- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+[2.996s] [31mCMake Error at CMakeLists.txt:13 (find_package):
+[2.996s]   By not providing "Findobstacles_msgs.cmake" in CMAKE_MODULE_PATH this
+[2.996s]   project has asked CMake to find a package configuration file provided by
+[2.997s]   "obstacles_msgs", but CMake did not find one.
+[2.997s] 
+[2.997s]   Could not find a package configuration file provided by "obstacles_msgs"
+[2.997s]   with any of the following names:
+[2.997s] 
+[2.998s]     obstacles_msgsConfig.cmake
+[2.998s]     obstacles_msgs-config.cmake
+[2.998s] 
+[2.998s]   Add the installation prefix of "obstacles_msgs" to CMAKE_PREFIX_PATH or set
+[2.998s]   "obstacles_msgs_DIR" to a directory containing one of the above files.  If
+[2.999s]   "obstacles_msgs" provides a separate development package or SDK, be sure it
+[2.999s]   has been installed.
+[2.999s] 
+[2.999s] [0m
+[2.999s] -- Configuring incomplete, errors occurred!
+[3.025s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/robot_planning -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning

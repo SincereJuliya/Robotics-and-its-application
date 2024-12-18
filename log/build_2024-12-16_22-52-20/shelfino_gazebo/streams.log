@@ -1,0 +1,42 @@
+[0.069s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo -- -j8 -l8
+[0.400s] [100%] Built target destroy_shelfino
+[0.436s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo -- -j8 -l8
+[1.001s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo
+[1.403s] -- Install configuration: ""
+[1.403s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/lib/shelfino_gazebo/destroy_shelfino
+[1.412s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/launch
+[1.412s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/launch/shelfino.launch.py
+[1.413s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds
+[1.421s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_new
+[1.421s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_new/model.sdf
+[1.430s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_new/model.config
+[1.454s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/labIoTOT.world
+[1.454s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/empty.world
+[1.455s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon.world
+[1.455s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world
+[1.455s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world/model.sdf
+[1.455s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world/meshes
+[1.455s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world/meshes/hexagon.dae
+[1.455s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world/meshes/wall.dae
+[1.456s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world/model.config
+[1.456s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/hexagon_world/model-1_4.sdf
+[1.456s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/povo.world
+[1.456s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/rectangle_world
+[1.457s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/rectangle_world/model.sdf
+[1.461s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/worlds/rectangle_world/model.config
+[1.461s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/ament_index/resource_index/package_run_dependencies/shelfino_gazebo
+[1.461s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/ament_index/resource_index/parent_prefix_path/shelfino_gazebo
+[1.463s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/environment/ament_prefix_path.sh
+[1.463s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/environment/ament_prefix_path.dsv
+[1.464s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/environment/path.sh
+[1.465s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/environment/path.dsv
+[1.465s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/local_setup.bash
+[1.465s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/local_setup.sh
+[1.466s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/local_setup.zsh
+[1.466s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/local_setup.dsv
+[1.471s] -- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/package.dsv
+[1.472s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/ament_index/resource_index/packages/shelfino_gazebo
+[1.472s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/cmake/shelfino_gazeboConfig.cmake
+[1.472s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/cmake/shelfino_gazeboConfig-version.cmake
+[1.472s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_gazebo/share/shelfino_gazebo/package.xml
+[1.509s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo

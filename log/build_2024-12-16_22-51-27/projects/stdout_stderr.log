@@ -1,0 +1,20 @@
+-- Install configuration: ""
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/launch
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/launch/victims.launch.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/launch/evader.launch.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/launch/evacuation.launch.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/ament_index/resource_index/package_run_dependencies/projects
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/ament_index/resource_index/parent_prefix_path/projects
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/environment/ament_prefix_path.sh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/environment/path.sh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/environment/path.dsv
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/local_setup.bash
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/local_setup.sh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/local_setup.zsh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/local_setup.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/package.dsv
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/ament_index/resource_index/packages/projects
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/cmake/projectsConfig.cmake
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/cmake/projectsConfig-version.cmake
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/projects/share/projects/package.xml

@@ -1,0 +1,117 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter
+-- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")
+-- Found FastRTPS: /opt/ros/humble/include
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found rclpy: 3.3.14 (/opt/ros/humble/share/rclpy/cmake)
+-- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+-- Found obstacles_msgs: 0.1.2 (/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/share/obstacles_msgs/cmake)
+-- Found tf2: 0.25.8 (/opt/ros/humble/share/tf2/cmake)
+-- Found tf2_ros: 0.25.8 (/opt/ros/humble/share/tf2_ros/cmake)
+-- Found lifecycle_msgs: 1.2.1 (/opt/ros/humble/share/lifecycle_msgs/cmake)
+-- Found rclcpp_lifecycle: 16.0.10 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+-- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)
+-- Found Python3: /usr/include/python3.10 (found version "3.10.12") found components: Development Development.Module Development.Embed
+-- Configuring done (3.6s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/seventeen/Robotics-and-its-application/build/map_pkg
+[  6%] [32mBuilding CXX object CMakeFiles/send_victims.dir/src/utilities.cpp.o[0m
+[ 13%] [32mBuilding CXX object CMakeFiles/send_victims.dir/src/send_victims.cpp.o[0m
+[ 20%] [32mBuilding CXX object CMakeFiles/send_gates.dir/src/send_gates.cpp.o[0m
+[ 26%] [32mBuilding CXX object CMakeFiles/send_gates.dir/src/utilities.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/send_borders.dir/src/send_borders.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/send_borders.dir/src/utilities.cpp.o[0m
+[ 46%] [32mBuilding CXX object CMakeFiles/send_obstacles.dir/src/send_obstacles.cpp.o[0m
+[ 53%] [32mBuilding CXX object CMakeFiles/send_timeout.dir/src/send_timeout.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/send_timeout.dir/src/utilities.cpp.o[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/send_obstacles.dir/src/utilities.cpp.o[0m
+[ 73%] [32m[1mLinking CXX executable send_gates[0m
+[ 73%] Built target send_gates
+[ 80%] [32m[1mLinking CXX executable send_borders[0m
+[ 80%] Built target send_borders
+[ 86%] [32m[1mLinking CXX executable send_victims[0m
+[ 93%] [32m[1mLinking CXX executable send_timeout[0m
+[100%] [32m[1mLinking CXX executable send_obstacles[0m
+[100%] Built target send_timeout
+[100%] Built target send_victims
+[100%] Built target send_obstacles
+-- Install configuration: ""
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/spawn_map.launch.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_borders.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_utility_.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_obstacles.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/geo_utility.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_gates.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.sdf
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.config
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.sdf
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.config
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.sdf
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.config
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.sdf
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.config
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims2.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims4.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims1.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims3.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation3.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation2.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation4.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation1.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/map_config.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_borders
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_gates
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_obstacles
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_victims
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_timeout
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/create_map_pgm.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/generate_config_file.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/package_run_dependencies/map_pkg
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/parent_prefix_path/map_pkg
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.bash
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.zsh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/packages/map_pkg
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig.cmake
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig-version.cmake
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.xml

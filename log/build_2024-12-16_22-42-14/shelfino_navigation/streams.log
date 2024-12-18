@@ -1,0 +1,29 @@
+[0.039s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_navigation -- -j8 -l8
+[0.247s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.248s]   Compatibility with CMake < 3.10 will be removed from a future version of
+[0.248s]   CMake.
+[0.248s] 
+[0.248s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[0.248s]   CMake that the project does not need compatibility with older versions.
+[0.249s] 
+[0.249s] [0m
+[0.281s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.775s] Traceback (most recent call last):
+[0.775s]   File "/opt/ros/humble/share/ament_cmake_core/cmake/package_templates/templates_2_cmake.py", line 21, in <module>
+[0.775s]     from ament_package.templates import get_environment_hook_template_path
+[0.775s] ModuleNotFoundError: No module named 'ament_package'
+[0.816s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/ament_cmake_package_templates-extras.cmake:41 (message):
+[0.817s]   execute_process(/usr/bin/python3
+[0.817s]   /opt/ros/humble/share/ament_cmake_core/cmake/package_templates/templates_2_cmake.py
+[0.817s]   /home/seventeen/Robotics-and-its-application/build/shelfino_navigation/ament_cmake_package_templates/templates.cmake)
+[0.818s]   returned error code 1
+[0.818s] Call Stack (most recent call first):
+[0.818s]   /opt/ros/humble/share/ament_cmake_core/cmake/ament_cmake_coreConfig.cmake:41 (include)
+[0.818s]   /opt/ros/humble/share/ament_cmake/cmake/ament_cmake_export_dependencies-extras.cmake:15 (find_package)
+[0.818s]   /opt/ros/humble/share/ament_cmake/cmake/ament_cmakeConfig.cmake:41 (include)
+[0.819s]   CMakeLists.txt:11 (find_package)
+[0.819s] 
+[0.819s] [0m
+[0.820s] -- Configuring incomplete, errors occurred!
+[0.827s] gmake: *** [Makefile:226: cmake_check_build_system] Error 1
+[0.831s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation' returned '2': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_navigation -- -j8 -l8

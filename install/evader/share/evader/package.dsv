@@ -1,0 +1,8 @@
+source;share/evader/hook/cmake_prefix_path.ps1
+source;share/evader/hook/cmake_prefix_path.dsv
+source;share/evader/hook/cmake_prefix_path.sh
+source;share/evader/local_setup.bash
+source;share/evader/local_setup.dsv
+source;share/evader/local_setup.ps1
+source;share/evader/local_setup.sh
+source;share/evader/local_setup.zsh

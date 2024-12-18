@@ -1,0 +1,9 @@
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/uninstall.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/projects_uninstall.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/test.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/edit_cache.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/rebuild_cache.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/list_install_components.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/install.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/install/local.dir
+/home/seventeen/Robotics-and-its-application/build/projects/CMakeFiles/install/strip.dir
