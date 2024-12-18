@@ -1,0 +1,22 @@
+[0.050s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
+[0.397s] [100%] Built target evader
+[0.417s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/evader' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
+[0.757s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/evader
+[0.945s] -- Install configuration: ""
+[0.946s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/lib/evader/evader
+[0.946s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/ament_index/resource_index/package_run_dependencies/evader
+[0.946s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/ament_index/resource_index/parent_prefix_path/evader
+[0.947s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/ament_prefix_path.sh
+[0.947s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/ament_prefix_path.dsv
+[0.947s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/path.sh
+[0.948s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/environment/path.dsv
+[0.948s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.bash
+[0.949s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.sh
+[0.949s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.zsh
+[0.949s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/local_setup.dsv
+[0.949s] -- Installing: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/package.dsv
+[0.949s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/ament_index/resource_index/packages/evader
+[0.950s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/cmake/evaderConfig.cmake
+[0.950s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/cmake/evaderConfig-version.cmake
+[0.950s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/evader/share/evader/package.xml
+[0.954s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/evader' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/evader

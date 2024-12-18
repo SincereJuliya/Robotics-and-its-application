@@ -1,0 +1,64 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter
+-- Configuring done (1.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/seventeen/Robotics-and-its-application/build/shelfino_navigation
+-- Install configuration: ""
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch/shelfino_nav.launch.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch/multi_shelfino_nav.launch.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch/shelfino2_slam.launch.py
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/config
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/config/shelfino.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz/shelfino_nav.rviz
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz/shelfino2_slam.rviz
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz/shelfino_nav_backup.rviz
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio3.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio2.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/dynamic_map.png
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/test_obstacles.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab1.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio1.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/test_obstacles.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/hexagon.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/dynamic_map.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab1.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio3.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/demo.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio2.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio1.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/hexagon.pgm
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/demo.yaml
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/ament_index/resource_index/package_run_dependencies/shelfino_navigation
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/ament_index/resource_index/parent_prefix_path/shelfino_navigation
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/ament_prefix_path.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/ament_prefix_path.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/path.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/path.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.bash
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.zsh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/ament_index/resource_index/packages/shelfino_navigation
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/cmake/shelfino_navigationConfig.cmake
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/cmake/shelfino_navigationConfig-version.cmake
+-- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.xml

@@ -1,0 +1,16 @@
+[0.071s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8
+[0.391s] [ 16%] [32mBuilding CXX object CMakeFiles/borders.dir/src/listenerBorders.cpp.o[0m
+[0.416s] [ 33%] [32mBuilding CXX object CMakeFiles/obstacles.dir/src/listenerObstacles.cpp.o[0m
+[0.416s] [ 50%] [32mBuilding CXX object CMakeFiles/gates.dir/src/listenerGates.cpp.o[0m
+[6.575s] [01m[K/home/seventeen/Robotics-and-its-application/src/robot_planning/src/listenerObstacles.cpp:22:1:[m[K [01;31m[Kerror: [m[K‘[01m[KObstacle[m[K’ does not name a type
+[6.576s]    22 | [01;31m[KObstacle[m[K {
+[6.576s]       | [01;31m[K^~~~~~~~[m[K
+[11.299s] gmake[2]: *** [CMakeFiles/obstacles.dir/build.make:79: CMakeFiles/obstacles.dir/src/listenerObstacles.cpp.o] Error 1
+[11.299s] gmake[1]: *** [CMakeFiles/Makefile2:219: CMakeFiles/obstacles.dir/all] Error 2
+[11.299s] gmake[1]: *** Waiting for unfinished jobs....
+[14.411s] [ 66%] [32m[1mLinking CXX executable borders[0m
+[14.635s] [ 83%] [32m[1mLinking CXX executable gates[0m
+[15.306s] [ 83%] Built target borders
+[15.313s] [ 83%] Built target gates
+[15.316s] gmake: *** [Makefile:146: all] Error 2
+[15.320s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8

@@ -1,0 +1,66 @@
+[0.043s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/map_pkg': CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/home/seventeen/Robotics-and-its-application/install/projects:/home/seventeen/Robotics-and-its-application/install/shelfino_navigation:/home/seventeen/Robotics-and-its-application/install/shelfino_gazebo:/home/seventeen/Robotics-and-its-application/install/shelfino_description:/home/seventeen/Robotics-and-its-application/install/map_pkg:/home/seventeen/Robotics-and-its-application/install/evader:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/map_pkg -- -j8 -l8
+[0.420s] [ 20%] Built target send_borders
+[0.443s] [ 60%] Built target send_victims
+[0.446s] [ 60%] Built target send_gates
+[0.454s] [ 80%] Built target send_timeout
+[0.455s] [100%] Built target send_obstacles
+[0.473s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/map_pkg' returned '0': CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/home/seventeen/Robotics-and-its-application/install/projects:/home/seventeen/Robotics-and-its-application/install/shelfino_navigation:/home/seventeen/Robotics-and-its-application/install/shelfino_gazebo:/home/seventeen/Robotics-and-its-application/install/shelfino_description:/home/seventeen/Robotics-and-its-application/install/map_pkg:/home/seventeen/Robotics-and-its-application/install/evader:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/map_pkg -- -j8 -l8
+[0.756s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/map_pkg': CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/home/seventeen/Robotics-and-its-application/install/projects:/home/seventeen/Robotics-and-its-application/install/shelfino_navigation:/home/seventeen/Robotics-and-its-application/install/shelfino_gazebo:/home/seventeen/Robotics-and-its-application/install/shelfino_description:/home/seventeen/Robotics-and-its-application/install/map_pkg:/home/seventeen/Robotics-and-its-application/install/evader:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/map_pkg
+[1.005s] -- Install configuration: ""
+[1.005s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch
+[1.008s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/spawn_map.launch.py
+[1.008s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts
+[1.008s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_borders.py
+[1.013s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_utility_.py
+[1.013s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_obstacles.py
+[1.013s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/geo_utility.py
+[1.013s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_gates.py
+[1.014s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models
+[1.014s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder
+[1.014s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.sdf
+[1.014s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.config
+[1.015s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate
+[1.015s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.sdf
+[1.015s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.config
+[1.015s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box
+[1.015s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.sdf
+[1.016s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.config
+[1.016s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim
+[1.016s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.sdf
+[1.020s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.config
+[1.020s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config
+[1.020s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos
+[1.021s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims
+[1.021s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims2.yaml
+[1.021s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims4.yaml
+[1.021s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims1.yaml
+[1.021s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims3.yaml
+[1.021s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation
+[1.022s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation3.yaml
+[1.022s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation2.yaml
+[1.022s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation4.yaml
+[1.022s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation1.yaml
+[1.022s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/map_config.yaml
+[1.023s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_borders
+[1.023s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_gates
+[1.023s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_obstacles
+[1.026s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_victims
+[1.027s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_timeout
+[1.027s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/create_map_pgm.py
+[1.027s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/generate_config_file.py
+[1.028s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/package_run_dependencies/map_pkg
+[1.028s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/parent_prefix_path/map_pkg
+[1.028s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.sh
+[1.028s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.dsv
+[1.028s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.sh
+[1.029s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.dsv
+[1.029s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.bash
+[1.030s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.sh
+[1.030s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.zsh
+[1.031s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.dsv
+[1.031s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.dsv
+[1.031s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/packages/map_pkg
+[1.032s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig.cmake
+[1.032s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig-version.cmake
+[1.032s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.xml
+[1.033s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/map_pkg' returned '0': CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/home/seventeen/Robotics-and-its-application/install/projects:/home/seventeen/Robotics-and-its-application/install/shelfino_navigation:/home/seventeen/Robotics-and-its-application/install/shelfino_gazebo:/home/seventeen/Robotics-and-its-application/install/shelfino_description:/home/seventeen/Robotics-and-its-application/install/map_pkg:/home/seventeen/Robotics-and-its-application/install/evader:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/map_pkg

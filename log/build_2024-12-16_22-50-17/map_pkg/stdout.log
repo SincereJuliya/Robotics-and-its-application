@@ -1,0 +1,62 @@
+[ 20%] Built target send_obstacles
+[ 40%] Built target send_timeout
+[ 60%] Built target send_gates
+[ 80%] Built target send_victims
+[100%] Built target send_borders
+-- Install configuration: ""
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/spawn_map.launch.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_borders.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_utility_.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_obstacles.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/geo_utility.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_gates.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.sdf
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.config
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.sdf
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.config
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.sdf
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.config
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.sdf
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.config
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims2.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims4.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims1.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims3.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation3.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation2.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation4.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation1.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/map_config.yaml
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_borders
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_gates
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_obstacles
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_victims
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_timeout
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/create_map_pgm.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/generate_config_file.py
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/package_run_dependencies/map_pkg
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/parent_prefix_path/map_pkg
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.sh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.sh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.dsv
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.bash
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.sh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.zsh
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.dsv
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/packages/map_pkg
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig.cmake
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig-version.cmake
+-- Up-to-date: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.xml

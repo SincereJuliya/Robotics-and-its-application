@@ -1,0 +1,50 @@
+[0.058s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_navigation -- -j8 -l8
+[0.254s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_navigation -- -j8 -l8
+[0.941s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_navigation
+[1.173s] -- Install configuration: ""
+[1.174s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch
+[1.174s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch/shelfino_nav.launch.py
+[1.178s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/launch/multi_shelfino_nav.launch.py
+[1.178s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/config
+[1.179s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/config/shelfino.yaml
+[1.179s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz
+[1.179s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz/shelfino_nav.rviz
+[1.179s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz/shelfino2_slam.rviz
+[1.179s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/rviz/shelfino_nav_backup.rviz
+[1.180s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps
+[1.180s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio3.yaml
+[1.180s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio.pgm
+[1.181s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio2.yaml
+[1.182s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/dynamic_map.png
+[1.182s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/test_obstacles.pgm
+[1.182s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab1.pgm
+[1.182s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio1.yaml
+[1.182s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/test_obstacles.yaml
+[1.182s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab.yaml
+[1.183s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/hexagon.yaml
+[1.183s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/dynamic_map.yaml
+[1.187s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab1.yaml
+[1.187s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio3.pgm
+[1.188s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/lab.pgm
+[1.188s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio.yaml
+[1.188s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/demo.pgm
+[1.188s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio2.pgm
+[1.188s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/ufficio1.pgm
+[1.188s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/hexagon.pgm
+[1.189s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/maps/demo.yaml
+[1.189s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/ament_index/resource_index/package_run_dependencies/shelfino_navigation
+[1.189s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/ament_index/resource_index/parent_prefix_path/shelfino_navigation
+[1.189s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/ament_prefix_path.sh
+[1.189s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/ament_prefix_path.dsv
+[1.189s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/path.sh
+[1.190s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/environment/path.dsv
+[1.190s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.bash
+[1.194s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.sh
+[1.195s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.zsh
+[1.195s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/local_setup.dsv
+[1.196s] -- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.dsv
+[1.196s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/ament_index/resource_index/packages/shelfino_navigation
+[1.196s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/cmake/shelfino_navigationConfig.cmake
+[1.197s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/cmake/shelfino_navigationConfig-version.cmake
+[1.197s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.xml
+[1.199s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_navigation

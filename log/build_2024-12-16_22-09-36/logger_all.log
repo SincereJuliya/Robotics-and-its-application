@@ -1,0 +1,397 @@
+[0.183s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.183s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x74d914656ec0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x74d91475b580>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x74d91475b580>>, mixin_verb=('build',))
+[0.501s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.502s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.502s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.502s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.502s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.502s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.502s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/seventeen/Robotics-and-its-application'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.522s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.522s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.522s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.522s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.522s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.523s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.523s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.523s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.523s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.523s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.523s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.524s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extensions ['ignore', 'ignore_ament_install']
+[0.525s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'ignore'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'ignore_ament_install'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extensions ['colcon_pkg']
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'colcon_pkg'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extensions ['colcon_meta']
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'colcon_meta'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extensions ['ros']
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'ros'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extensions ['cmake', 'python']
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'cmake'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'python'
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extensions ['python_setup_py']
+[0.526s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2) by extension 'python_setup_py'
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extensions ['ignore', 'ignore_ament_install']
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'ignore'
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'ignore_ament_install'
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extensions ['colcon_pkg']
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'colcon_pkg'
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extensions ['colcon_meta']
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'colcon_meta'
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extensions ['ros']
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'ros'
+[0.527s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extensions ['cmake', 'python']
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'cmake'
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'python'
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extensions ['python_setup_py']
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets) by extension 'python_setup_py'
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extensions ['ignore', 'ignore_ament_install']
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'ignore'
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'ignore_ament_install'
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extensions ['colcon_pkg']
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'colcon_pkg'
+[0.528s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extensions ['colcon_meta']
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'colcon_meta'
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extensions ['ros']
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'ros'
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extensions ['cmake', 'python']
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'cmake'
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'python'
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extensions ['python_setup_py']
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/assets/images) by extension 'python_setup_py'
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extensions ['ignore', 'ignore_ament_install']
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extension 'ignore'
+[0.529s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extension 'ignore_ament_install'
+[0.530s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extensions ['colcon_pkg']
+[0.530s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extension 'colcon_pkg'
+[0.530s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extensions ['colcon_meta']
+[0.530s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extension 'colcon_meta'
+[0.530s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extensions ['ros']
+[0.530s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/evader) by extension 'ros'
+[0.535s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/evader' with type 'ros.ament_cmake' and name 'evader'
+[0.535s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extensions ['ignore', 'ignore_ament_install']
+[0.535s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extension 'ignore'
+[0.535s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extension 'ignore_ament_install'
+[0.535s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extensions ['colcon_pkg']
+[0.535s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extension 'colcon_pkg'
+[0.536s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extensions ['colcon_meta']
+[0.536s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extension 'colcon_meta'
+[0.536s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extensions ['ros']
+[0.536s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/map_pkg) by extension 'ros'
+[0.538s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/map_pkg' with type 'ros.ament_cmake' and name 'map_pkg'
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extension 'ignore'
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extension 'ignore_ament_install'
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extensions ['colcon_pkg']
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extension 'colcon_pkg'
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extensions ['colcon_meta']
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extension 'colcon_meta'
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extensions ['ros']
+[0.539s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/obstacles_msgs) by extension 'ros'
+[0.540s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/obstacles_msgs' with type 'ros.ament_cmake' and name 'obstacles_msgs'
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extensions ['ignore', 'ignore_ament_install']
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extension 'ignore'
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extension 'ignore_ament_install'
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extensions ['colcon_pkg']
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extension 'colcon_pkg'
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extensions ['colcon_meta']
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extension 'colcon_meta'
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extensions ['ros']
+[0.541s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/projects) by extension 'ros'
+[0.543s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/projects' with type 'ros.ament_cmake' and name 'projects'
+[0.543s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extensions ['ignore', 'ignore_ament_install']
+[0.543s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extension 'ignore'
+[0.543s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extension 'ignore_ament_install'
+[0.543s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extensions ['colcon_pkg']
+[0.544s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extension 'colcon_pkg'
+[0.544s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extensions ['colcon_meta']
+[0.544s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extension 'colcon_meta'
+[0.544s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extensions ['ros']
+[0.544s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_description) by extension 'ros'
+[0.545s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/shelfino_description' with type 'ros.ament_cmake' and name 'shelfino_description'
+[0.545s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.545s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extension 'ignore'
+[0.545s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extension 'ignore_ament_install'
+[0.546s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extensions ['colcon_pkg']
+[0.546s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extension 'colcon_pkg'
+[0.546s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extensions ['colcon_meta']
+[0.546s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extension 'colcon_meta'
+[0.546s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extensions ['ros']
+[0.546s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_gazebo) by extension 'ros'
+[0.549s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/shelfino_gazebo' with type 'ros.ament_cmake' and name 'shelfino_gazebo'
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extension 'ignore'
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extension 'ignore_ament_install'
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extensions ['colcon_pkg']
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extension 'colcon_pkg'
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extensions ['colcon_meta']
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extension 'colcon_meta'
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extensions ['ros']
+[0.550s] Level 1:colcon.colcon_core.package_identification:_identify(src/Shelfino_ROS2/shelfino_navigation) by extension 'ros'
+[0.552s] DEBUG:colcon.colcon_core.package_identification:Package 'src/Shelfino_ROS2/shelfino_navigation' with type 'ros.ament_cmake' and name 'shelfino_navigation'
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extensions ['ignore', 'ignore_ament_install']
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extension 'ignore'
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extension 'ignore_ament_install'
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extensions ['colcon_pkg']
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extension 'colcon_pkg'
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extensions ['colcon_meta']
+[0.552s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extension 'colcon_meta'
+[0.553s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extensions ['ros']
+[0.553s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_planning) by extension 'ros'
+[0.554s] DEBUG:colcon.colcon_core.package_identification:Package 'src/robot_planning' with type 'ros.ament_cmake' and name 'robot_planning'
+[0.554s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.554s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.554s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.554s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.554s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.606s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.606s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.609s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 1 installed packages in /home/seventeen/Robotics-and-its-application/install
+[0.611s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 354 installed packages in /opt/ros/humble
+[0.615s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'cmake_args' from command line to 'None'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'cmake_target' from command line to 'None'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'cmake_clean_cache' from command line to 'False'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'cmake_clean_first' from command line to 'False'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'cmake_force_configure' from command line to 'False'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'ament_cmake_args' from command line to 'None'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'catkin_cmake_args' from command line to 'None'
+[0.691s] Level 5:colcon.colcon_core.verb:set package 'evader' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.691s] DEBUG:colcon.colcon_core.verb:Building package 'evader' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/evader', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/evader', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader', 'symlink_install': False, 'test_result_base': None}
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'cmake_args' from command line to 'None'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'cmake_target' from command line to 'None'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.692s] Level 5:colcon.colcon_core.verb:set package 'obstacles_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.693s] DEBUG:colcon.colcon_core.verb:Building package 'obstacles_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/obstacles_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/obstacles_msgs', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/obstacles_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.693s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'cmake_args' from command line to 'None'
+[0.693s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'cmake_target' from command line to 'None'
+[0.693s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.693s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'cmake_clean_cache' from command line to 'False'
+[0.693s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'cmake_clean_first' from command line to 'False'
+[0.694s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'cmake_force_configure' from command line to 'False'
+[0.694s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'ament_cmake_args' from command line to 'None'
+[0.694s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'catkin_cmake_args' from command line to 'None'
+[0.694s] Level 5:colcon.colcon_core.verb:set package 'robot_planning' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.694s] DEBUG:colcon.colcon_core.verb:Building package 'robot_planning' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/robot_planning', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/robot_planning', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/robot_planning', 'symlink_install': False, 'test_result_base': None}
+[0.694s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'cmake_args' from command line to 'None'
+[0.694s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'cmake_target' from command line to 'None'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.695s] DEBUG:colcon.colcon_core.verb:Building package 'shelfino_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/shelfino_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/shelfino_description', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_description', 'symlink_install': False, 'test_result_base': None}
+[0.695s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'cmake_args' from command line to 'None'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'cmake_target' from command line to 'None'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'cmake_clean_first' from command line to 'False'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'cmake_force_configure' from command line to 'False'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'ament_cmake_args' from command line to 'None'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.696s] Level 5:colcon.colcon_core.verb:set package 'shelfino_gazebo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.696s] DEBUG:colcon.colcon_core.verb:Building package 'shelfino_gazebo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/shelfino_gazebo', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_gazebo', 'symlink_install': False, 'test_result_base': None}
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'cmake_args' from command line to 'None'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'cmake_target' from command line to 'None'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'cmake_clean_first' from command line to 'False'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'cmake_force_configure' from command line to 'False'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'ament_cmake_args' from command line to 'None'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.697s] Level 5:colcon.colcon_core.verb:set package 'shelfino_navigation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.697s] DEBUG:colcon.colcon_core.verb:Building package 'shelfino_navigation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_navigation', 'symlink_install': False, 'test_result_base': None}
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'cmake_args' from command line to 'None'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'cmake_target' from command line to 'None'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'cmake_clean_cache' from command line to 'False'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'cmake_clean_first' from command line to 'False'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'cmake_force_configure' from command line to 'False'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'ament_cmake_args' from command line to 'None'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'catkin_cmake_args' from command line to 'None'
+[0.698s] Level 5:colcon.colcon_core.verb:set package 'map_pkg' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.698s] DEBUG:colcon.colcon_core.verb:Building package 'map_pkg' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/map_pkg', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/map_pkg', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg', 'symlink_install': False, 'test_result_base': None}
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'cmake_args' from command line to 'None'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'cmake_target' from command line to 'None'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'cmake_clean_cache' from command line to 'False'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'cmake_clean_first' from command line to 'False'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'cmake_force_configure' from command line to 'False'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'ament_cmake_args' from command line to 'None'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'catkin_cmake_args' from command line to 'None'
+[0.699s] Level 5:colcon.colcon_core.verb:set package 'projects' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.699s] DEBUG:colcon.colcon_core.verb:Building package 'projects' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/seventeen/Robotics-and-its-application/build/projects', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/seventeen/Robotics-and-its-application/install/projects', 'merge_install': False, 'path': '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/projects', 'symlink_install': False, 'test_result_base': None}
+[0.699s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.701s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.702s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/obstacles_msgs' with build type 'ament_cmake'
+[0.702s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/obstacles_msgs'
+[0.706s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.707s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.707s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.713s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_description' with build type 'ament_cmake'
+[0.713s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_description'
+[0.714s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.714s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.720s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_gazebo' with build type 'ament_cmake'
+[0.721s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_gazebo'
+[0.721s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.721s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.727s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_navigation' with build type 'ament_cmake'
+[0.728s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/shelfino_navigation'
+[0.728s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.728s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.736s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader' with build type 'ament_cmake'
+[0.736s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader'
+[0.737s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.737s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.744s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/seventeen/Robotics-and-its-application/src/robot_planning' with build type 'ament_cmake'
+[0.745s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/seventeen/Robotics-and-its-application/src/robot_planning'
+[0.745s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.745s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.768s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/obstacles_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/obstacles_msgs -- -j8 -l8
+[0.776s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_description -- -j8 -l8
+[0.785s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo -- -j8 -l8
+[0.792s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_navigation -- -j8 -l8
+[0.804s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
+[0.816s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/robot_planning -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning
+[0.974s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_description -- -j8 -l8
+[0.987s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_navigation -- -j8 -l8
+[1.446s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_description
+[1.454s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_navigation
+[1.702s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(shelfino_navigation)
+[1.706s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_navigation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_navigation
+[1.718s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation' for CMake module files
+[1.723s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation' for CMake config files
+[1.724s] Level 1:colcon.colcon_core.shell:create_environment_hook('shelfino_navigation', 'cmake_prefix_path')
+[1.725s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/hook/cmake_prefix_path.ps1'
+[1.731s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/hook/cmake_prefix_path.dsv'
+[1.733s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/hook/cmake_prefix_path.sh'
+[1.736s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/bin'
+[1.736s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/lib/pkgconfig/shelfino_navigation.pc'
+[1.737s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/lib/python3.10/site-packages'
+[1.737s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/bin'
+[1.738s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.ps1'
+[1.741s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.dsv'
+[1.742s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.sh'
+[1.748s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.bash'
+[1.751s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.zsh'
+[1.753s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/colcon-core/packages/shelfino_navigation)
+[1.757s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(shelfino_description)
+[1.758s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description' for CMake module files
+[1.759s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description' for CMake config files
+[1.762s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_description
+[1.762s] Level 1:colcon.colcon_core.shell:create_environment_hook('shelfino_description', 'cmake_prefix_path')
+[1.763s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/hook/cmake_prefix_path.ps1'
+[1.764s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/hook/cmake_prefix_path.dsv'
+[1.765s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/hook/cmake_prefix_path.sh'
+[1.767s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/bin'
+[1.767s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/lib/pkgconfig/shelfino_description.pc'
+[1.768s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/lib/python3.10/site-packages'
+[1.768s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/bin'
+[1.769s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.ps1'
+[1.770s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.dsv'
+[1.771s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.sh'
+[1.773s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.bash'
+[1.774s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.zsh'
+[1.775s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/colcon-core/packages/shelfino_description)
+[2.068s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(shelfino_description)
+[2.069s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description' for CMake module files
+[2.070s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description' for CMake config files
+[2.072s] Level 1:colcon.colcon_core.shell:create_environment_hook('shelfino_description', 'cmake_prefix_path')
+[2.073s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/hook/cmake_prefix_path.ps1'
+[2.074s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/hook/cmake_prefix_path.dsv'
+[2.076s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/hook/cmake_prefix_path.sh'
+[2.078s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/bin'
+[2.078s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/lib/pkgconfig/shelfino_description.pc'
+[2.079s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/lib/python3.10/site-packages'
+[2.080s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_description/bin'
+[2.081s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.ps1'
+[2.088s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.dsv'
+[2.090s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.sh'
+[2.093s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.bash'
+[2.095s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.zsh'
+[2.104s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/seventeen/Robotics-and-its-application/install/shelfino_description/share/colcon-core/packages/shelfino_description)
+[2.159s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(shelfino_navigation)
+[2.160s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation' for CMake module files
+[2.162s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation' for CMake config files
+[2.163s] Level 1:colcon.colcon_core.shell:create_environment_hook('shelfino_navigation', 'cmake_prefix_path')
+[2.164s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/hook/cmake_prefix_path.ps1'
+[2.166s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/hook/cmake_prefix_path.dsv'
+[2.167s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/hook/cmake_prefix_path.sh'
+[2.169s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/bin'
+[2.170s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/lib/pkgconfig/shelfino_navigation.pc'
+[2.171s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/lib/python3.10/site-packages'
+[2.172s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/bin'
+[2.173s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.ps1'
+[2.175s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.dsv'
+[2.177s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.sh'
+[2.179s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.bash'
+[2.181s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/shelfino_navigation/package.zsh'
+[2.182s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/seventeen/Robotics-and-its-application/install/shelfino_navigation/share/colcon-core/packages/shelfino_navigation)
+[2.947s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/robot_planning -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning
+[3.439s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(robot_planning)
+[3.440s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/robot_planning' for CMake module files
+[3.441s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/robot_planning' for CMake config files
+[3.445s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/robot_planning/bin'
+[3.446s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/pkgconfig/robot_planning.pc'
+[3.446s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/python3.10/site-packages'
+[3.447s] Level 1:colcon.colcon_core.environment:checking '/home/seventeen/Robotics-and-its-application/install/robot_planning/bin'
+[3.448s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.ps1'
+[3.451s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.dsv'
+[3.452s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.sh'
+[3.453s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.bash'
+[3.459s] INFO:colcon.colcon_core.shell:Creating package script '/home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.zsh'
+[3.464s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/seventeen/Robotics-and-its-application/install/robot_planning/share/colcon-core/packages/robot_planning)
+[30.080s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[30.081s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[30.081s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[30.081s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[30.095s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[30.095s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[30.095s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[30.126s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[30.127s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/seventeen/Robotics-and-its-application/install/local_setup.ps1'
+[30.130s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/seventeen/Robotics-and-its-application/install/_local_setup_util_ps1.py'
+[30.134s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/seventeen/Robotics-and-its-application/install/setup.ps1'
+[30.136s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/seventeen/Robotics-and-its-application/install/local_setup.sh'
+[30.138s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/seventeen/Robotics-and-its-application/install/_local_setup_util_sh.py'
+[30.140s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/seventeen/Robotics-and-its-application/install/setup.sh'
+[30.143s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/seventeen/Robotics-and-its-application/install/local_setup.bash'
+[30.144s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/seventeen/Robotics-and-its-application/install/setup.bash'
+[30.147s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/seventeen/Robotics-and-its-application/install/local_setup.zsh'
+[30.149s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/seventeen/Robotics-and-its-application/install/setup.zsh'

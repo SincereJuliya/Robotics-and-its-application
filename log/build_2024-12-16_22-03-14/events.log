@@ -1,0 +1,58 @@
+[0.000000] (-) TimerEvent: {}
+[0.001271] (robot_planning) JobQueued: {'identifier': 'robot_planning', 'dependencies': OrderedDict()}
+[0.001550] (robot_planning) JobStarted: {'identifier': 'robot_planning'}
+[0.017801] (robot_planning) JobProgress: {'identifier': 'robot_planning', 'progress': 'cmake'}
+[0.018369] (robot_planning) Command: {'cmd': ['/home/seventeen/.local/bin/cmake', '/home/seventeen/Robotics-and-its-application/src/robot_planning', '-DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning'], 'cwd': '/home/seventeen/Robotics-and-its-application/build/robot_planning', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('CONTIKI', '/home/seventeen/contiki-uwb/contiki'), ('USER', 'seventeen'), ('LC_TIME', 'it_IT.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('SHLVL', '1'), ('HOME', '/home/seventeen'), ('OLDPWD', '/home/seventeen/Robotics-and-its-application/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('LC_MONETARY', 'it_IT.UTF-8'), ('SYSTEMD_EXEC_PID', '1897'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_colcon_cd_root', '/opt/ros/humble/'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('LOGNAME', 'seventeen'), ('_', '/usr/bin/colcon'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'seventeen'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('PATH', '/home/seventeen/Desktop/LPIoT/gcc-arm-none-eabi-10.3-2021.07/bin:/home/seventeen/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/seventeen/cooja/bin'), ('SESSION_MANAGER', 'local/seventeen-NBLK-WAX9X:@/tmp/.ICE-unix/1710,unix/seventeen-NBLK-WAX9X:/tmp/.ICE-unix/1710'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'it_IT.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/7617b0b6_0cac_4fbd_99e9_1f365ee13814'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('LC_TELEPHONE', 'it_IT.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.GRCGY2'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.254'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('SHELL', '/bin/bash'), ('LC_NAME', 'it_IT.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'it_IT.UTF-8'), ('LC_IDENTIFICATION', 'it_IT.UTF-8'), ('COOJA', '/home/seventeen/cooja'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/jvm/java-1.8.0-openjdk-amd64'), ('PWD', '/home/seventeen/Robotics-and-its-application/build/robot_planning'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('LC_NUMERIC', 'it_IT.UTF-8'), ('LC_PAPER', 'it_IT.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('UWB_CONTIKI', '/home/seventeen/contiki-uwb')]), 'shell': False}
+[0.099707] (-) TimerEvent: {}
+[0.187091] (robot_planning) StderrLine: {'line': b'\x1b[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):\n'}
+[0.188030] (robot_planning) StderrLine: {'line': b'  Compatibility with CMake < 3.10 will be removed from a future version of\n'}
+[0.188308] (robot_planning) StderrLine: {'line': b'  CMake.\n'}
+[0.188524] (robot_planning) StderrLine: {'line': b'\n'}
+[0.188717] (robot_planning) StderrLine: {'line': b'  Update the VERSION argument <min> value or use a ...<max> suffix to tell\n'}
+[0.188981] (robot_planning) StderrLine: {'line': b'  CMake that the project does not need compatibility with older versions.\n'}
+[0.189184] (robot_planning) StderrLine: {'line': b'\n'}
+[0.189371] (robot_planning) StderrLine: {'line': b'\x1b[0m\n'}
+[0.199912] (-) TimerEvent: {}
+[0.300462] (-) TimerEvent: {}
+[0.364684] (robot_planning) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.403904] (-) TimerEvent: {}
+[0.504538] (-) TimerEvent: {}
+[0.550704] (robot_planning) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.574840] (robot_planning) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.604720] (-) TimerEvent: {}
+[0.705372] (-) TimerEvent: {}
+[0.714296] (robot_planning) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.758254] (robot_planning) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.759124] (robot_planning) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.760813] (robot_planning) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.794175] (robot_planning) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.805589] (-) TimerEvent: {}
+[0.906290] (-) TimerEvent: {}
+[0.951119] (robot_planning) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.006487] (-) TimerEvent: {}
+[1.007040] (robot_planning) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.007408] (robot_planning) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.008605] (robot_planning) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.065390] (robot_planning) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:9 (find_package):\n'}
+[1.066010] (robot_planning) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.066434] (robot_planning) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.066739] (robot_planning) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[1.067058] (robot_planning) StderrLine: {'line': b'\n'}
+[1.067281] (robot_planning) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[1.067501] (robot_planning) StderrLine: {'line': b'  any of the following names:\n'}
+[1.067722] (robot_planning) StderrLine: {'line': b'\n'}
+[1.067989] (robot_planning) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[1.068211] (robot_planning) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[1.068418] (robot_planning) StderrLine: {'line': b'\n'}
+[1.068626] (robot_planning) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[1.068882] (robot_planning) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[1.069158] (robot_planning) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[1.069366] (robot_planning) StderrLine: {'line': b'  has been installed.\n'}
+[1.069575] (robot_planning) StderrLine: {'line': b'\n'}
+[1.069815] (robot_planning) StderrLine: {'line': b'\x1b[0m\n'}
+[1.070058] (robot_planning) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.075494] (robot_planning) CommandEnded: {'returncode': 1}
+[1.106693] (-) TimerEvent: {}
+[1.207278] (-) TimerEvent: {}
+[1.269859] (robot_planning) JobEnded: {'identifier': 'robot_planning', 'rc': 1}
+[1.280879] (-) EventReactorShutdown: {}

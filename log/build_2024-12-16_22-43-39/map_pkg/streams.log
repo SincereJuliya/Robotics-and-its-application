@@ -1,0 +1,175 @@
+[0.021s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/map_pkg': AMENT_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/map_pkg
+[0.193s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.193s]   Compatibility with CMake < 3.10 will be removed from a future version of
+[0.193s]   CMake.
+[0.193s] 
+[0.194s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[0.194s]   CMake that the project does not need compatibility with older versions.
+[0.194s] 
+[0.194s] [0m
+[0.302s] -- The C compiler identification is GNU 11.4.0
+[0.428s] -- The CXX compiler identification is GNU 11.4.0
+[0.449s] -- Detecting C compiler ABI info
+[0.585s] -- Detecting C compiler ABI info - done
+[0.634s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.635s] -- Detecting C compile features
+[0.636s] -- Detecting C compile features - done
+[0.664s] -- Detecting CXX compiler ABI info
+[0.809s] -- Detecting CXX compiler ABI info - done
+[0.853s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.853s] -- Detecting CXX compile features
+[0.855s] -- Detecting CXX compile features - done
+[0.873s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.162s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter
+[1.361s] -- Found rclcpp: 16.0.10 (/opt/ros/humble/share/rclcpp/cmake)
+[1.445s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.455s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.470s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.494s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.523s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.603s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.607s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.783s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")
+[1.868s] -- Found FastRTPS: /opt/ros/humble/include
+[1.987s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.009s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.170s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.172s] -- Found Threads: TRUE
+[2.346s] -- Found rclpy: 3.3.14 (/opt/ros/humble/share/rclpy/cmake)
+[2.350s] -- Found geometry_msgs: 4.2.4 (/opt/ros/humble/share/geometry_msgs/cmake)
+[2.390s] -- Found obstacles_msgs: 0.1.2 (/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/share/obstacles_msgs/cmake)
+[2.448s] -- Found tf2: 0.25.8 (/opt/ros/humble/share/tf2/cmake)
+[2.477s] -- Found tf2_ros: 0.25.8 (/opt/ros/humble/share/tf2_ros/cmake)
+[2.750s] -- Found lifecycle_msgs: 1.2.1 (/opt/ros/humble/share/lifecycle_msgs/cmake)
+[2.784s] -- Found rclcpp_lifecycle: 16.0.10 (/opt/ros/humble/share/rclcpp_lifecycle/cmake)
+[2.814s] -- Found visualization_msgs: 4.2.4 (/opt/ros/humble/share/visualization_msgs/cmake)
+[3.556s] -- Found Python3: /usr/include/python3.10 (found version "3.10.12") found components: Development Development.Module Development.Embed
+[3.760s] -- Configuring done (3.6s)
+[3.859s] -- Generating done (0.1s)
+[3.860s] -- Build files have been written to: /home/seventeen/Robotics-and-its-application/build/map_pkg
+[3.892s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/map_pkg' returned '0': AMENT_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/map_pkg
+[3.897s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/map_pkg': AMENT_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/map_pkg -- -j8 -l8
+[4.125s] [  6%] [32mBuilding CXX object CMakeFiles/send_victims.dir/src/utilities.cpp.o[0m
+[4.126s] [ 13%] [32mBuilding CXX object CMakeFiles/send_victims.dir/src/send_victims.cpp.o[0m
+[4.126s] [ 20%] [32mBuilding CXX object CMakeFiles/send_gates.dir/src/send_gates.cpp.o[0m
+[4.126s] [ 26%] [32mBuilding CXX object CMakeFiles/send_gates.dir/src/utilities.cpp.o[0m
+[4.131s] [ 33%] [32mBuilding CXX object CMakeFiles/send_borders.dir/src/send_borders.cpp.o[0m
+[4.134s] [ 40%] [32mBuilding CXX object CMakeFiles/send_borders.dir/src/utilities.cpp.o[0m
+[4.139s] [ 46%] [32mBuilding CXX object CMakeFiles/send_obstacles.dir/src/send_obstacles.cpp.o[0m
+[4.140s] [ 53%] [32mBuilding CXX object CMakeFiles/send_timeout.dir/src/send_timeout.cpp.o[0m
+[13.514s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[13.515s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:32:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.515s]    32 |   on_configure([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[13.515s]       |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[13.516s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_activate(const rclcpp_lifecycle::State&)[m[K’:
+[13.516s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:47:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.516s]    47 |   on_activate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[13.516s]       |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[13.516s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_deactivate(const rclcpp_lifecycle::State&)[m[K’:
+[13.517s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:56:48:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.517s]    56 |   on_deactivate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[13.517s]       |                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[13.533s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_cleanup(const rclcpp_lifecycle::State&)[m[K’:
+[13.533s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:63:45:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.534s]    63 |   on_cleanup([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[13.534s]       |              [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[13.534s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_shutdown(const rclcpp_lifecycle::State&)[m[K’:
+[13.534s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:70:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.535s]    70 |   on_shutdown([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[13.535s]       |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[13.574s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_gates.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn GatesPublisher::on_deactivate(const rclcpp_lifecycle::State&)[m[K’:
+[13.574s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_gates.cpp:59:48:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[13.574s]    59 |   on_deactivate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[13.574s]       |                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[14.851s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn ObstaclesPublisher::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[14.851s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:57:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[14.852s]    57 |   on_configure([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[14.852s]       |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[14.859s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn ObstaclesPublisher::on_activate(const rclcpp_lifecycle::State&)[m[K’:
+[14.860s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:138:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[14.860s]   138 |   on_activate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[14.860s]       |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[15.222s] [ 60%] [32mBuilding CXX object CMakeFiles/send_timeout.dir/src/utilities.cpp.o[0m
+[15.223s] [ 66%] [32mBuilding CXX object CMakeFiles/send_obstacles.dir/src/utilities.cpp.o[0m
+[16.808s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn VictimPublisher::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[16.808s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:63:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[16.808s]    63 |   on_configure([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[16.809s]       |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[16.810s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn VictimPublisher::on_activate(const rclcpp_lifecycle::State&)[m[K’:
+[16.810s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:101:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[16.810s]   101 |   on_activate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[16.810s]       |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[16.811s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn VictimPublisher::on_deactivate(const rclcpp_lifecycle::State&)[m[K’:
+[16.812s] [01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:119:48:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[16.812s]   119 |   on_deactivate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+[16.813s]       |                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[20.383s] [ 73%] [32m[1mLinking CXX executable send_gates[0m
+[21.579s] [ 73%] Built target send_gates
+[22.217s] [ 80%] [32m[1mLinking CXX executable send_borders[0m
+[23.235s] [ 80%] Built target send_borders
+[24.500s] [ 86%] [32m[1mLinking CXX executable send_victims[0m
+[24.522s] [ 93%] [32m[1mLinking CXX executable send_timeout[0m
+[24.694s] [100%] [32m[1mLinking CXX executable send_obstacles[0m
+[25.235s] [100%] Built target send_timeout
+[25.366s] [100%] Built target send_victims
+[25.536s] [100%] Built target send_obstacles
+[25.547s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/map_pkg' returned '0': AMENT_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/map_pkg -- -j8 -l8
+[25.737s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/map_pkg': AMENT_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/map_pkg
+[25.869s] -- Install configuration: ""
+[25.870s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch
+[25.870s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/spawn_map.launch.py
+[25.870s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts
+[25.870s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_borders.py
+[25.871s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_utility_.py
+[25.871s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_obstacles.py
+[25.871s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/geo_utility.py
+[25.872s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/launch/mapscripts/spawn_gates.py
+[25.872s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models
+[25.873s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder
+[25.873s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.sdf
+[25.873s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/cylinder/model.config
+[25.874s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate
+[25.874s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.sdf
+[25.874s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/gate/model.config
+[25.875s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box
+[25.875s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.sdf
+[25.875s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/box/model.config
+[25.876s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim
+[25.876s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.sdf
+[25.876s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/models/victim/model.config
+[25.877s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config
+[25.877s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos
+[25.877s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims
+[25.878s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims2.yaml
+[25.878s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims4.yaml
+[25.878s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims1.yaml
+[25.879s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/victims/victims3.yaml
+[25.879s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation
+[25.880s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation3.yaml
+[25.880s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation2.yaml
+[25.881s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation4.yaml
+[25.881s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/demos/evacuation/evacuation1.yaml
+[25.881s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/config/map_config.yaml
+[25.882s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_borders
+[25.885s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_gates
+[25.888s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_obstacles
+[25.891s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_victims
+[25.895s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/send_timeout
+[25.898s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/create_map_pgm.py
+[25.899s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/lib/map_pkg/generate_config_file.py
+[25.901s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/package_run_dependencies/map_pkg
+[25.901s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/parent_prefix_path/map_pkg
+[25.901s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.sh
+[25.902s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/ament_prefix_path.dsv
+[25.902s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.sh
+[25.902s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/environment/path.dsv
+[25.903s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.bash
+[25.903s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.sh
+[25.903s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.zsh
+[25.904s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/local_setup.dsv
+[25.904s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.dsv
+[25.904s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/ament_index/resource_index/packages/map_pkg
+[25.905s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig.cmake
+[25.905s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/cmake/map_pkgConfig-version.cmake
+[25.905s] -- Installing: /home/seventeen/Robotics-and-its-application/install/map_pkg/share/map_pkg/package.xml
+[25.908s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/map_pkg' returned '0': AMENT_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/seventeen/Robotics-and-its-application/install/obstacles_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/map_pkg

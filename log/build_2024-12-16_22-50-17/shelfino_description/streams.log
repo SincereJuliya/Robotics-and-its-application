@@ -1,0 +1,42 @@
+[0.068s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_description -- -j8 -l8
+[0.342s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_description -- -j8 -l8
+[0.873s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_description
+[1.228s] -- Install configuration: ""
+[1.232s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/launch
+[1.243s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/launch/rsp.launch.py
+[1.244s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models
+[1.244s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat
+[1.244s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/model.sdf
+[1.245s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/materials
+[1.245s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/materials/textures
+[1.246s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/materials/textures/Material.001 Base Color.png
+[1.247s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/materials/textures/xmas_hat.png
+[1.247s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/meshes
+[1.247s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/meshes/xmas_hat.dae
+[1.248s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/xmas_hat/model.config
+[1.248s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1
+[1.248s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1/gazebo_classic_controls.xacro
+[1.248s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1/xmas_hat.xacro
+[1.248s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1/wheels.xacro
+[1.249s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1/shelfino_body.xacro
+[1.249s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1/lidar.xacro
+[1.249s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1/materials.xacro
+[1.249s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/models/shelfino_v1.xacro
+[1.249s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/rviz
+[1.254s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/rviz/shelfino.rviz
+[1.254s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/ament_index/resource_index/package_run_dependencies/shelfino_description
+[1.254s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/ament_index/resource_index/parent_prefix_path/shelfino_description
+[1.255s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/environment/ament_prefix_path.sh
+[1.255s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/environment/ament_prefix_path.dsv
+[1.255s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/environment/path.sh
+[1.255s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/environment/path.dsv
+[1.255s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/local_setup.bash
+[1.256s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/local_setup.sh
+[1.256s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/local_setup.zsh
+[1.256s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/local_setup.dsv
+[1.256s] -- Installing: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.dsv
+[1.256s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/ament_index/resource_index/packages/shelfino_description
+[1.256s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/cmake/shelfino_descriptionConfig.cmake
+[1.258s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/cmake/shelfino_descriptionConfig-version.cmake
+[1.258s] -- Up-to-date: /home/seventeen/Robotics-and-its-application/install/shelfino_description/share/shelfino_description/package.xml
+[1.286s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/shelfino_description

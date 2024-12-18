@@ -1,0 +1,10 @@
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/uninstall.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/shelfino_gazebo_uninstall.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/destroy_shelfino.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/test.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/edit_cache.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/rebuild_cache.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/list_install_components.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/install.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/install/local.dir
+/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo/CMakeFiles/install/strip.dir
