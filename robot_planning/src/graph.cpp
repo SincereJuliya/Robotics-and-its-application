@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include "../include/robotPlanning/variables.hpp"
 
 class Graph{
 
@@ -9,24 +10,25 @@ public:
 
     Graph() {}
 
-    void addVertice(int vertex){
+    void addVertice(Point vertex){
         mGraph[vertex] = {};
     }
-    void addEdge(int v1, int v2){
+    void addEdge(Point v1, Point v2){
         mGraph[v1].push_back(v2);
         mGraph[v2].push_back(v1);
     }
     void printGraph(){
-        for( const auto& element: mGraph){
-            std::cout << element.first << " : ";
-            for( const auto& edge: element.second){
-                std::cout << edge << " ";
+        for(const auto& element: mGraph){
+            std::cout << element.first.x << "," << element.first.y << " --> ";
+            std::vector<Point>::iterator it;
+            for (const auto& edge : element.second) {
+                std::cout << edge.x << "," << edge.y << " ";
             }
             std::cout << "\n";
         }
     }
 
-    void removeVertex(int vertex){
+    void removeVertex(Point vertex){
         if(mGraph.find(vertex) == mGraph.end()){
             std::cout << "Invalid vertex \n" ;
             return;
@@ -38,28 +40,28 @@ public:
         }
     }
 
-    std::vector<int> getVertices(){
+    std::vector<Point> getVertices(){
         std::cout << "vertices: " ;
-        std::vector<int> vertices;
+        std::vector<Point> vertices;
 
         for(auto& element: mGraph){
             vertices.push_back(element.first);
-            std::cout << element.first << " ";
+            std::cout << element.first.x << "," << element.first.y << "  ";
         }
         std::cout << "\n";
 
     return vertices;
     }
 
-    std::vector<int> getEdge(int vertex){
+    std::vector<Point> getEdge(Point vertex){
         if(mGraph.find(vertex) == mGraph.end()){
             std::cout << "Invalid vertex \n" ;
             return {};
         }
         
-        std::cout << "edges: " ;
+        std::cout << "edges of vertex (" << vertex.x <<  "," << vertex.y << "): " ;
         for(const auto& i: mGraph[vertex]){
-            std::cout << i << " ";
+            std::cout << i.x << "," << i.y << " ";
 
         }
         std::cout << "\n";
@@ -67,25 +69,29 @@ public:
     }
 
 private:
-    std::map<int, std::vector<int>> mGraph;
+    std::map<Point, std::vector<Point>> mGraph;
 
 };
 
 int main(){
     Graph mg;
 
-    mg.addVertice(1);
-    mg.addVertice(3);
-    mg.addVertice(2);
-    mg.addEdge(1,2);
-    mg.addEdge(2,3);
-    mg.addEdge(1,3);
-
+    mg.addVertice(Point{1,1});
+    mg.addVertice(Point{1,3});
+    mg.addVertice(Point{1,2});
+    mg.addVertice(Point{1,4});
+    mg.addEdge(Point{1,1},Point{1,2});
+    mg.addEdge(Point{1,2},Point{1,3});
+    mg.addEdge(Point{1,1},Point{1,3});
+    mg.addEdge(Point{1,1},Point{1,4});
+    std::cout << "printing graph\n";
     mg.printGraph();
 
-    mg.removeVertex(3);
+    mg.removeVertex({1,3});
+
+    std::cout << "\nprinting graph after removal of an edge\n";
     mg.printGraph(); 
-    mg.getEdge(1);
+    mg.getEdge({1,1});
     mg.getVertices();
     return 0;
 }
