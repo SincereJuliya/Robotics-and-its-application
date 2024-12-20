@@ -7,6 +7,16 @@
 typedef struct Point {
     double x;
     double y;
+    
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y;
+    }
+
+    bool operator<(const Point& other) const {
+        if (x != other.x)
+            return x < other.x;
+        return y < other.y;
+    }
 } Point;
 
 typedef struct Circle {
