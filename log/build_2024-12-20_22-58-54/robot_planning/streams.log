@@ -1,0 +1,5 @@
+[0.024s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8
+[0.187s] [0mCMake Error: The source directory "/home/seventeen/Robotics-and-its-application/src/robot_planning" does not exist.
+[0.187s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.189s] gmake: *** [Makefile:349: cmake_check_build_system] Error 1
+[0.193s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '2': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8

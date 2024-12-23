@@ -24,10 +24,10 @@ typedef struct Square {
     std::vector<Point> obstacle;
 } Square;
 
-Obstacle {
+typedef struct Obstacle {
     std::vector<Point> vertices;
     double radius;
-}
+}Obstacle;
 
 std::vector<Circle> circleObstacles; //maybe better to create classes, in order to store obstacles, where we have circles and boxes as subclasses
 

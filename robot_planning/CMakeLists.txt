@@ -15,15 +15,18 @@ find_package(obstacles_msgs REQUIRED)
 add_executable(borders src/listenerBorders.cpp)
 add_executable(gates src/listenerGates.cpp)
 add_executable(obstacles src/listenerObstacles.cpp)
+add_executable(dataRetriver src/dataRetriver.cpp)
 
 ament_target_dependencies(borders rclcpp std_msgs geometry_msgs)
 ament_target_dependencies(gates rclcpp std_msgs geometry_msgs)
 ament_target_dependencies(obstacles rclcpp std_msgs geometry_msgs obstacles_msgs)
+ament_target_dependencies(dataRetriver rclcpp std_msgs geometry_msgs obstacles_msgs)
 
 install(TARGETS
   borders
   gates
   obstacles
+  dataRetriver
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

@@ -19,6 +19,12 @@ typedef struct Point {
     }
 } Point;
 
+std::vector<Point> gates;
+std::vector<Point> borders;
+std::vector<Point> obstacles;
+
+enum obstacleType{CIRCLE, BOX};
+
 typedef struct Circle {
     Point center;
     double radius;
@@ -28,9 +34,11 @@ typedef struct Square {
     std::vector<Point> obstacle;
 } Square;
 
-typedef struct Obstacle {
+/* typedef struct Obstacle {
     std::vector<Point> vertices;
     double radius;
-} Obstacle;
+} Obstacle; */
+
+std::vector<Circle> circleObstacles;
 
 #endif

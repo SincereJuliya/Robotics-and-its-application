@@ -1,0 +1,5 @@
+[0.025s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8
+[0.193s] [0mCMake Error: The source directory "/home/seventeen/Robotics-and-its-application/src/robot_planning" does not exist.
+[0.193s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.194s] gmake: *** [Makefile:349: cmake_check_build_system] Error 1
+[0.198s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/robot_planning -- -j8 -l8

@@ -14,7 +14,7 @@ Obstacle::Obstacle(double r, std::vector<Point> vs){
         std::cout << "box\n";
     }
 }
-Obstacle::Point getCentroid(){
+Point Obstacle::getCentroid(){
     if(type == BOX){
         double A=0; 
         double Cx=0;
@@ -38,7 +38,7 @@ Obstacle::Point getCentroid(){
     return vertices[0];
 }
 
-Obstacle::void convertToSqaure(){
+void Obstacle::convertToSqaure(){
     if(type==BOX){
         return;
     }
@@ -50,18 +50,18 @@ Obstacle::void convertToSqaure(){
     vertices = vec;
 }
 
-Obstacle::obstacleType getType(){
+obstacleType Obstacle::getType(){
     return type;
 }
 
-Obstacle::double getMinDist(){
+double Obstacle::getMinDist(){
     if(type==BOX){
         
     }
     return 2*radius;
 }
 
-Obstacle::bool isInsideObstacle(Point p){
+bool Obstacle::isInsideObstacle(Point p){
     if(type==BOX){
         int cnt=0;
         vertices.push_back(vertices[0]);
