@@ -1,7 +1,8 @@
-#include "../include/robotPlanning/variables.hpp"
-#include "../include/robotPlanning/obstacles.hpp"
 #include <math.h>
 #include <vector>
+
+#include "robotPlanning/variables.hpp"
+#include "robotPlanning/obstacles.hpp"
 
 Obstacle::Obstacle(double r, std::vector<Point> vs){
     radius = r;
@@ -20,15 +21,15 @@ Point Obstacle::getCentroid(){
         double Cx=0;
         double Cy=0;
         vertices.push_back(vertices[0]);
-        for(int i=0;i<vertices.size();i++){
+        for(std::size_t i=0;i<vertices.size();i++){
             A += ((vertices[i].x*vertices[i+1].y)-(vertices[i+1].x*vertices[i].y));
         }
         A/=2;
-        for(int i=0;i<vertices.size();i++){
+        for(std::size_t i=0;i<vertices.size();i++){
             Cx += ((vertices[i].x+vertices[i+1].x)*(vertices[i].x*vertices[i+1].y-vertices[i+1].x*vertices[i].y));   
         }
         Cx /=(6*A);
-        for(int i=0;i<vertices.size();i++){
+        for(std::size_t i=0;i<vertices.size();i++){
             Cy += ((vertices[i].y+vertices[i+1].y)*(vertices[i].x*vertices[i+1].y-vertices[i+1].x*vertices[i].y));
         }
         Cy /=(6*A);
@@ -65,11 +66,13 @@ bool Obstacle::isInsideObstacle(Point p){
     if(type==BOX){
         int cnt=0;
         vertices.push_back(vertices[0]);
-        for(int i=0; i<vertices.size();i++){
+        for(std::size_t i=0; i<vertices.size();i++){
             Point p1 = vertices[i];
             Point p2 = vertices[i+1];
             if(((p1.y==p2.y)&&(p1.y==p.y))||((p1.x==p2.x)&&(p1.x==p.x))||((p1.x==p.x)&&(p1.y==p.y))||((p2.x==p.x)&&(p2.y==p.y))){
-                //add also check if point is on the line----------------------------
+                return true;
+            }
+            if(p.y==(((p1.y-p2.y)/(p1.x-p2.x))*p.x+p1.y*((p1.y-p2.y)/(p1.x-p2.x))*p1.x)){ //da testare
                 return true;
             }
             if((p.y<p1.y)!=(p.y<p2.y)){
@@ -90,6 +93,14 @@ bool Obstacle::isInsideObstacle(Point p){
     }
     return ((pow(p.x-vertices[0].x,2)+pow(p.y-vertices[0].y,2))<pow(radius,2)); 
     
+}
+
+std::vector<double> Obstacle::getAbscissas(){
+    std::vector<double> vec;
+    for(size_t i; i<vertices.size(); i++){
+        vec.push_back(vertices[i].x);
+    }
+    return vec;
 }
 
 /* int main(int argc, char** argv){

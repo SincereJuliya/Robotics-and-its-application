@@ -2,8 +2,8 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "../include/robotPlanning/variables.hpp"
-#include "../include/robotPlanning/graph.hpp"
+#include "robotPlanning/variables.hpp"
+#include "robotPlanning/graph.hpp"
 
 Graph::Graph() {}
 

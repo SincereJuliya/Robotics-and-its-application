@@ -1,3 +1,6 @@
+#ifndef __GRAPH_H__
+#define __GRAPH_H__
+
 #include <iostream>
 #include <map>
 #include <vector>
@@ -17,3 +20,5 @@ public:
     std::vector<Point> getEdge(Point vertex);
 
 };
+
+#endif

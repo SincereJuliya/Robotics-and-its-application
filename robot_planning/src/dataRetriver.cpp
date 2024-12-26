@@ -7,9 +7,14 @@
 #include <chrono>
 #include <vector>
 #include <iostream>
-#include "../include/robotPlanning/variables.hpp"
+#include "robotPlanning/variables.hpp"
+#include "robotPlanning/obstacles.hpp"
 
 using namespace std::chrono_literals;
+
+std::vector<Point> gates;
+std::vector<Point> borders;
+std::vector<Obstacle> obstacles;
 
 class DataRetriver : public rclcpp::Node {
 public:
@@ -75,15 +80,21 @@ private:
                 std::cout << "Ostacle: '" << i << "of type circle '\n";
                 std::cout << "Received: Cx: '" << msg.obstacles[i].polygon.points[0].x << "', Cy: '" << msg.obstacles[i].polygon.points[0].y << " with radius: " << msg.obstacles[i].radius <<"'\n";
                 // Store the received points in a circle struct
-                Circle c {{msg.obstacles[i].polygon.points[0].x, msg.obstacles[i].polygon.points[0].y}, msg.obstacles[i].radius};
-                circleObstacles.push_back(c);
+                /* Circle c {{msg.obstacles[i].polygon.points[0].x, msg.obstacles[i].polygon.points[0].y}, msg.obstacles[i].radius};
+                circleObstacles.push_back(c); */
+                std::vector<Point> verteces;
+                verteces.push_back(Point{msg.obstacles[i].polygon.points[0].x, msg.obstacles[i].polygon.points[0].y});
+                obstacles.push_back(Obstacle(msg.obstacles[i].radius, verteces));
             }else{
                 std::cout << "Ostacle: '" << i << "of type box '\n";
                 Square sq;
+                std::vector<Point> verteces;
                 for(size_t j=0; j< msg.obstacles[i].polygon.points.size(); j++){
                     std::cout << "Received: x: '" << msg.obstacles[i].polygon.points[j].x << "', y: '" << msg.obstacles[i].polygon.points[j].y << "'\n";
                     sq.obstacle.push_back({msg.obstacles[i].polygon.points[j].x, msg.obstacles[i].polygon.points[j].y});
+                    verteces.push_back(Point{msg.obstacles[i].polygon.points[j].x, msg.obstacles[i].polygon.points[j].y});
                 }
+                obstacles.push_back(Obstacle(0, verteces));
             }
         }
     }
