@@ -3,6 +3,11 @@
 
 #include "variables.hpp"
 
+/*
+    should we add the number of the point?
+    from the structure to class? 
+    the smallest edge of a rectangle is a minDistance for the radius..
+    */
 struct Point {
     double x;
     double y;

@@ -52,6 +52,7 @@ class SampleBasedMapGenerator: public IMapGenerator
         /* TO DO to get the radius for searching */
         float getSearchRadius()
         {
+            // check the nearest obstacle -> take the minDist()
             float radius = 0;
             return radius;
         }; 
