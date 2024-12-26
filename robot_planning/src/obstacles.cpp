@@ -1,7 +1,6 @@
 #include <math.h>
 #include <vector>
 
-#include "robotPlanning/variables.hpp"
 #include "robotPlanning/obstacles.hpp"
 
 Obstacle::Obstacle(double r, std::vector<Point> vs){
@@ -22,19 +21,19 @@ Point Obstacle::getCentroid(){
         double Cy=0;
         vertices.push_back(vertices[0]);
         for(std::size_t i=0;i<vertices.size();i++){
-            A += ((vertices[i].x*vertices[i+1].y)-(vertices[i+1].x*vertices[i].y));
+            A += ((vertices[i].getX()*vertices[i+1].getY())-(vertices[i+1].getX()*vertices[i].getY()));
         }
         A/=2;
         for(std::size_t i=0;i<vertices.size();i++){
-            Cx += ((vertices[i].x+vertices[i+1].x)*(vertices[i].x*vertices[i+1].y-vertices[i+1].x*vertices[i].y));   
+            Cx += ((vertices[i].getX()+vertices[i+1].getX())*(vertices[i].getX()*vertices[i+1].getY()-vertices[i+1].getX()*vertices[i].getY()));   
         }
         Cx /=(6*A);
         for(std::size_t i=0;i<vertices.size();i++){
-            Cy += ((vertices[i].y+vertices[i+1].y)*(vertices[i].x*vertices[i+1].y-vertices[i+1].x*vertices[i].y));
+            Cy += ((vertices[i].getY()+vertices[i+1].getY())*(vertices[i].getX()*vertices[i+1].getY()-vertices[i+1].getX()*vertices[i].getY()));
         }
         Cy /=(6*A);
         vertices.pop_back();
-        return Point{Cx, Cy};
+        return Point(Cx, Cy);
     }
     return vertices[0];
 }
@@ -44,10 +43,10 @@ void Obstacle::convertToSqaure(){
         return;
     }
     std::vector<Point> vec;
-    vec.push_back(Point{vertices[0].x-radius, vertices[0].y+radius});
-    vec.push_back(Point{vertices[0].x+radius, vertices[0].y+radius});
-    vec.push_back(Point{vertices[0].x+radius, vertices[0].y-radius});
-    vec.push_back(Point{vertices[0].x-radius, vertices[0].y-radius});
+    vec.push_back(Point(vertices[0].getX()-radius, vertices[0].getY()+radius));
+    vec.push_back(Point(vertices[0].getX()+radius, vertices[0].getY()+radius));
+    vec.push_back(Point(vertices[0].getX()+radius, vertices[0].getY()-radius));
+    vec.push_back(Point(vertices[0].getX()-radius, vertices[0].getY()-radius));
     vertices = vec;
 }
 
@@ -69,15 +68,15 @@ bool Obstacle::isInsideObstacle(Point p){
         for(std::size_t i=0; i<vertices.size();i++){
             Point p1 = vertices[i];
             Point p2 = vertices[i+1];
-            if(((p1.y==p2.y)&&(p1.y==p.y))||((p1.x==p2.x)&&(p1.x==p.x))||((p1.x==p.x)&&(p1.y==p.y))||((p2.x==p.x)&&(p2.y==p.y))){
+            if(((p1.getY()==p2.getY())&&(p1.getY()==p.getY()))||((p1.getX()==p2.getX())&&(p1.getX()==p.getX()))||((p1.getX()==p.getX())&&(p1.getY()==p.getY()))||((p2.getX()==p.getX())&&(p2.getY()==p.getY()))){
                 return true;
             }
-            if(p.y==(((p1.y-p2.y)/(p1.x-p2.x))*p.x+p1.y*((p1.y-p2.y)/(p1.x-p2.x))*p1.x)){ //da testare
+            if(p.getY()==(((p1.getY()-p2.getY())/(p1.getX()-p2.getX()))*p.getX()+p1.getY()*((p1.getY()-p2.getY())/(p1.getX()-p2.getX()))*p1.getX())){ //da testare
                 return true;
             }
-            if((p.y<p1.y)!=(p.y<p2.y)){
-                double x0 = (p.y*(p1.x-p2.x)-(p1.x-p2.x)*p1.y+(p1.y-p2.y)*p1.x)/(p1.y-p2.y); 
-                if(p.x<x0){ 
+            if((p.getY()<p1.getY())!=(p.getY()<p2.getY())){
+                double x0 = (p.getY()*(p1.getX()-p2.getX())-(p1.getX()-p2.getX())*p1.getY()+(p1.getY()-p2.getY())*p1.getX())/(p1.getY()-p2.getY()); 
+                if(p.getX()<x0){ 
                     cnt++;
                 }
             }
@@ -91,18 +90,17 @@ bool Obstacle::isInsideObstacle(Point p){
         }
         return ((cnt%2)==1);
     }
-    return ((pow(p.x-vertices[0].x,2)+pow(p.y-vertices[0].y,2))<pow(radius,2)); 
+    return ((pow(p.getX()-vertices[0].getX(),2)+pow(p.getY()-vertices[0].getY(),2))<pow(radius,2)); 
     
 }
 
 std::vector<double> Obstacle::getAbscissas(){
     std::vector<double> vec;
     for(size_t i; i<vertices.size(); i++){
-        vec.push_back(vertices[i].x);
+        vec.push_back(vertices[i].getX());
     }
     return vec;
 }
-
 /* int main(int argc, char** argv){
     std::vector<Point> vec1 = {Point{-1.22492, -1.36989}, Point{-1.80755, -0.869648}, Point{-2.1845, -1.30868}, Point{-1.60187, -1.80892}};
     Obstacle o(0, vec1);

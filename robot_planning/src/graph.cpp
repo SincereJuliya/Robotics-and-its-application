@@ -2,7 +2,6 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "robotPlanning/variables.hpp"
 #include "robotPlanning/graph.hpp"
 
 Graph::Graph() {}
@@ -17,11 +16,12 @@ void Graph::addEdge(Point v1, Point v2){
 }
 
 void Graph::printGraph(){
-    for(const auto& element: mGraph){
-        std::cout << element.first.x << "," << element.first.y << " --> ";
+    std::map<Point, std::vector<Point>>::const_iterator citer;
+    for(citer=mGraph.cbegin(); citer!=mGraph.cend();++citer){
+        std::cout << citer->first << " --> ";
         std::vector<Point>::iterator it;
-        for (const auto& edge : element.second) {
-            std::cout << edge.x << "," << edge.y << " ";
+        for (const auto& edge : citer->second) {
+            std::cout << edge << " ";
         }
         std::cout << "\n";
     }
@@ -45,7 +45,7 @@ std::vector<Point> Graph::getVertices(){
 
     for(auto& element: mGraph){
         vertices.push_back(element.first);
-        std::cout << element.first.x << "," << element.first.y << "  ";
+        std::cout << element.first << "  ";
     }
     std::cout << "\n";
 
@@ -56,11 +56,11 @@ std::vector<Point> Graph::getEdge(Point vertex){
     if(mGraph.find(vertex) == mGraph.end()){
         std::cout << "Invalid vertex \n" ;
         return {};
-    }
-        
-    std::cout << "edges of vertex (" << vertex.x <<  "," << vertex.y << "): " ;
-        for(const auto& i: mGraph[vertex]){
-            std::cout << i.x << "," << i.y << " ";
+}
+    
+std::cout << "edges of vertex (" << vertex.getX() <<  "," << vertex.getY() << "): " ;
+    for(const auto& i: mGraph[vertex]){
+        std::cout << i << " ";
 
     }
     std::cout << "\n";

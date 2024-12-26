@@ -1,28 +1,13 @@
 #ifndef __OBSTACLES_H__
 #define __OBSTACLES_H__
 
-#include "variables.hpp"
+#include "point.hpp"
 
 /*
     should we add the number of the point?
     from the structure to class? 
     the smallest edge of a rectangle is a minDistance for the radius..
     */
-struct Point {
-    double x;
-    double y;
-    
-    bool operator==(const Point& other) const {
-        return x == other.x && y == other.y;
-    }
-
-    bool operator<(const Point& other) const {
-        if (x != other.x)
-            return x < other.x;
-        return y < other.y;
-    }
-};
-
 enum obstacleType {CIRCLE, BOX};
 
 class Obstacle{

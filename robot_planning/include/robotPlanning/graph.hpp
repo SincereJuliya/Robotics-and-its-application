@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "variables.hpp"
+#include "point.hpp"
 
 class Graph{
 private:
