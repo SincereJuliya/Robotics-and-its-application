@@ -56,11 +56,11 @@ std::vector<Point> Graph::getEdge(Point vertex){
     if(mGraph.find(vertex) == mGraph.end()){
         std::cout << "Invalid vertex \n" ;
         return {};
-}
-    
-std::cout << "edges of vertex (" << vertex.x <<  "," << vertex.y << "): " ;
-    for(const auto& i: mGraph[vertex]){
-        std::cout << i.x << "," << i.y << " ";
+    }
+        
+    std::cout << "edges of vertex (" << vertex.x <<  "," << vertex.y << "): " ;
+        for(const auto& i: mGraph[vertex]){
+            std::cout << i.x << "," << i.y << " ";
 
     }
     std::cout << "\n";
