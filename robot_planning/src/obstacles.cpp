@@ -1,5 +1,6 @@
 #include <math.h>
 #include <vector>
+#include <algorithm>
 
 #include "robotPlanning/obstacles.hpp"
 
@@ -56,7 +57,15 @@ obstacleType Obstacle::getType(){
 
 double Obstacle::getMinDist(){
     if(type==BOX){
-        
+        std::vector<double> edges;
+        vertices.push_back(vertices[0]);
+        for(std::size_t i=0;i<vertices.size();i++){
+            Point p1 = vertices[i];
+            Point p2 = vertices[i+1];
+            edges.push_back(sqrt(pow((p2.getX()-p1.getX()),2)+pow((p2.getY()-p1.getY()),2)));
+        }
+        vertices.pop_back();
+        return *(std::min_element(edges.begin(), edges.end()));
     }
     return 2*radius;
 }
