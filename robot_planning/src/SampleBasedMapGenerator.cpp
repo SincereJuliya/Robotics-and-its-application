@@ -118,7 +118,7 @@ class SampleBasedMapGenerator: public IMapGenerator
         float toComputeDistance(float x0, float y0, float x, float y)
         {
             return ((x - x0)*(x - x0) + (y - y0)*(y - y0));
-        }
+        };
 
         /* TO DO to get the info if we reached the gates */
         bool isReachedGate(Point p)
