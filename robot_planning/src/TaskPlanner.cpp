@@ -1,84 +1,149 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#include <variables.hpp>
-#include <stdio.h>
-#include <unicode/unistr.h>
+#include <unordered_map>
+#include <queue>
+#include <cmath>
+#include <functional>
+#include "graph.h"
 
-class TaskPlanner
-{
-        
-    private:
-        std::vector<Point> openList;
-        std::vector<Point> closedList;
+// Define the Point structure as a pair of integers (e.g., (x, y)).
+typedef std::pair<int, int> Point;
 
-    public:
-
-        std::vector<Point> generateSuccessors(const Point& q)
-        {
-            std::vector<Point> successors;
-            successors.push_back(Point{q.x + 1, q.y});
-            successors.push_back(Point{q.x - 1, q.y});
-            successors.push_back(Point{q.x, q.y + 1});
-            successors.push_back(Point{q.x, q.y - 1});
-            return successors;
+// Define a hash function for Point
+namespace std {
+    template <>
+    struct hash<Point> {
+        std::size_t operator()(const Point& p) const {
+            return std::hash<int>()(p.first) ^ std::hash<int>()(p.second);
         }
+    };
+}
 
-        void run()
-        {
-            Point start{0,0};
-            Point goal{5,5};
+// Define a structure to store the A* node information
+struct Node {
+    Point point;
+    double gCost;  // Cost to reach this node from the start
+    double hCost;
+    double fCost() const { return gCost + hCost; }
+    bool operator<(const Node& other) const {
+        return fCost() > other.fCost(); // Priority queue needs reverse ordering
+    }
+};
 
-            openList.push_back(start);
-            auto it = openList.begin();
+// A* algorithm implementation
+class AStar {
+public:
+    AStar(const Graph& graph, const Point& start, const Point& goal)
+        : mGraph(graph), start(start), goal(goal), gScores(), fScores() {}
 
-            while(!openList.empty())
-            {
-                auto q = it++;
-                openList.erase(q); // remove q from openList
+    std::vector<Point> findPath() {
+        std::priority_queue<Node> openSet;
+        std::unordered_map<Point, Point> cameFrom;
+        std::unordered_map<Point, double> gScores;
+        std::unordered_map<Point, double> fScores;
 
-                std::vector<Point> successors = generateSuccessors(*q);
+        // Initialize start point
+        gScores[start] = 0;
+        fScores[start] = heuristic(start, goal);
+        openSet.push(Node{ start, 0, fScores[start] });
 
-                for (const auto &successor : successors)
-                {
-                    if (successor == goal)
-                    {
-                        std::cout << "Goal reached\n";
-                        return;
-                    }
+        while (!openSet.empty()) {
+            Node currentNode = openSet.top();
+            openSet.pop();
+            Point currentPoint = currentNode.point;
 
-                    float g = toComputeDistance(*q, successor);
-                    float h = toComputeDistance(successor, goal);
-                    float f = g + h;
-
-                    if (isInOpenList(successor) && f < successor.f)
-                    {
-                        continue;
-                    }
-
-                    if (isInClosedList(successor) && f < successor.f)
-                    {
-                        continue;
-                    }
-
-                    openList.push_back(successor);
-                }
-
-                closedList.push_back(*q);
+            // If we reached the goal, reconstruct the path
+            if (currentPoint == goal) {
+                return reconstructPath(cameFrom);
             }
 
-        };
-
-        float toComputeDistance(Point a, Point b)
-        {
-            return ((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
-        };
-
-        bool isInClosedList(const Point& point)
-        {
-            return std::find(closedList.begin(), closedList.end(), point) != closedList.end();
+            // Iterate over neighbors
+            for (const Point& neighbor : mGraph.getEdge(currentPoint)) {
+                double tentativeGScore = gScores[currentPoint] + distance(currentPoint, neighbor);
+                if (gScores.find(neighbor) == gScores.end() || tentativeGScore < gScores[neighbor]) {
+                    // We found a better path to this neighbor
+                    cameFrom[neighbor] = currentPoint;
+                    gScores[neighbor] = tentativeGScore;
+                    fScores[neighbor] = gScores[neighbor] + heuristic(neighbor, goal);
+                    openSet.push(Node{ neighbor, gScores[neighbor], fScores[neighbor] });
+                }
+            }
         }
+
+        // Return empty vector if no path is found
+        return {};
+    }
+
+private:
+    Graph mGraph;
+    Point start;
+    Point goal;
+
+    // Heuristic function (e.g., Euclidean distance)
+    double heuristic(const Point& a, const Point& b) const {
+        return sqrt(pow(b.first - a.first, 2) + pow(b.second - a.second, 2));
+    }
+
+    // Distance function (e.g., assuming 1-unit distance between adjacent points)
+    double distance(const Point& a, const Point& b) const {
+        return 1.0;
+    }
+
+    // Reconstruct the path from start to goal using the cameFrom map
+    std::vector<Point> reconstructPath(const std::unordered_map<Point, Point>& cameFrom) {
+        std::vector<Point> path;
+        Point current = goal;
+        while (cameFrom.find(current) != cameFrom.end()) {
+            path.push_back(current);
+            current = cameFrom.at(current);
+        }
+        path.push_back(start);
+        std::reverse(path.begin(), path.end());
+        return path;
+    }
+};
+
+// Helper function to print the path
+void printPath(const std::vector<Point>& path) {
+    if (path.empty()) {
+        std::cout << "No path found." << std::endl;
+    } else {
+        for (const auto& p : path) {
+            std::cout << "(" << p.first << ", " << p.second << ") ";
+        }
+        std::cout << std::endl;
+    }
 }
+
+int main() {
+    // Define the graph as an adjacency list (std::map of Point -> vector of Points)
+    Graph graph;
+
+    graph.addEdge({0, 0}, {1, 0});
+    graph.addEdge({0, 0}, {0, 1});
+    graph.addEdge({1, 0}, {0, 0});
+    graph.addEdge({1, 0}, {1, 1});
+    graph.addEdge({0, 1}, {0, 0});
+    graph.addEdge({0, 1}, {1, 1});
+    graph.addEdge({1, 1}, {1, 0});
+    graph.addEdge({1, 1}, {0, 1});
+    graph.addEdge({1, 1}, {2, 2});
+    graph.addEdge({2, 2}, {1, 1});
+
+    Point start = {0, 0};
+    Point goal = {2, 2};
+
+    AStar astar(graph, start, goal);
+    std::vector<Point> path = astar.findPath();
+
+    // Print the path
+    printPath(path);
+
+    return 0;
+}
+
+
+
 /*
 // A* Search Algorithm
 1.  Initialize the open list
