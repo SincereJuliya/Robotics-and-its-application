@@ -1,0 +1,2 @@
+Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo -- -j8 -l8
+Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_gazebo' returned '2': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_gazebo -- -j8 -l8

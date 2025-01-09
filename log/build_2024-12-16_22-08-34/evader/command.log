@@ -1,0 +1,1 @@
+Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/evader -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/evader

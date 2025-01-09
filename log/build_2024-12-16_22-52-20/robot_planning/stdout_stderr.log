@@ -1,0 +1,31 @@
+[ 16%] [32mBuilding CXX object CMakeFiles/borders.dir/src/listenerBorders.cpp.o[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/gates.dir/src/listenerGates.cpp.o[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/obstacles.dir/src/listenerObstacles.cpp.o[0m
+[ 66%] [32m[1mLinking CXX executable gates[0m
+[ 83%] [32m[1mLinking CXX executable borders[0m
+[100%] [32m[1mLinking CXX executable obstacles[0m
+[100%] Built target borders
+[100%] Built target gates
+[100%] Built target obstacles
+-- Install configuration: ""
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/borders
+-- Set non-toolchain portion of runtime path of "/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/borders" to ""
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/gates
+-- Set non-toolchain portion of runtime path of "/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/gates" to ""
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/obstacles
+-- Set non-toolchain portion of runtime path of "/home/seventeen/Robotics-and-its-application/install/robot_planning/lib/robot_planning/obstacles" to ""
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/ament_index/resource_index/package_run_dependencies/robot_planning
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/ament_index/resource_index/parent_prefix_path/robot_planning
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/ament_prefix_path.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/ament_prefix_path.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/path.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/environment/path.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.bash
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.sh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.zsh
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/local_setup.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.dsv
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/ament_index/resource_index/packages/robot_planning
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/cmake/robot_planningConfig.cmake
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/cmake/robot_planningConfig-version.cmake
+-- Installing: /home/seventeen/Robotics-and-its-application/install/robot_planning/share/robot_planning/package.xml

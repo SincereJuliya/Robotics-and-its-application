@@ -1,0 +1,52 @@
+[0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+[0m
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:32:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   32 |   on_configure([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_activate(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:47:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   47 |   on_activate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_deactivate(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:56:48:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   56 |   on_deactivate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_cleanup(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:63:45:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   63 |   on_cleanup([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |              [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn SendTimeout::on_shutdown(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_timeout.cpp:70:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   70 |   on_shutdown([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_gates.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn GatesPublisher::on_deactivate(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_gates.cpp:59:48:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   59 |   on_deactivate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn ObstaclesPublisher::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:57:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   57 |   on_configure([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn ObstaclesPublisher::on_activate(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_obstacles.cpp:138:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  138 |   on_activate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn VictimPublisher::on_configure(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:63:47:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   63 |   on_configure([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |                [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn VictimPublisher::on_activate(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:101:46:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  101 |   on_activate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |               [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:[m[K In member function ‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn VictimPublisher::on_deactivate(const rclcpp_lifecycle::State&)[m[K’:
+[01m[K/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/map_pkg/src/send_victims.cpp:119:48:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kstate[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  119 |   on_deactivate([01;35m[Kconst rclcpp_lifecycle::State& state[m[K)
+      |                 [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K

@@ -1,0 +1,40 @@
+[0.018s] Invoking command in '/home/seventeen/Robotics-and-its-application/build/robot_planning': /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/robot_planning -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning
+[0.186s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.187s]   Compatibility with CMake < 3.10 will be removed from a future version of
+[0.187s]   CMake.
+[0.187s] 
+[0.187s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[0.188s]   CMake that the project does not need compatibility with older versions.
+[0.188s] 
+[0.188s] [0m
+[0.364s] -- The C compiler identification is GNU 11.4.0
+[0.549s] -- The CXX compiler identification is GNU 11.4.0
+[0.573s] -- Detecting C compiler ABI info
+[0.713s] -- Detecting C compiler ABI info - done
+[0.757s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.758s] -- Detecting C compile features
+[0.760s] -- Detecting C compile features - done
+[0.793s] -- Detecting CXX compiler ABI info
+[0.950s] -- Detecting CXX compiler ABI info - done
+[1.006s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.006s] -- Detecting CXX compile features
+[1.007s] -- Detecting CXX compile features - done
+[1.064s] [31mCMake Error at CMakeLists.txt:9 (find_package):
+[1.065s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[1.065s]   has asked CMake to find a package configuration file provided by
+[1.065s]   "ament_cmake", but CMake did not find one.
+[1.066s] 
+[1.066s]   Could not find a package configuration file provided by "ament_cmake" with
+[1.066s]   any of the following names:
+[1.066s] 
+[1.067s]     ament_cmakeConfig.cmake
+[1.067s]     ament_cmake-config.cmake
+[1.067s] 
+[1.067s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[1.068s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[1.068s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[1.068s]   has been installed.
+[1.068s] 
+[1.068s] [0m
+[1.069s] -- Configuring incomplete, errors occurred!
+[1.075s] Invoked command in '/home/seventeen/Robotics-and-its-application/build/robot_planning' returned '1': /home/seventeen/.local/bin/cmake /home/seventeen/Robotics-and-its-application/src/robot_planning -DCMAKE_INSTALL_PREFIX=/home/seventeen/Robotics-and-its-application/install/robot_planning
