@@ -3,18 +3,17 @@
 #include <unordered_map>
 #include <queue>
 #include <cmath>
+#include <utility>
 #include <functional>
-#include "graph.h"
-
-// Define the Point structure as a pair of integers (e.g., (x, y)).
-typedef std::pair<int, int> Point;
+#include "../include/robotPlanning/graph.hpp"
+#include "../include/robotPlanning/point.hpp"
 
 // Define a hash function for Point
 namespace std {
     template <>
     struct hash<Point> {
         std::size_t operator()(const Point& p) const {
-            return std::hash<int>()(p.first) ^ std::hash<int>()(p.second);
+            return std::hash<double>()(p.getX()) ^ std::hash<double>()(p.getY());
         }
     };
 }
@@ -34,7 +33,7 @@ struct Node {
 class AStar {
 public:
     AStar(const Graph& graph, const Point& start, const Point& goal)
-        : mGraph(graph), start(start), goal(goal), gScores(), fScores() {}
+        : mGraph(graph), start(start), goal(goal) {}
 
     std::vector<Point> findPath() {
         std::priority_queue<Node> openSet;
@@ -81,7 +80,7 @@ private:
 
     // Heuristic function (e.g., Euclidean distance)
     double heuristic(const Point& a, const Point& b) const {
-        return sqrt(pow(b.first - a.first, 2) + pow(b.second - a.second, 2));
+        return sqrt(pow(b.getX() - a.getX(), 2) + pow(b.getY() - a.getY(), 2));
     }
 
     // Distance function (e.g., assuming 1-unit distance between adjacent points)
@@ -109,7 +108,7 @@ void printPath(const std::vector<Point>& path) {
         std::cout << "No path found." << std::endl;
     } else {
         for (const auto& p : path) {
-            std::cout << "(" << p.first << ", " << p.second << ") ";
+            std::cout << "(" << p.getX() << ", " << p.getY() << ") ";
         }
         std::cout << std::endl;
     }
