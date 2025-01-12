@@ -3,11 +3,6 @@
 
 #include "point.hpp"
 
-/*
-    should we add the number of the point?
-    from the structure to class? 
-    the smallest edge of a rectangle is a minDistance for the radius..
-    */
 enum obstacleType {CIRCLE, BOX};
 
 class Obstacle{
@@ -17,12 +12,15 @@ private:
     std::vector<Point> vertices;
 public:
     Obstacle(double r, std::vector<Point> vs);
+    std::vector<Point> getVertices();
     Point getCentroid();
     void convertToSqaure();
     obstacleType getType();
     double getMinDist();
     bool isInsideObstacle(Point p);
     std::vector<double> getAbscissas();
+    bool belongsToObstacle(Point p1, Point p2, Point p3, Point p4, bool extr);
+    std::vector<Point> isIntersecting(double x);
 };
 
 #endif

@@ -7,8 +7,8 @@
 #include <chrono>
 #include <vector>
 #include <iostream>
-#include "robotPlanning/point.hpp"
-#include "robotPlanning/obstacles.hpp"
+#include "../incliude/robotPlanning/point.hpp"
+#include "../incliude/robotPlanning/obstacles.hpp"
 
 using namespace std::chrono_literals;
 
