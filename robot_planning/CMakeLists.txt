@@ -12,21 +12,22 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(obstacles_msgs REQUIRED)
 
-add_executable(borders src/listenerBorders.cpp)
-add_executable(gates src/listenerGates.cpp)
-add_executable(obstacles src/listenerObstacles.cpp)
 add_executable(dataRetriver src/dataRetriver.cpp)
+add_executable(cellDecomposition src/cellDecomposition.cpp src/obstacles.cpp src/point.cpp src/graph.cpp)
 
-ament_target_dependencies(borders rclcpp std_msgs geometry_msgs)
-ament_target_dependencies(gates rclcpp std_msgs geometry_msgs)
-ament_target_dependencies(obstacles rclcpp std_msgs geometry_msgs obstacles_msgs)
+target_include_directories(dataRetriver PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+target_include_directories(cellDecomposition PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
+
 ament_target_dependencies(dataRetriver rclcpp std_msgs geometry_msgs obstacles_msgs)
+ament_target_dependencies(cellDecomposition rclcpp std_msgs geometry_msgs obstacles_msgs)
 
 install(TARGETS
-  borders
-  gates
-  obstacles
   dataRetriver
+  cellDecomposition
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
