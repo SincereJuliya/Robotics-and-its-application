@@ -2,8 +2,8 @@
 #include <vector>
 #include <map>
 #include <iostream>
-#include <graph.hpp>
-#include <obstacles.hpp>
+#include "../include/robotPlanning/graph.hpp"
+#include "../include/robotPlanning/obstacles.hpp"
 
 /*
     1. the communication between nodes: services, messages...
@@ -22,8 +22,9 @@ class IMapGenerator
         
         std::vector<Obstacle> toGetObstacles()
         {
-            return (new std::vector<Obstacle>());
+            return std::vector<Obstacle>(); // Return a new vector by value, not a pointer
         }
+
     
         bool isItInObstacle(Point p)
         {
@@ -35,4 +36,4 @@ class IMapGenerator
             return true;
         };
 
-}
+};

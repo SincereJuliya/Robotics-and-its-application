@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "robotPlanning/obstacles.hpp"
+#include "../include/robotPlanning/obstacles.hpp"
 
 Obstacle::Obstacle(double r, std::vector<Point> vs){
     radius = r;

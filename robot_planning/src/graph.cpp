@@ -2,7 +2,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "robotPlanning/graph.hpp"
+#include "../include/robotPlanning/graph.hpp"
 
 Graph::Graph() {}
 

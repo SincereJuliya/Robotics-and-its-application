@@ -1,6 +1,6 @@
-#include "robotPlanning/variables.hpp"
-#include "robotPlanning/obstacles.hpp"
-#include "robotPlanning/graph.hpp"
+#include "../include/robotPlanning/point.hpp"
+#include "../include/robotPlanning/obstacles.hpp"
+#include "../include/robotPlanning/graph.hpp"
 
 class CellDecomposition{
 private:
