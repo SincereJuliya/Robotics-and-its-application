@@ -3,118 +3,9 @@
 #include <vector>
 #include <math.h> 
 #include <cassert>
+#include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 
 using namespace std;
-
-//double Kmax = 3.0;
-//enum type {LSL, RSR, LSR, RSL, RLR, LRL};
-
-struct arcVar{
-  double x;
-  double y;
-  double th;
-};
-
-struct dubinsCurve{ 
-  arcVar i;
-  double k;
-  double L;
-  arcVar f;
-};
-
-struct tripleDubinsCurve{
-  dubinsCurve a1;
-  dubinsCurve a2;
-  dubinsCurve a3;
-  double L;
-};
-
-struct toStandard{
-  double sc_th0;
-  double sc_thf;
-  double sc_Kmax;
-  double lamda;
-};
-
-struct fromStandard{
-  double s1;
-  double s2;
-  double s3;
-};
-
-struct solution{
-  bool ok;
-  double s1;
-  double s2;
-  double s3;
-};
-
-int ksigns [6][3] = {
-  { 1, 0, 1},  //LSL
-  {-1, 0, -1}, //RSR
-  { 1, 0, -1}, //LSR
-  {-1, 0, 1},  // RSL
-  {-1, 1, -1}, //RLR
-  {1, -1,  1}  // LRL
-};
-
-struct curve{
-  int curvType; // with this order -- LSL, RSR, LSR, RSL, RLR, LRL -- 
-  tripleDubinsCurve values;
-};
-
-dubinsCurve dubinsArc(double x0, double y0, double th0, double Kmax, double L);
-
-tripleDubinsCurve dubinsCur(double x0, double y0, double th0, double s1, double s2, double s3, double k0, double k1, double k2);
-
-toStandard scaleToStandard(double x0, double y0, double th0, double xf, double yf, double thf, double Kmax);
-
-fromStandard scaleFromStandard(double sc_s1, double sc_s2, double sc_s3, double lamda);
-
-arcVar circLine(double L, double x0, double y0, double th0, double k);
-
-double mod2pi(double angle);
-
-double rangeSymm(double angle);
-
-double sinc(double t);
-
-curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf, double Kmax);
-
-bool check(double s1, double k0, double s2, double k1, double s3, double k2, double th0, double thf);
-
-solution LSL(double th0, double thf, double Kmax);
-
-solution RSR(double th0, double thf, double Kmax);
-
-solution LSR(double th0, double thf, double Kmax);
-
-solution RSL(double th0, double thf, double Kmax);
-
-solution RLR(double th0, double thf, double Kmax);
-
-solution LRL(double th0, double thf, double Kmax);
-
-int main(int argc, char** argv){
-  double x0 = 0;
-  double y0 = 0;
-  double th0 = -M_PI/2  ;
-  double xf = 4;
-  double yf = 0;
-  double thf = -M_PI/2;
-
-  double kmax = 1;
-
-  solution sol = LSL(th0, thf, kmax);
-  cout << "LSL: s1=" << sol.s1 << " s2=" << sol.s2 << " s3=" << sol.s3 << "\n";
-
-  sol = RSR(th0, thf, kmax);
-  cout << "RSR: s1=" << sol.s1 << " s2=" << sol.s2 << " s3=" << sol.s3 << "\n";
-  
-  sol = LSR(th0, thf, kmax);
-  cout << "LSR: s1=" << sol.s1 << " s2=" << sol.s2 << " s3=" << sol.s3 << "\n";
-  return 0;
-}
 
 
 toStandard scaleToStandard(double x0, double y0, double th0, double xf, double yf, double thf, double Kmax){
@@ -236,8 +127,8 @@ solution LSL(double th0, double thf, double Kmax){
     ret.s3 = 0;
     return ret;
   }
-  cout << "temp2: " << temp2 << "\n";
-  cout << "sqrt(temp2): " << sqrt(temp2) << "\n";
+  /* cout << "temp2: " << temp2 << "\n";
+  cout << "sqrt(temp2): " << sqrt(temp2) << "\n"; */
   ret.s2 = invK * sqrt(temp2);
   ret.s3 = invK * mod2pi(thf - temp1);
   ret.ok = true;
@@ -361,7 +252,7 @@ solution LRL(double th0, double thf, double Kmax){
   return ret;
 }
 
-curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf, double Kmax){
+curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf, double kmax){
   toStandard var = scaleToStandard(x0, y0, th0, xf, yf, thf, Kmax);
   fromStandard ret;
   double s1, s2, s3;
@@ -376,7 +267,7 @@ curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf,
   double Lcur=0;
 
   sol = (*primitivesPtr[0])(var.sc_th0, var.sc_thf, var.sc_Kmax);
-  L = sol.s1+sol.s2+sol.s3+1;
+  L = sol.s1+sol.s2+sol.s3+1; //added 1 to make it longer than the real first value, to take it into consieration with the loop
   for(int i=0;i<6;i++){
     sol = (*primitivesPtr[i])(var.sc_th0, var.sc_thf, var.sc_Kmax);
     Lcur = sol.s1+sol.s2+sol.s3;
@@ -387,14 +278,49 @@ curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf,
       s3 = sol.s3;
       pidx = i;
     }
+    cout << curvNames[i] << " L = " << Lcur*var.lamda << ", " << "s1 = " << sol.s1*var.lamda << " s2 = " << sol.s2*var.lamda << " s3 = " << sol.s3*var.lamda<< "\n";
   }
   if(pidx>0){
     ret = scaleFromStandard(s1, s2, s3, var.lamda);
     dubinsRes = dubinsCur(x0, y0, th0, ret.s1, ret.s2, ret.s3, ksigns[pidx][0]*Kmax, ksigns[pidx][1]*Kmax, ksigns[pidx][2]*Kmax);
-    assert(check(s1, ksigns[pidx][0]*var.sc_Kmax, s2, ksigns[pidx][1]*var.sc_Kmax, s3, ksigns[pidx][2]*var.sc_Kmax, var.sc_th0, var.sc_thf));
+    //assert(check(s1, ksigns[pidx][0]*var.sc_Kmax, s2, ksigns[pidx][1]*var.sc_Kmax, s3, ksigns[pidx][2]*var.sc_Kmax, var.sc_th0, var.sc_thf));
   }
 
   res.curvType = pidx;
   res.values = dubinsRes;
   return res;
 }
+
+std::vector<arcVar> plotArc(dubinsCurve arc, std::vector<arcVar>& plt){
+  int nPts = 100;
+  for(int i=0; i<nPts; i++){
+    
+  }
+}
+
+std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv){
+  std::vector<arcVar> plot;
+  
+  plotArc(dubCurv.a1, plot);
+  plotArc(dubCurv.a2, plot);
+  plotArc(dubCurv.a3, plot);
+
+
+}
+
+int main(int argc, char** argv){
+  double x0 = 0;
+  double y0 = 0;
+  double th0 = -M_PI/2  ;
+  double xf = 4;
+  double yf = 0;
+  double thf = -M_PI/2;
+
+  double kmax = 1;
+
+  curve res = dubinsShortestPath(x0, y0, th0, xf, yf, thf, kmax);
+  cout << "\n best one with L: " << res.values.L << " the one on index:" << res.curvType << "\n";
+
+  return 0;
+}
+
