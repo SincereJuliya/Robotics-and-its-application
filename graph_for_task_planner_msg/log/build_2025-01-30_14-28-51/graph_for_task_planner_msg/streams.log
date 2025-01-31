@@ -1,0 +1,17 @@
+[0.012s] Invoking command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg -DCMAKE_INSTALL_PREFIX=/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg
+[0.021s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.022s] -- Found ament_cmake_core: 1.3.10 (/opt/ros/humble/share/ament_cmake_core/cmake)
+[0.114s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.116s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.144s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.304s] [31mCMake Error at /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:229 (message):
+[0.304s]   Packages installing interfaces must include
+[0.304s]   '<member_of_group>rosidl_interface_packages</member_of_group>' in their
+[0.305s]   package.xml
+[0.305s] Call Stack (most recent call first):
+[0.305s]   CMakeLists.txt:12 (rosidl_generate_interfaces)
+[0.305s] 
+[0.305s] [0m
+[0.305s] -- Configuring incomplete, errors occurred!
+[0.305s] See also "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/CMakeFiles/CMakeOutput.log".
+[0.310s] Invoked command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg -DCMAKE_INSTALL_PREFIX=/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg

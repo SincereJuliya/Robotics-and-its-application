@@ -11,22 +11,25 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(obstacles_msgs REQUIRED)
+find_package(graph_for_task_planner_msg REQUIRED)
 
-add_executable(borders src/listenerBorders.cpp)
-add_executable(gates src/listenerGates.cpp)
-add_executable(obstacles src/listenerObstacles.cpp)
-add_executable(dataRetriver src/dataRetriver.cpp)
+add_executable(dataRetriver src/dataRetriver.cpp src/obstacles.cpp src/point.cpp)
+add_executable(taskPlanner src/TaskPlannerN.cpp src/graph.cpp src/point.cpp src/TaskPlanner.cpp)
+add_executable(mapGenerator src/SampleBasedMapGenerator.cpp src/graph.cpp src/point.cpp src/IMapGenerator.cpp )
 
-ament_target_dependencies(borders rclcpp std_msgs geometry_msgs)
-ament_target_dependencies(gates rclcpp std_msgs geometry_msgs)
-ament_target_dependencies(obstacles rclcpp std_msgs geometry_msgs obstacles_msgs)
-ament_target_dependencies(dataRetriver rclcpp std_msgs geometry_msgs obstacles_msgs)
+add_executable(testMap src/test.cpp src/graph.cpp src/obstacles.cpp src/point.cpp src/IMapGenerator.cpp )
+
+ament_target_dependencies(dataRetriver rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
+ament_target_dependencies(taskPlanner rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
+ament_target_dependencies(mapGenerator rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
+ament_target_dependencies(testMap rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
+
 
 install(TARGETS
-  borders
-  gates
-  obstacles
   dataRetriver
+  taskPlanner
+  mapGenerator
+  testMap
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

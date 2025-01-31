@@ -1,0 +1,14 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from graph_for_task_planner_msg/msg/Point.msg
+// generated code does not contain a copyright notice
+
+
+module graph_for_task_planner_msg {
+  module msg {
+    struct Point {
+      double x;
+
+      double y;
+    };
+  };
+};

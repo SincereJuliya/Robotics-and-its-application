@@ -1,4 +1,7 @@
 #include "stdio.h"
+#include "graph_for_task_planner_msg/msg/graph.hpp" 
+#include "graph_for_task_planner_msg/msg/edge.hpp"
+#include "graph_for_task_planner_msg/msg/point.hpp"
 #include <vector>
 #include <map>
 #include <iostream>
@@ -25,7 +28,6 @@ class IMapGenerator
             return std::vector<Obstacle>(); // Return a new vector by value, not a pointer
         }
 
-    
         bool isItInObstacle(Point p)
         {
             return false;

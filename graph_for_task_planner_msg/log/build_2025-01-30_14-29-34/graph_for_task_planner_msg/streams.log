@@ -1,0 +1,265 @@
+[0.011s] Invoking command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg -DCMAKE_INSTALL_PREFIX=/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg
+[0.022s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[0.022s] -- Found ament_cmake_core: 1.3.10 (/opt/ros/humble/share/ament_cmake_core/cmake)
+[0.115s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.117s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.146s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.364s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.523s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.706s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.725s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[0.728s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[0.750s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[0.750s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.750s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[0.750s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[0.767s] -- Found PythonExtra: .so  
+[0.800s] -- Configuring done
+[0.828s] -- Generating done
+[0.830s] -- Build files have been written to: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg
+[0.836s] Invoked command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg -DCMAKE_INSTALL_PREFIX=/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg
+[0.838s] Invoking command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake --build /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg -- -j12 -l12
+[0.872s] [  2%] [34m[1mGenerating C code for ROS interfaces[0m
+[0.881s] [  4%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[0.889s] [  4%] Built target ament_cmake_python_copy_graph_for_task_planner_msg
+[1.102s] running egg_info
+[1.103s] creating graph_for_task_planner_msg.egg-info
+[1.103s] writing graph_for_task_planner_msg.egg-info/PKG-INFO
+[1.103s] writing dependency_links to graph_for_task_planner_msg.egg-info/dependency_links.txt
+[1.103s] writing top-level names to graph_for_task_planner_msg.egg-info/top_level.txt
+[1.103s] writing manifest file 'graph_for_task_planner_msg.egg-info/SOURCES.txt'
+[1.105s] reading manifest file 'graph_for_task_planner_msg.egg-info/SOURCES.txt'
+[1.106s] writing manifest file 'graph_for_task_planner_msg.egg-info/SOURCES.txt'
+[1.124s] [  4%] Built target graph_for_task_planner_msg__cpp
+[1.133s] [  4%] Built target ament_cmake_python_build_graph_for_task_planner_msg_egg
+[1.133s] [  6%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[1.134s] [  8%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[1.135s] [ 10%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[1.151s] [ 17%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_generator_c.dir/rosidl_generator_c/graph_for_task_planner_msg/msg/detail/point__functions.c.o[0m
+[1.152s] [ 17%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_generator_c.dir/rosidl_generator_c/graph_for_task_planner_msg/msg/detail/edge__functions.c.o[0m
+[1.152s] [ 17%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_generator_c.dir/rosidl_generator_c/graph_for_task_planner_msg/msg/detail/graph__functions.c.o[0m
+[1.189s] [ 19%] [32m[1mLinking C shared library libgraph_for_task_planner_msg__rosidl_generator_c.so[0m
+[1.221s] [ 19%] Built target graph_for_task_planner_msg__rosidl_generator_c
+[1.231s] [ 25%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[1.231s] [ 25%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[1.231s] [ 25%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[1.335s] [ 27%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/graph_for_task_planner_msg/msg/graph__type_support.cpp.o[0m
+[1.335s] [ 31%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/graph_for_task_planner_msg/msg/edge__type_support.cpp.o[0m
+[1.335s] [ 31%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/graph_for_task_planner_msg/msg/point__type_support.cpp.o[0m
+[1.397s] [ 34%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/graph_for_task_planner_msg/msg/detail/graph__type_support.cpp.o[0m
+[1.398s] [ 36%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/graph_for_task_planner_msg/msg/detail/edge__type_support.cpp.o[0m
+[1.398s] [ 38%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/graph_for_task_planner_msg/msg/detail/point__type_support.cpp.o[0m
+[1.410s] [ 40%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/graph_for_task_planner_msg/msg/detail/dds_fastrtps/edge__type_support.cpp.o[0m
+[1.414s] [ 42%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/graph_for_task_planner_msg/msg/detail/dds_fastrtps/graph__type_support.cpp.o[0m
+[1.418s] [ 44%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/graph_for_task_planner_msg/msg/detail/dds_fastrtps/point__type_support.cpp.o[0m
+[1.505s] [ 46%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_c.dir/rosidl_typesupport_c/graph_for_task_planner_msg/msg/graph__type_support.cpp.o[0m
+[1.543s] [ 48%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_c.dir/rosidl_typesupport_c/graph_for_task_planner_msg/msg/point__type_support.cpp.o[0m
+[1.583s] [ 51%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_c.dir/rosidl_typesupport_c/graph_for_task_planner_msg/msg/edge__type_support.cpp.o[0m
+[1.605s] [ 53%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/graph_for_task_planner_msg/msg/detail/graph__type_support_c.cpp.o[0m
+[1.625s] [ 55%] [32m[1mLinking CXX shared library libgraph_for_task_planner_msg__rosidl_typesupport_c.so[0m
+[1.633s] [ 57%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/graph_for_task_planner_msg/msg/detail/graph__type_support.c.o[0m
+[1.646s] [ 59%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/graph_for_task_planner_msg/msg/detail/point__type_support.c.o[0m
+[1.669s] [ 61%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/graph_for_task_planner_msg/msg/detail/point__type_support_c.cpp.o[0m
+[1.686s] [ 63%] [32mBuilding CXX object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/graph_for_task_planner_msg/msg/detail/edge__type_support_c.cpp.o[0m
+[1.689s] [ 63%] Built target graph_for_task_planner_msg__rosidl_typesupport_c
+[1.694s] [ 65%] [32m[1mLinking CXX shared library libgraph_for_task_planner_msg__rosidl_typesupport_cpp.so[0m
+[1.698s] [ 68%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/graph_for_task_planner_msg/msg/detail/edge__type_support.c.o[0m
+[1.742s] [ 70%] [32m[1mLinking C shared library libgraph_for_task_planner_msg__rosidl_typesupport_introspection_c.so[0m
+[1.753s] [ 70%] Built target graph_for_task_planner_msg__rosidl_typesupport_cpp
+[1.787s] [ 70%] Built target graph_for_task_planner_msg__rosidl_typesupport_introspection_c
+[1.896s] [ 72%] [32m[1mLinking CXX shared library libgraph_for_task_planner_msg__rosidl_typesupport_introspection_cpp.so[0m
+[1.926s] [ 74%] [32m[1mLinking CXX shared library libgraph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp.so[0m
+[1.969s] [ 74%] Built target graph_for_task_planner_msg__rosidl_typesupport_introspection_cpp
+[1.987s] [ 76%] [32m[1mLinking CXX shared library libgraph_for_task_planner_msg__rosidl_typesupport_fastrtps_c.so[0m
+[1.995s] [ 76%] Built target graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp
+[2.049s] [ 76%] Built target graph_for_task_planner_msg__rosidl_typesupport_fastrtps_c
+[2.067s] [ 76%] Built target graph_for_task_planner_msg
+[2.085s] [ 78%] [34m[1mGenerating Python code for ROS interfaces[0m
+[2.394s] [ 78%] Built target graph_for_task_planner_msg__py
+[2.413s] [ 82%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_generator_py.dir/rosidl_generator_py/graph_for_task_planner_msg/msg/_graph_s.c.o[0m
+[2.413s] [ 82%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_generator_py.dir/rosidl_generator_py/graph_for_task_planner_msg/msg/_edge_s.c.o[0m
+[2.413s] [ 85%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_generator_py.dir/rosidl_generator_py/graph_for_task_planner_msg/msg/_point_s.c.o[0m
+[2.492s] [ 87%] [32m[1mLinking C shared library rosidl_generator_py/graph_for_task_planner_msg/libgraph_for_task_planner_msg__rosidl_generator_py.so[0m
+[2.526s] [ 87%] Built target graph_for_task_planner_msg__rosidl_generator_py
+[2.545s] [ 91%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/graph_for_task_planner_msg/_graph_for_task_planner_msg_s.ep.rosidl_typesupport_c.c.o[0m
+[2.545s] [ 91%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/graph_for_task_planner_msg/_graph_for_task_planner_msg_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[2.545s] [ 93%] [32mBuilding C object CMakeFiles/graph_for_task_planner_msg__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/graph_for_task_planner_msg/_graph_for_task_planner_msg_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[2.617s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.617s] [ 97%] [32m[1mLinking C shared library rosidl_generator_py/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.621s] [100%] [32m[1mLinking C shared library rosidl_generator_py/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[2.646s] [100%] Built target graph_for_task_planner_msg__rosidl_typesupport_introspection_c__pyext
+[2.646s] [100%] Built target graph_for_task_planner_msg__rosidl_typesupport_c__pyext
+[2.650s] [100%] Built target graph_for_task_planner_msg__rosidl_typesupport_fastrtps_c__pyext
+[2.660s] Invoked command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake --build /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg -- -j12 -l12
+[2.768s] Invoking command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake --install /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg
+[2.775s] -- Install configuration: ""
+[2.775s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/ament_index/resource_index/rosidl_interfaces/graph_for_task_planner_msg
+[2.775s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/rosidl_generator_c__visibility_control.h
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/point.h
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/graph.h
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/edge.h
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__functions.h
+[2.776s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__struct.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__functions.c
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__struct.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__functions.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__type_support.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__functions.c
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__type_support.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__functions.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__type_support.h
+[2.777s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__functions.c
+[2.778s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__struct.h
+[2.778s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/library_path.sh
+[2.778s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/library_path.dsv
+[2.778s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_generator_c.so
+[2.778s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_generator_c.so" to ""
+[2.778s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg
+[2.779s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg
+[2.779s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail
+[2.779s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__rosidl_typesupport_fastrtps_c.h
+[2.779s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__rosidl_typesupport_fastrtps_c.h
+[2.779s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__rosidl_typesupport_fastrtps_c.h
+[2.779s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[2.779s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_fastrtps_c.so
+[2.779s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_fastrtps_c.so" to ""
+[2.779s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg
+[2.780s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[2.780s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__rosidl_typesupport_introspection_c.h
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__type_support.c
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__rosidl_typesupport_introspection_c.h
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__rosidl_typesupport_introspection_c.h
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__type_support.c
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__type_support.c
+[2.780s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_introspection_c.so
+[2.781s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_introspection_c.so" to ""
+[2.781s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_c.so
+[2.781s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_c.so" to ""
+[2.781s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg
+[2.781s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg
+[2.781s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/point.hpp
+[2.781s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/edge.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/graph.hpp
+[2.782s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__struct.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__builder.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__builder.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__struct.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__traits.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__traits.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__builder.hpp
+[2.782s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__struct.hpp
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__traits.hpp
+[2.783s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg
+[2.783s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[2.783s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/dds_fastrtps
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__rosidl_typesupport_fastrtps_cpp.hpp
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__rosidl_typesupport_fastrtps_cpp.hpp
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__rosidl_typesupport_fastrtps_cpp.hpp
+[2.783s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp.so
+[2.784s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_fastrtps_cpp.so" to ""
+[2.784s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg
+[2.784s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg
+[2.784s] -- Up-to-date: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail
+[2.784s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__rosidl_typesupport_introspection_cpp.hpp
+[2.784s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__type_support.cpp
+[2.784s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/point__rosidl_typesupport_introspection_cpp.hpp
+[2.784s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__rosidl_typesupport_introspection_cpp.hpp
+[2.784s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/graph__type_support.cpp
+[2.785s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/include/graph_for_task_planner_msg/graph_for_task_planner_msg/msg/detail/edge__type_support.cpp
+[2.785s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_introspection_cpp.so
+[2.785s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_introspection_cpp.so" to ""
+[2.785s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_cpp.so
+[2.786s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_typesupport_cpp.so" to ""
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/pythonpath.sh
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/pythonpath.dsv
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg-0.0.0-py3.10.egg-info
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg-0.0.0-py3.10.egg-info/SOURCES.txt
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg-0.0.0-py3.10.egg-info/PKG-INFO
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg-0.0.0-py3.10.egg-info/top_level.txt
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg-0.0.0-py3.10.egg-info/dependency_links.txt
+[2.786s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/_graph_for_task_planner_msg_s.ep.rosidl_typesupport_fastrtps_c.c
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/libgraph_for_task_planner_msg__rosidl_generator_py.so
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/_graph_for_task_planner_msg_s.ep.rosidl_typesupport_c.c
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/__init__.py
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.787s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/_graph_for_task_planner_msg_s.ep.rosidl_typesupport_introspection_c.c
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_graph.py
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_point.py
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_point_s.c
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/__init__.py
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_edge_s.c
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_graph_s.c
+[2.788s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_edge.py
+[2.816s] Listing '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg'...
+[2.816s] Compiling '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/__init__.py'...
+[2.816s] Listing '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg'...
+[2.816s] Compiling '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/__init__.py'...
+[2.816s] Compiling '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_edge.py'...
+[2.816s] Compiling '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_graph.py'...
+[2.816s] Compiling '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/msg/_point.py'...
+[2.819s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[2.820s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[2.820s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[2.820s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[2.820s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[2.821s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/local/lib/python3.10/dist-packages/graph_for_task_planner_msg/graph_for_task_planner_msg_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[2.821s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_generator_py.so
+[2.821s] -- Set runtime path of "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/lib/libgraph_for_task_planner_msg__rosidl_generator_py.so" to ""
+[2.821s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/msg/Graph.idl
+[2.821s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/msg/Point.idl
+[2.821s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/msg/Edge.idl
+[2.821s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/msg/Graph.msg
+[2.822s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/msg/Point.msg
+[2.822s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/msg/Edge.msg
+[2.822s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/ament_index/resource_index/package_run_dependencies/graph_for_task_planner_msg
+[2.822s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/ament_index/resource_index/parent_prefix_path/graph_for_task_planner_msg
+[2.822s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/ament_prefix_path.sh
+[2.822s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/ament_prefix_path.dsv
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/path.sh
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/environment/path.dsv
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/local_setup.bash
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/local_setup.sh
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/local_setup.zsh
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/local_setup.dsv
+[2.823s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/package.dsv
+[2.824s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/ament_index/resource_index/packages/graph_for_task_planner_msg
+[2.824s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_generator_cExport.cmake
+[2.824s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_generator_cExport-noconfig.cmake
+[2.824s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cExport.cmake
+[2.824s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[2.824s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_introspection_cExport.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_cExport.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_cExport-noconfig.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_generator_cppExport.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cppExport.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[2.825s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_introspection_cppExport.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_cppExport.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msg__rosidl_typesupport_cppExport-noconfig.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_generator_pyExport.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/export_graph_for_task_planner_msg__rosidl_generator_pyExport-noconfig.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/rosidl_cmake-extras.cmake
+[2.826s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/ament_cmake_export_include_directories-extras.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/ament_cmake_export_libraries-extras.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/ament_cmake_export_targets-extras.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/ament_cmake_export_dependencies-extras.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msgConfig.cmake
+[2.827s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/cmake/graph_for_task_planner_msgConfig-version.cmake
+[2.828s] -- Installing: /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/install/graph_for_task_planner_msg/share/graph_for_task_planner_msg/package.xml
+[2.830s] Invoked command in '/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/sincerejuliya/Documents/ros_ws/src/install/obstacles_msgs:/opt/ros/humble /usr/bin/cmake --install /home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg
