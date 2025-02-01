@@ -1,9 +1,3 @@
-#include <algorithm>
-#include <bits/stdc++.h>
-/* #include "robotPlanning/points.hpp"
-#include "robotPlanning/obstacles.hpp"
-#include "robotPlanning/graph.hpp"  */
-
 #include "../include/robotPlanning/point.hpp"
 #include "../include/robotPlanning/obstacles.hpp"
 #include "../include/robotPlanning/graph.hpp"

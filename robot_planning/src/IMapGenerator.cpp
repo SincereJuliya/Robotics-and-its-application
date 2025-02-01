@@ -1,9 +1,12 @@
 #include "stdio.h"
+#include "graph_for_task_planner_msg/msg/graph.hpp" 
+#include "graph_for_task_planner_msg/msg/edge.hpp"
+#include "graph_for_task_planner_msg/msg/point.hpp"
 #include <vector>
 #include <map>
 #include <iostream>
-#include <graph.hpp>
-#include <obstacles.hpp>
+#include "../include/robotPlanning/graph.hpp"
+#include "../include/robotPlanning/obstacles.hpp"
 
 /*
     1. the communication between nodes: services, messages...
@@ -22,9 +25,9 @@ class IMapGenerator
         
         std::vector<Obstacle> toGetObstacles()
         {
-            return (new std::vector<Obstacle>());
+            return std::vector<Obstacle>(); // Return a new vector by value, not a pointer
         }
-    
+
         bool isItInObstacle(Point p)
         {
             return false;
@@ -35,4 +38,4 @@ class IMapGenerator
             return true;
         };
 
-}
+};

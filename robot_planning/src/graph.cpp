@@ -2,9 +2,13 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "robotPlanning/graph.hpp"
+#include "../include/robotPlanning/graph.hpp"
 
 Graph::Graph() {}
+
+Graph::Graph(const Graph& g) {
+    mGraph = g.mGraph;
+}
 
 void Graph::addVertice(Point vertex){
     mGraph[vertex] = {};
@@ -67,6 +71,60 @@ std::cout << "edges of vertex (" << vertex.getX() <<  "," << vertex.getY() << ")
     return mGraph[vertex]; 
 }
 
+// Method to clear the graph
+void Graph::clear() {
+        mGraph.clear(); // Clears the adjacency list of vertices and edges
+}
+
+// Convert Graph class to ROS 2 message
+graph_for_task_planner_msg::msg::Graph Graph::toROSMsg() const {
+    graph_for_task_planner_msg::msg::Graph graph_msg;
+
+    std::map<Point, int> point_index;
+    int index = 0;
+
+    // Convert vertices
+    for (const auto& pair : mGraph) {
+        graph_for_task_planner_msg::msg::Point p;
+        p.x = pair.first.getX();
+        p.y = pair.first.getY();
+        graph_msg.vertices.push_back(p);
+        point_index[pair.first] = index++;
+    }
+
+    // Convert edges
+    for (const auto& pair : mGraph) {
+        // Get the index of the start point
+        int start_idx = point_index[pair.first];
+        // Create a Point object for the start point
+        graph_for_task_planner_msg::msg::Point start_point;
+        start_point.x = pair.first.getX();  // Use the correct `x` value from Point class
+        start_point.y = pair.first.getY();  // Use the correct `y` value from Point class
+
+        // Iterate over neighbors and create edges
+        for (const Point& neighbor : pair.second) {
+            if (point_index.find(neighbor) != point_index.end()) {
+                // Create an edge
+                graph_for_task_planner_msg::msg::Edge edge;
+
+                // Assign start_point and end_point as Point objects
+                edge.start_point = start_point;
+
+                // Create a Point object for the neighbor
+                graph_for_task_planner_msg::msg::Point end_point;
+                end_point.x = neighbor.getX();  // Use the correct `x` value from neighbor
+                end_point.y = neighbor.getY();  // Use the correct `y` value from neighbor
+
+                edge.end_point = end_point;
+
+                // Add the edge to the graph message
+                graph_msg.edges.push_back(edge);
+            }
+        }
+    }
+
+    return graph_msg;
+}
 
 /* int main(){
     Graph mg;

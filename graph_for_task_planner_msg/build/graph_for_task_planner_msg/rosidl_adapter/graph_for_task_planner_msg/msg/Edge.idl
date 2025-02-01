@@ -1,0 +1,17 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from graph_for_task_planner_msg/msg/Edge.msg
+// generated code does not contain a copyright notice
+
+#include "graph_for_task_planner_msg/msg/Point.idl"
+
+module graph_for_task_planner_msg {
+  module msg {
+    @verbatim (language="comment", text=
+      "Edge.msg")
+    struct Edge {
+      graph_for_task_planner_msg::msg::Point start_point;
+
+      graph_for_task_planner_msg::msg::Point end_point;
+    };
+  };
+};

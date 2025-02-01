@@ -13,12 +13,16 @@ find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(obstacles_msgs REQUIRED)
+find_package(graph_for_task_planner_msg REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
 
 add_executable(dataRetriver src/dataRetriver.cpp src/obstacles.cpp src/point.cpp)
 add_executable(cellDecomposition src/cellDecomposition.cpp src/obstacles.cpp src/point.cpp src/graph.cpp)
+add_executable(taskPlanner src/TaskPlannerN.cpp src/graph.cpp src/point.cpp src/TaskPlanner.cpp)
+add_executable(mapGenerator src/SampleBasedMapGenerator.cpp src/graph.cpp src/point.cpp src/IMapGenerator.cpp )
 add_executable(followPath src/followPath.cpp)
+add_executable(testMap src/test.cpp src/graph.cpp src/obstacles.cpp src/point.cpp src/IMapGenerator.cpp )
 
 target_include_directories(dataRetriver PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -27,12 +31,19 @@ target_include_directories(cellDecomposition PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)
 
-ament_target_dependencies(dataRetriver rclcpp std_msgs geometry_msgs obstacles_msgs)
+ament_target_dependencies(dataRetriver rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
 ament_target_dependencies(cellDecomposition rclcpp std_msgs geometry_msgs obstacles_msgs)
+ament_target_dependencies(mapGenerator rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
+ament_target_dependencies(taskPlanner rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
+ament_target_dependencies(testMap rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg)
 ament_target_dependencies(followPath rclcpp rclcpp_components rclcpp_action nav2_msgs std_msgs nav_msgs)
+
 
 install(TARGETS
   dataRetriver
+  taskPlanner
+  mapGenerator
+  testMap
   cellDecomposition
   followPath
   DESTINATION lib/${PROJECT_NAME})

@@ -1,0 +1,21 @@
+{
+  "package_name": "graph_for_task_planner_msg",
+  "output_dir": "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_typesupport_cpp/graph_for_task_planner_msg",
+  "template_dir": "/opt/ros/humble/share/rosidl_typesupport_cpp/resource",
+  "idl_tuples": [
+    "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg:msg/Graph.idl",
+    "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg:msg/Edge.idl",
+    "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg:msg/Point.idl"
+  ],
+  "target_dependencies": [
+    "/opt/ros/humble/lib/rosidl_typesupport_cpp/rosidl_typesupport_cpp",
+    "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_typesupport_cpp/__init__.py",
+    "/opt/ros/humble/share/rosidl_typesupport_cpp/resource/action__type_support.cpp.em",
+    "/opt/ros/humble/share/rosidl_typesupport_cpp/resource/idl__type_support.cpp.em",
+    "/opt/ros/humble/share/rosidl_typesupport_cpp/resource/msg__type_support.cpp.em",
+    "/opt/ros/humble/share/rosidl_typesupport_cpp/resource/srv__type_support.cpp.em",
+    "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg/msg/Graph.idl",
+    "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg/msg/Edge.idl",
+    "/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg/msg/Point.idl"
+  ]
+}

@@ -1,0 +1,1 @@
+/home/sincerejuliya/Documents/ros_ws/src/graph_for_task_planner_msg/build/graph_for_task_planner_msg/ament_cmake_environment_hooks/pythonpath.sh

@@ -1,0 +1,6 @@
+msg/Edge.idl
+msg/Edge.msg
+msg/Graph.idl
+msg/Graph.msg
+msg/Point.idl
+msg/Point.msg

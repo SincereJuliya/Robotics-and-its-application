@@ -1,5 +1,10 @@
 
-#include "../include/robotPlanning//point.hpp"
+#include "../include/robotPlanning/point.hpp"
+
+Point::Point(){
+    x=0;
+    y=0;
+}
 
 Point::Point(){
     x=0;

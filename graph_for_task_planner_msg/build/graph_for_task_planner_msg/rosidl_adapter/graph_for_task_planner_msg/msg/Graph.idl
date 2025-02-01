@@ -1,0 +1,16 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from graph_for_task_planner_msg/msg/Graph.msg
+// generated code does not contain a copyright notice
+
+#include "graph_for_task_planner_msg/msg/Edge.idl"
+#include "graph_for_task_planner_msg/msg/Point.idl"
+
+module graph_for_task_planner_msg {
+  module msg {
+    struct Graph {
+      sequence<graph_for_task_planner_msg::msg::Point> vertices;
+
+      sequence<graph_for_task_planner_msg::msg::Edge> edges;
+    };
+  };
+};

@@ -1,0 +1,2 @@
+Point[] vertices
+Edge[] edges
