@@ -21,6 +21,8 @@ private:
     std::vector<Point> gates_;
     std::vector<Point> borders_;
     std::vector<std::vector<Point>> obstacles_;
+
+    bool data_received_;  // Flag to ensure map is generated only once
     
     void gatesCallback(const geometry_msgs::msg::PoseArray::SharedPtr msg) {
         RCLCPP_INFO(this->get_logger(), "Received PoseArray with %zu gates", msg->poses.size());
@@ -28,6 +30,7 @@ private:
         for (const auto& pose : msg->poses) {
             gates_.emplace_back(pose.position.x, pose.position.y);
         }
+        checkAndGenerateMap();
     }
     
     void bordersCallback(const geometry_msgs::msg::PolygonStamped::SharedPtr msg) {
@@ -36,6 +39,7 @@ private:
         for (const auto& point : msg->polygon.points) {
             borders_.emplace_back(point.x, point.y);
         }
+        checkAndGenerateMap();
     }
     
     void obstaclesCallback(const obstacles_msgs::msg::ObstacleArrayMsg::SharedPtr msg) {
@@ -48,6 +52,7 @@ private:
             }
             obstacles_.push_back(obstacle_points);
         }
+        checkAndGenerateMap();
     }
     
     rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr gates_sub_;
@@ -58,7 +63,7 @@ private:
 public:
     Graph G;
     
-    SampleBasedMapGenerator() : Node("mapGenerator") {
+    SampleBasedMapGenerator() : Node("mapGenerator"), data_received_(false) {
         gates_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
             "/gates", 10, std::bind(&SampleBasedMapGenerator::gatesCallback, this, std::placeholders::_1));
         
@@ -72,6 +77,16 @@ public:
         RCLCPP_INFO(this->get_logger(), "SampleBasedMapGenerator node initialized.");
     }
     
+    void checkAndGenerateMap() {
+        // Check if all data is received (gates, borders, obstacles)
+        if (!data_received_ && !gates_.empty() && !borders_.empty() && !obstacles_.empty()) {
+            data_received_ = true; // Flag as data received
+            RCLCPP_INFO(this->get_logger(), "All data received. Generating map...");
+            toGenerateMap(4);  // Generate map once
+            publishGraph();    // Publish the graph
+        }
+    }
+
     virtual Graph toGenerateMap(int interactions) override {
         if (gates_.empty() || borders_.empty() || obstacles_.empty()) {
             RCLCPP_ERROR(this->get_logger(), "ERROR: Gates, borders, or obstacles not received!");
@@ -113,25 +128,39 @@ public:
         graph_pub_->publish(graph_msg);
         RCLCPP_INFO(this->get_logger(), "Graph message published.");
     }
-
     
     float getSearchRadius() { return 10.0f; }
     
     Point getRandomPoint(Point initP, float radius) {
-        bool flag = true;
+        bool validPoint = false;
         float x = initP.getX();
         float y = initP.getY();
 
-        while (flag) {
+        // Keep generating random points until a valid one is found (inside the borders)
+        while (!validPoint) {
             x = getRandomPosition(initP.getX(), radius);
             y = getRandomPosition(initP.getY(), radius);
-            flag = !isInsideArea(x - initP.getX(), y - initP.getY(), radius);
+            Point newP{x, y};
+
+            // Check if the point is inside the borders and not inside any obstacles
+            if (isInsideBorder(newP) && !isItInObstacle(newP)) {
+                validPoint = true;
+            }
         }
         return Point{x, y};
     }
 
-    bool isInsideArea(float x, float y, float r) {
-        return (toComputeDistance(0, 0, x, y) <= r * r);
+    bool isInsideBorder(Point p) {
+        // Use a point-in-polygon algorithm (e.g., ray-casting) to check if point p is inside the borders
+        int n = borders_.size();
+        bool inside = false;
+        for (int i = 0, j = n - 1; i < n; j = i++) {
+            if ((borders_[i].getY() > p.getY()) != (borders_[j].getY() > p.getY()) &&
+                (p.getX() < (borders_[j].getX() - borders_[i].getX()) * (p.getY() - borders_[i].getY()) / (borders_[j].getY() - borders_[i].getY()) + borders_[i].getX())) {
+                inside = !inside;
+            }
+        }
+        return inside;
     }
     
     float getRandomPosition(float middle, float r) {
@@ -161,7 +190,6 @@ public:
         return nearest;
     }
 
-    
     float toComputeDistance(float x0, float y0, float x, float y) {
         return ((x - x0) * (x - x0) + (y - y0) * (y - y0));
     }
@@ -189,7 +217,6 @@ public:
     void spin() {
         rclcpp::spin(this->get_node_base_interface());
     }
-
 };
 
 int main(int argc, char * argv[]) {
@@ -199,4 +226,3 @@ int main(int argc, char * argv[]) {
     rclcpp::shutdown();
     return 0;
 }
-

@@ -1,8 +1,9 @@
 #include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/string.hpp>
 #include <graph_for_task_planner_msg/msg/graph.hpp>
 #include <graph_for_task_planner_msg/msg/point.hpp>
 #include <graph_for_task_planner_msg/msg/edge.hpp>
+#include <geometry_msgs/msg/pose_array.hpp>
+#include <geometry_msgs/msg/pose.hpp>
 #include "../include/robotPlanning/point.hpp"
 #include "../include/robotPlanning/TaskPlanner.hpp"
 
@@ -11,18 +12,19 @@ public:
     AStarNode() : Node("taskPlanner") {
         // Create a subscriber for "graph" topic
         graph_subscriber_ = this->create_subscription<graph_for_task_planner_msg::msg::Graph>(
-            "graph", 10, std::bind(&AStarNode::graphCallback, this, std::placeholders::_1));
+            "generatedGraph", 10, std::bind(&AStarNode::graphCallback, this, std::placeholders::_1));
 
-        // Create a publisher for "followPath" topic
-        path_publisher_ = this->create_publisher<std_msgs::msg::String>("followPath", 10);
+        // Create a publisher for "taskPlannerPath" topic
+        path_publisher_ = this->create_publisher<geometry_msgs::msg::PoseArray>("taskPlannerPath", 10);
+        RCLCPP_INFO(this->get_logger(), "A* Node initialized and waiting for graph messages.");
     }
 
 private:
     rclcpp::Subscription<graph_for_task_planner_msg::msg::Graph>::SharedPtr graph_subscriber_;
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr path_publisher_;
+    rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr path_publisher_;
     Graph graph_;
 
-   void graphCallback(const graph_for_task_planner_msg::msg::Graph::SharedPtr msg) {
+    void graphCallback(const graph_for_task_planner_msg::msg::Graph::SharedPtr msg) {
         RCLCPP_INFO(this->get_logger(), "Received graph with %ld vertices and %ld edges",
                     msg->vertices.size(), msg->edges.size());
 
@@ -47,8 +49,11 @@ private:
         }
 
         // Example points for A* search
-        Point start(0, 0);  
-        Point goal(10, 10);  
+        Point start = graph_.getVertices().front();
+        Point goal = graph_.getVertices().back();  // Use the first vertex as goal
+
+        RCLCPP_INFO(this->get_logger(), "Start and goal for A*: (%f, %f) -> (%f, %f)",
+                        start.getX(), start.getY(), goal.getX(), goal.getY());
 
         // Run A* and publish the result
         AStar astar(graph_, start, goal);
@@ -56,20 +61,30 @@ private:
         publishPath(path);
     }
 
-
-
     // Method to publish the path
     void publishPath(const std::vector<Point>& path) {
-        std_msgs::msg::String path_msg;
-        
-        // Convert the path to a string for easy visualization
-        for (const auto& point : path) {
-            path_msg.data += "(" + std::to_string(point.getX()) + ", " + std::to_string(point.getY()) + ") ";
+        if (path.empty()) {
+            RCLCPP_WARN(this->get_logger(), "Path is empty, nothing to publish");
+            return;  // If the path is empty, exit early
         }
 
-        // Publish the path
+        geometry_msgs::msg::PoseArray path_msg;
+        
+        // Convert the path to PoseArray
+        for (const auto& point : path) {
+            geometry_msgs::msg::Pose pose;
+            pose.position.x = point.getX();
+            pose.position.y = point.getY();
+            pose.position.z = 0.0;  // Set z to 0 for 2D path
+            pose.orientation.w = 1.0;  // Default orientation (no rotation)
+            
+            path_msg.poses.push_back(pose);
+        }
+
+        // Publish the PoseArray on the "taskPlannerPath" topic
         path_publisher_->publish(path_msg);
     }
+
 };
 
 // Main function
@@ -78,4 +93,4 @@ int main(int argc, char *argv[]) {
     rclcpp::spin(std::make_shared<AStarNode>());
     rclcpp::shutdown();
     return 0;
-} 
+}

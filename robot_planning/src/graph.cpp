@@ -2,7 +2,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "../include/robotPlanning/graph.hpp"
+#include "/home/sincerejuliya/Documents/ros_ws/src/robot_planning/include/robotPlanning/graph.hpp"
 
 Graph::Graph() {}
 
@@ -76,48 +76,45 @@ void Graph::clear() {
         mGraph.clear(); // Clears the adjacency list of vertices and edges
 }
 
-// Convert Graph class to ROS 2 message
 graph_for_task_planner_msg::msg::Graph Graph::toROSMsg() const {
     graph_for_task_planner_msg::msg::Graph graph_msg;
 
+    // Map for storing point indices
     std::map<Point, int> point_index;
     int index = 0;
 
-    // Convert vertices
+    // Convert vertices to ROS message
     for (const auto& pair : mGraph) {
-        graph_for_task_planner_msg::msg::Point p;
-        p.x = pair.first.getX();
-        p.y = pair.first.getY();
-        graph_msg.vertices.push_back(p);
-        point_index[pair.first] = index++;
+        graph_for_task_planner_msg::msg::Point ros_point;
+        ros_point.x = pair.first.getX();
+        ros_point.y = pair.first.getY();
+        graph_msg.vertices.push_back(ros_point);
+        point_index[pair.first] = index++;  // Store index for later use in edges
     }
 
-    // Convert edges
+    // Convert edges to ROS message
     for (const auto& pair : mGraph) {
-        // Get the index of the start point
-        int start_idx = point_index[pair.first];
-        // Create a Point object for the start point
-        graph_for_task_planner_msg::msg::Point start_point;
-        start_point.x = pair.first.getX();  // Use the correct `x` value from Point class
-        start_point.y = pair.first.getY();  // Use the correct `y` value from Point class
-
-        // Iterate over neighbors and create edges
+        // Iterate over the neighbors
         for (const Point& neighbor : pair.second) {
-            if (point_index.find(neighbor) != point_index.end()) {
-                // Create an edge
+            // Only create edges if both points are valid in the graph (no duplicates)
+            if (point_index.find(pair.first) != point_index.end() &&
+                point_index.find(neighbor) != point_index.end()) {
+                // Create the edge
                 graph_for_task_planner_msg::msg::Edge edge;
 
-                // Assign start_point and end_point as Point objects
+                // Start point
+                graph_for_task_planner_msg::msg::Point start_point;
+                start_point.x = pair.first.getX();
+                start_point.y = pair.first.getY();
                 edge.start_point = start_point;
 
-                // Create a Point object for the neighbor
+                // End point (neighbor)
                 graph_for_task_planner_msg::msg::Point end_point;
-                end_point.x = neighbor.getX();  // Use the correct `x` value from neighbor
-                end_point.y = neighbor.getY();  // Use the correct `y` value from neighbor
-
+                end_point.x = neighbor.getX();
+                end_point.y = neighbor.getY();
                 edge.end_point = end_point;
 
-                // Add the edge to the graph message
+                // Add edge to the message
                 graph_msg.edges.push_back(edge);
             }
         }
@@ -125,6 +122,7 @@ graph_for_task_planner_msg::msg::Graph Graph::toROSMsg() const {
 
     return graph_msg;
 }
+
 
 /* int main(){
     Graph mg;
