@@ -1,7 +1,6 @@
 #include <math.h>
 #include <vector>
 #include <algorithm>
-
 #include "../include/robotPlanning/obstacles.hpp"
 
 Obstacle::Obstacle(double r, std::vector<Point> vs){
@@ -42,7 +41,7 @@ Point Obstacle::getCentroid(){
     return vertices[0];
 }
 
-void Obstacle::convertToSqaure(){
+void Obstacle::convertToSquare(){
     if(type==BOX){
         return;
     }
@@ -74,25 +73,26 @@ double Obstacle::getMinDist(){
     return 2*radius;
 }
 
-bool Obstacle::isInsideObstacle(Point p){
+bool Obstacle::isInsideObstacle(Point p) const{
+    std::vector<Point> vertices_ = vertices;
     if(type==BOX){
         int cnt=0;
-        vertices.push_back(vertices[0]);
-        for(std::size_t i=0; i<vertices.size()-1;i++){
-            Point p1 = vertices[i];
-            Point p2 = vertices[i+1];
-            //with the following if check if the edges are parallel to any of the two axes and in case it was, check if the same or if it lays on the vertices 
+        vertices_.push_back(vertices_[0]);
+        for(std::size_t i=0; i<vertices_.size()-1;i++){
+            Point p1 = vertices_[i];
+            Point p2 = vertices_[i+1];
+            //with the following if check if the edges are parallel to any of the two axes and in case it was, check if the same or if it lays on the vertices_ 
             if((p1.getY()==p2.getY())&&(p1.getY()==p.getY())&&(p.getX()<p1.getX())!=(p.getX()<p2.getX())){
-                    vertices.pop_back();
+                    vertices_.pop_back();
                     return true;
                 }
             if((p1.getX()==p2.getX())&&(p1.getX()==p.getX())&&(p.getY()<p1.getY())!=(p.getY()<p2.getY())){
-                vertices.pop_back();
+                vertices_.pop_back();
                 return true;
             }
             if(((p1.getX()==p.getX())&&(p1.getY()==p.getY()))||((p2.getX()==p.getX())&&(p2.getY()==p.getY()))){
                 //need to add the check if in range of the obstacle edge                
-                vertices.pop_back();
+                vertices_.pop_back();
                 return true;
             }
             double err;
@@ -100,10 +100,10 @@ bool Obstacle::isInsideObstacle(Point p){
             err = abs((((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))*(p.getX()-p1.getX()))+p1.getY()- p.getY());
             if(err<0.0028){ //still need to check if inside the range of the variables
                 if((p.getY()<p1.getY())!=(p.getY()<p2.getY())&&(p.getX()<p1.getX())!=(p.getX()<p2.getX())){
-                    vertices.pop_back();
+                    vertices_.pop_back();
                     return true;
                 }else {
-                    vertices.pop_back();
+                    vertices_.pop_back();
                     return false;
                 }
             }
@@ -115,10 +115,10 @@ bool Obstacle::isInsideObstacle(Point p){
                 }
             }
         }
-        vertices.pop_back();
+        vertices_.pop_back();
         return ((cnt%2)==1);
     }
-    return ((pow(p.getX()-vertices[0].getX(),2)+pow(p.getY()-vertices[0].getY(),2))<=pow(radius,2)); 
+    return ((pow(p.getX()-vertices_[0].getX(),2)+pow(p.getY()-vertices_[0].getY(),2))<=pow(radius,2)); 
     
 }
 

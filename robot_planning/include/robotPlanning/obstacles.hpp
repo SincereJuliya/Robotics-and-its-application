@@ -14,10 +14,10 @@ public:
     Obstacle(double r, std::vector<Point> vs);
     std::vector<Point> getVertices();
     Point getCentroid();
-    void convertToSqaure();
+    void convertToSquare();
     obstacleType getType();
     double getMinDist();
-    bool isInsideObstacle(Point p);
+    bool isInsideObstacle(Point p) const;
     std::vector<double> getAbscissas();
     bool belongsToObstacle(Point p1, Point p2, Point p3, Point p4, bool extr);
     std::vector<Point> isIntersecting(double x);

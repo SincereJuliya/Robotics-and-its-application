@@ -43,7 +43,7 @@ void Graph::removeVertex(Point vertex){
     }
 }
 
-std::vector<Point> Graph::getVertices(){
+std::vector<Point> Graph::getVertices() const{
     std::cout << "vertices: " ;
     std::vector<Point> vertices;
 
@@ -60,9 +60,9 @@ std::vector<Point> Graph::getEdge(Point vertex){
     if(mGraph.find(vertex) == mGraph.end()){
         std::cout << "Invalid vertex \n" ;
         return {};
-}
+    }
     
-std::cout << "edges of vertex (" << vertex.getX() <<  "," << vertex.getY() << "): " ;
+    std::cout << "edges of vertex (" << vertex.getX() <<  "," << vertex.getY() << "): " ;
     for(const auto& i: mGraph[vertex]){
         std::cout << i << " ";
 

@@ -30,7 +30,7 @@ bool Point::operator <(const Point& p )const{
     return y > p.y;
 }
 bool Point::operator==(const Point& p) const {
-    return x == p.x && y == p.y;
+    return std::abs(x - p.x) < 1e-6 && std::abs(y - p.y) < 1e-6;
 }
 
 std::ostream& operator <<(std::ostream& os, const Point& p){

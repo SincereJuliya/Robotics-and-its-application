@@ -4,7 +4,7 @@
 #include <queue>
 #include <cmath>
 #include <functional>
-#include "../include/robotPlanning/TaskPlanner.hpp"
+#include "../include/robotPlanning/AStar.hpp"
 
 // A* algorithm implementation
 AStar::AStar(const Graph& graph, const Point& start, const Point& goal)
@@ -19,7 +19,7 @@ std::vector<Point> AStar::findPath() {
     // Initialize start point
     gScores[start] = 0;
     fScores[start] = heuristic(start, goal);
-    openSet.push(Node{ start, 0, fScores[start] });
+    openSet.push(Node{start, 0, fScores[start] });
 
     while (!openSet.empty()) {
         Node currentNode = openSet.top();

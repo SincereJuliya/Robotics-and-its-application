@@ -326,13 +326,6 @@ public:
     }
 }; 
 
-/*
-------------------TODO------------------
-- fuction to subscribe and read obstacles, borders an gate msg from DataRetriever  
-- fuction to send via topic graph
-
-*/
-
 int main(){
     /* std::vector<Point> borders = {Point{-4, -3}, Point{-4, 3}, Point{4, 3}, Point{4, -3}};
     

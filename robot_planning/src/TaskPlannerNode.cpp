@@ -5,14 +5,19 @@
 #include <geometry_msgs/msg/pose_array.hpp>
 #include <geometry_msgs/msg/pose.hpp>
 #include "../include/robotPlanning/point.hpp"
-#include "../include/robotPlanning/TaskPlanner.hpp"
+#include "../include/robotPlanning/IPathPlanner.hpp"
+#include "../include/robotPlanning/AStar.hpp"  
 
-class AStarNode : public rclcpp::Node {
+class TaskPlannerNode : public rclcpp::Node {
 public:
-    AStarNode() : Node("taskPlanner") {
+    TaskPlannerNode() : Node("taskPlannerNode") {
+        // Create a subscriber for "gates" topic
+        gates_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
+            "gates", rclcpp::QoS(10), std::bind(&MapGeneratorNode::gatesCallback, this, std::placeholders::_1));
+
         // Create a subscriber for "graph" topic
         graph_subscriber_ = this->create_subscription<graph_for_task_planner_msg::msg::Graph>(
-            "generatedGraph", 10, std::bind(&AStarNode::graphCallback, this, std::placeholders::_1));
+            "generated_graph", 10, std::bind(&TaskPlannerNode::graphCallback, this, std::placeholders::_1));
 
         // Create a publisher for "taskPlannerPath" topic
         path_publisher_ = this->create_publisher<geometry_msgs::msg::PoseArray>("taskPlannerPath", 10);
@@ -20,9 +25,36 @@ public:
     }
 
 private:
+    std::unique_ptr<IPathPlanner> planner_;
+    vector<Point> goals;
+
+    rclcpp::Subscription<graph_for_task_planner_msg::msg::PoseArray>::SharedPtr gates_subscriber_;
     rclcpp::Subscription<graph_for_task_planner_msg::msg::Graph>::SharedPtr graph_subscriber_;
     rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr path_publisher_;
     Graph graph_;
+
+    void gatesCallback(const geometry_msgs::msg::PoseArray::SharedPtr msg) {
+        std::vector<Point> gates_;
+        
+        for (const auto &pose : msg->poses) {
+            gates_.emplace_back(pose.position.x, pose.position.y);
+        }
+
+        // Calculate middle points between consecutive gates
+        for (size_t i = 0; i < gates_.size() - 1; ++i) {
+            Point p1 = gates_[i];
+            Point p2 = gates_[i + 1];
+            
+            // Calculate middle point
+            float middle_x = (p1.x + p2.x) / 2;
+            float middle_y = (p1.y + p2.y) / 2;
+            
+            // Store middle point
+            goals.emplace_back(Point{middle_x, middle_y});
+        }
+
+    }
+
 
     void graphCallback(const graph_for_task_planner_msg::msg::Graph::SharedPtr msg) {
         RCLCPP_INFO(this->get_logger(), "Received graph with %ld vertices and %ld edges",
@@ -55,9 +87,10 @@ private:
         RCLCPP_INFO(this->get_logger(), "Start and goal for A*: (%f, %f) -> (%f, %f)",
                         start.getX(), start.getY(), goal.getX(), goal.getY());
 
-        // Run A* and publish the result
-        AStar astar(graph_, start, goal);
-        std::vector<Point> path = astar.findPath();
+        //graph_.addEdge(Point{4.25, 3.375}, Point{4.25, 1.875});
+        
+        planner_ = std::make_unique<AStar>(graph_, start, goal); // Select algorithm
+        std::vector<Point> path = planner_->findPath(); // Use the algorithm
         publishPath(path);
     }
 
@@ -90,7 +123,7 @@ private:
 // Main function
 int main(int argc, char *argv[]) {
     rclcpp::init(argc, argv);
-    rclcpp::spin(std::make_shared<AStarNode>());
+    rclcpp::spin(std::make_shared<TaskPlannerNode>());
     rclcpp::shutdown();
     return 0;
 }
