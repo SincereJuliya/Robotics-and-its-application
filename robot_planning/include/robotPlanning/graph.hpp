@@ -21,7 +21,7 @@ public:
     void addEdge(Point v1, Point v2);
     void printGraph();
     void removeVertex(Point vertex);
-    std::vector<Point> getVertices();
+    std::vector<Point> getVertices() const;
     std::vector<Point> getEdge(Point vertex);
 
     void clear();

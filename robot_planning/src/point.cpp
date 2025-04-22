@@ -5,11 +5,6 @@ Point::Point(){
     x=0;
     y=0;
 }
-
-Point::Point(){
-    x=0;
-    y=0;
-}
 Point::Point(double _x, double _y){
     x=_x;
     y=_y;
@@ -35,7 +30,7 @@ bool Point::operator <(const Point& p )const{
     return y > p.y;
 }
 bool Point::operator==(const Point& p) const {
-    return x == p.x && y == p.y;
+    return std::abs(x - p.x) < 1e-6 && std::abs(y - p.y) < 1e-6;
 }
 
 std::ostream& operator <<(std::ostream& os, const Point& p){

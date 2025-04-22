@@ -7,6 +7,7 @@
 #include <cmath>
 #include "graph.hpp"
 #include "point.hpp"
+#include "IPathPlanner.hpp"
 
 /// Define a hash function for Point
 namespace std {
@@ -30,14 +31,12 @@ struct Node {
 };
 
 // A* algorithm implementation
-class AStar {
+class AStar : public IPathPlanner {
 public:
+    AStar() = default;
+    std::vector<Point> findPath() override;
+
     AStar(const Graph& graph, const Point& start, const Point& goal);
-
-    // + service to dubins
-    // + publ to topic 'followPath'
-
-    std::vector<Point> findPath();
 
 private:
     Graph mGraph;

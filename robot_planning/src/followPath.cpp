@@ -76,7 +76,7 @@ public:
     point.header = path_msg.header;
     point.pose.position.x = (i*0.1);
     point.pose.position.y = (i*0.1);
-    point.pose.orientation.w = 0.0;
+    point.pose.orientation.w = 1.0;
 
     path_msg.poses.push_back(point);
   }
@@ -113,7 +113,7 @@ private:
   void feedback_callback(GoalHandle::SharedPtr, const std::shared_ptr<const FollowPath::Feedback> feedback){
     std::stringstream ss;
     ss << "distance to goal: " << feedback->distance_to_goal << "\n";
-    ss << "spped: " << feedback->speed << "\n";
+    ss << "speed: " << feedback->speed << "\n";
     RCLCPP_INFO(this->get_logger(), ss.str().c_str());
   }
 
