@@ -5,8 +5,18 @@
 #include <cassert>
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 
-using namespace std;
+int ksigns [6][3] = {
+  { 1, 0, 1},  //LSL
+  {-1, 0, -1}, //RSR
+  { 1, 0, -1}, //LSR
+  {-1, 0, 1},  // RSL
+  {-1, 1, -1}, //RLR
+  {1, -1,  1}  // LRL
+};
 
+double Kmax = 1.0;
+
+std::string curvNames[6] = {"LSL", "RSR", "LSR", "RSL", "RLR", "LRL"};
 
 toStandard scaleToStandard(double x0, double y0, double th0, double xf, double yf, double thf, double Kmax){
   toStandard ret;
@@ -35,7 +45,6 @@ fromStandard scaleFromStandard(double sc_s1, double sc_s2, double sc_s3, double 
 double sinc(double t){
   double s;
   if(abs(t) < 0.002){
-    //s = 1-pow(t, 2/6)*(1-pow(t, 2/20));
     s = 1-pow(t, 2)*(1/6-pow(t, 2)/120);
   }else{
     s = sin(t)/t;
@@ -127,8 +136,6 @@ solution LSL(double th0, double thf, double Kmax){
     ret.s3 = 0;
     return ret;
   }
-  /* cout << "temp2: " << temp2 << "\n";
-  cout << "sqrt(temp2): " << sqrt(temp2) << "\n"; */
   ret.s2 = invK * sqrt(temp2);
   ret.s3 = invK * mod2pi(thf - temp1);
   ret.ok = true;
@@ -252,7 +259,7 @@ solution LRL(double th0, double thf, double Kmax){
   return ret;
 }
 
-curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf, double kmax){
+curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf){
   toStandard var = scaleToStandard(x0, y0, th0, xf, yf, thf, Kmax);
   fromStandard ret;
   double s1, s2, s3;
@@ -260,7 +267,6 @@ curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf,
   tripleDubinsCurve dubinsRes;
 
   solution (* primitivesPtr[]) (double th0, double thf, double Kmax) = {LSL, RSR, LSR, RSL, RLR, LRL};
-  //  (*functptr[0])();    /*  Call first function  */
   int pidx = -1;
   solution sol;
   double L=0;
@@ -278,12 +284,11 @@ curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf,
       s3 = sol.s3;
       pidx = i;
     }
-    cout << curvNames[i] << " L = " << Lcur*var.lamda << ", " << "s1 = " << sol.s1*var.lamda << " s2 = " << sol.s2*var.lamda << " s3 = " << sol.s3*var.lamda<< "\n";
+    std::cout << curvNames[i] << " L = " << Lcur*var.lamda << ", " << "s1 = " << sol.s1*var.lamda << " s2 = " << sol.s2*var.lamda << " s3 = " << sol.s3*var.lamda<< "\n";
   }
-  if(pidx>0){
+  if(pidx>=0){
     ret = scaleFromStandard(s1, s2, s3, var.lamda);
     dubinsRes = dubinsCur(x0, y0, th0, ret.s1, ret.s2, ret.s3, ksigns[pidx][0]*Kmax, ksigns[pidx][1]*Kmax, ksigns[pidx][2]*Kmax);
-    //assert(check(s1, ksigns[pidx][0]*var.sc_Kmax, s2, ksigns[pidx][1]*var.sc_Kmax, s3, ksigns[pidx][2]*var.sc_Kmax, var.sc_th0, var.sc_thf));
   }
 
   res.curvType = pidx;
@@ -291,10 +296,15 @@ curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf,
   return res;
 }
 
-std::vector<arcVar> plotArc(dubinsCurve arc, std::vector<arcVar>& plt){
-  int nPts = 100;
+void plotArc(dubinsCurve arc, std::vector<arcVar>& plt){
+  int nPts=arc.L/0.2;
+  std::cout << "nPts: " << nPts << "\n";
+  //int nPts=30; //to be changed to given distance and not fixed one
+  double s;
+  
   for(int i=0; i<nPts; i++){
-    
+      s = arc.L/nPts*i;
+      plt.push_back(circLine(s, arc.i.x, arc.i.y, arc.i.th, arc.k));
   }
 }
 
@@ -305,22 +315,88 @@ std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv){
   plotArc(dubCurv.a2, plot);
   plotArc(dubCurv.a3, plot);
 
-
+  return plot;
 }
 
-int main(int argc, char** argv){
-  double x0 = 0;
-  double y0 = 0;
-  double th0 = -M_PI/2  ;
-  double xf = 4;
-  double yf = 0;
-  double thf = -M_PI/2;
+std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m){
+  double h = 2*M_PI/k;  
+  std::vector<double> ths;
+  ths.push_back(th0);
 
-  double kmax = 1;
+  std::cout << "number of points: " << points.size() << "\n";
+  for(std::vector<Point>::size_type i=0; i<points.size()-1; i++){ //for each point
+    double minTh, minL, minThi;
+    double thi=0;
+    double lenght;
 
-  curve res = dubinsShortestPath(x0, y0, th0, xf, yf, thf, kmax);
-  cout << "\n best one with L: " << res.values.L << " the one on index:" << res.curvType << "\n";
+    thi = ths[i];
+    minL = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),0).values.L+1;
+    if(i!=(points.size()-1)){
+      std::cout << "starting first selection\n";
+      for (int a=0; a<k;a++){ //find the angle with the shortest path among k slides
+        double th = a*h;   
+        lenght = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),th).values.L;
+        if(lenght<minL && lenght>0){
+          minL = lenght;
+          minTh = th;
+        }
+      }
+      //refinement interations
+      std::cout << "starting refinement step\n";
+      for(int r=0; r<m; r++){
+        h = 2*M_PI*((pow(3, r)/(pow(2*k, r))));
+        minL = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),minTh-(3/2)*h).values.L+1; 
+        for(double j=minTh-(3/2)*h; j<=minTh+(3/2)*h; j+=h){ //refinement step (m-times)
+          lenght = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),j).values.L;
+          if(lenght<minL && lenght>0){
+            minL = lenght;
+            minThi = j;
+          }
+        }
+      } 
+      ths.push_back(minThi);
+    }else{
+      lenght = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),thf).values.L;
+      ths.push_back(thf);
+    }
+  }
+  return ths;
+}
 
+//need to check if the path is colliding with any object with at +/- distance (2/3 width of the robot)
+std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf){
+  std::vector<arcVar> plan;
+  std::vector<arcVar> planTmp;
+  std::vector<double> optAngles;
+  curve dubinsPortion;
+
+  optAngles = optimizeAngles(points, th0, thf, 4, 4);
+  for(std::vector<Point>::size_type  i=0; i<points.size()-2; i++){
+    dubinsPortion = dubinsShortestPath(points[i].getX(), points[i].getY(), optAngles[i], points[i+1].getX(), points[i+1].getY(), optAngles[i+1]);
+    planTmp = plotDubins(dubinsPortion.values);
+    for(long unsigned int j =0; j<planTmp.size(); j++){
+      plan.push_back(planTmp[j]);
+    }
+  }
+
+  return plan;
+}
+/*   
+int main(){
+  std::vector<Point> pts = { Point{67.91, 124.28}, Point{872.23, 452.31}, Point{290.71, 117.93}};
+  double th0 = 3.33;
+  double thf = 6.12;
+  std::vector<double> optAngles = optimizeAngles(pts, th0, thf, 2, 2);
+
+  std::cout << "number of angles: " << optAngles.size() << "\n";
+  std::cout << "number of points: " << pts.size() << "\n";
+
+  std::vector<arcVar> plan = multiPointMarvkovDubinsPlan(pts, th0, thf);
+
+  for (std::vector<arcVar>::size_type z=0; z < plan.size(); z++){
+      std::cout << "pt: " << plan[z].x << ", " << plan[z].y << ", " << plan[z].th << "\n";  ;
+  }
+  
+ 
   return 0;
-}
-
+}*/
