@@ -28,6 +28,8 @@ public:
     // Convert Graph to ROS 2 message
     graph_for_task_planner_msg::msg::Graph toROSMsg() const;
 
+    Point findNearestPoint(const Point& goal) const;
+
 };
 
 #endif

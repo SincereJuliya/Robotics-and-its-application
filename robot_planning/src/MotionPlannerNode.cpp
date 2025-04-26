@@ -4,6 +4,8 @@
 #include <geometry_msgs/msg/pose.hpp>
 #include "../include/robotPlanning/point.hpp"
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
+#include <tf2/LinearMath/Quaternion.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
 class MotionPlannerNode : public rclcpp::Node {
 public:
@@ -44,6 +46,8 @@ private:
         RCLCPP_INFO(this->get_logger(), "Received path with %zu points.", pathFromMsg.size());
 
         // here should be the process of generating the dubins path and so on 
+        dubinsPath = multiPointMarvkovDubinsPlan(pathFromMsg, 0,0);
+        publishDubinsPath();
         
         // Validate the path (this is just an example, implement your actual validation logic here)
         if (request->path.poses.empty()) {
@@ -56,6 +60,33 @@ private:
 
         RCLCPP_INFO(this->get_logger(), "Path validation result: %s", response->valid ? "valid" : "invalid");
     }
+
+    void publishDubinsPath() {
+        geometry_msgs::msg::PoseArray pose_array_msg;
+        pose_array_msg.header.frame_id = "map";
+        pose_array_msg.header.stamp = this->get_clock()->now();
+
+        for (const auto& arc : dubinsPath) {
+            geometry_msgs::msg::Pose pose;
+            pose.position.x = arc.x;
+            pose.position.y = arc.y;
+            pose.position.z = 0.0;
+
+            // Convert heading (yaw) to quaternion
+            tf2::Quaternion q;
+            q.setRPY(0, 0, arc.th);  // Roll=0, Pitch=0, Yaw=theta
+            pose.orientation.x = q.x();
+            pose.orientation.y = q.y();
+            pose.orientation.z = q.z();
+            pose.orientation.w = q.w();
+
+            pose_array_msg.poses.push_back(pose);
+        }
+
+        path_publisher_->publish(pose_array_msg);
+        RCLCPP_INFO(this->get_logger(), "Published Dubins path with %zu poses.", dubinsPath.size());
+    }
+
 
     // Method for FollowPathClass 
     /* // Method to convert PoseArray to a vector of arcVar objects
@@ -85,46 +116,11 @@ private:
         return arc_vars;
     } */
 
-   // Method to generate and publish the Dubins path
-    void publishDubinsPath() {
-        // Create an empty PoseArray message
-        geometry_msgs::msg::PoseArray pose_array_msg;
-        pose_array_msg.header.frame_id = "map";  // Set appropriate frame_id
-        pose_array_msg.header.stamp = this->get_clock()->now();  // Timestamp for the message
-
-        // Create a vector of poses for the Dubins path
-        std::vector<geometry_msgs::msg::Pose> path_poses;
-
-        // Example poses (you will replace this with your actual Dubins path)
-        for (int i = 0; i < 5; ++i) {
-            geometry_msgs::msg::Pose pose;
-            pose.position.x = i * 1.0;  // Example x position
-            pose.position.y = i * 1.0;  // Example y position
-            pose.position.z = 0.0;      // Assuming 2D plane (z = 0)
-
-            // Set the orientation (in this case, a simple identity quaternion)
-            pose.orientation.x = 0.0;
-            pose.orientation.y = 0.0;
-            pose.orientation.z = 0.0;
-            pose.orientation.w = 1.0;
-
-            // Add the pose to the path vector
-            path_poses.push_back(pose);
-        }
-
-        // Set the poses in the PoseArray message
-        pose_array_msg.poses = path_poses;
-
-        // Publish the PoseArray message
-        path_publisher_->publish(pose_array_msg);
-
-        // Log the number of poses published
-        RCLCPP_INFO(this->get_logger(), "Published Dubins path with %zu poses", path_poses.size());
-    }
-
     rclcpp::Service<motion_planner_msgs::srv::ValidatePath>::SharedPtr service_;
     rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr path_publisher_;
     std::vector<Point> pathFromMsg;
+    std::vector<arcVar> dubinsPath;
+
 };
 
 int main(int argc, char *argv[]) {

@@ -16,6 +16,9 @@ find_package(graph_for_task_planner_msg REQUIRED)
 find_package(motion_planner_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+
 
 # Map generator node (supports both Sample- and Cell-based generators)
 add_executable(mapGeneratorNode
@@ -57,9 +60,11 @@ ament_target_dependencies(motionPlannerNode
   motion_planner_msgs
   geometry_msgs
   graph_for_task_planner_msg
+  tf2
+  tf2_geometry_msgs
 )
 
-ament_target_dependencies(followPath rclcpp rclcpp_components rclcpp_action nav2_msgs std_msgs nav_msgs)
+ament_target_dependencies(followPath rclcpp rclcpp_components rclcpp_action nav2_msgs std_msgs nav_msgs tf2 tf2_geometry_msgs geometry_msgs)
 
 install(TARGETS
   mapGeneratorNode
