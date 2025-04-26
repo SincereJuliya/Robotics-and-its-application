@@ -2,6 +2,7 @@
 #define __MULTIPOINTMARKOVDUBINS_H_
 
 #include <vector>
+#include "point.hpp"
 
 struct arcVar{
   double x;
@@ -43,21 +44,10 @@ struct solution{
   double s3;
 };
 
-int ksigns [6][3] = {
-  { 1, 0, 1},  //LSL
-  {-1, 0, -1}, //RSR
-  { 1, 0, -1}, //LSR
-  {-1, 0, 1},  // RSL
-  {-1, 1, -1}, //RLR
-  {1, -1,  1}  // LRL
-};
-
 struct curve{
   int curvType; // index token with this order --> LSL, RSR, LSR, RSL, RLR, LRL 
   tripleDubinsCurve values;
 };
-
-double Kmax = 1.0;
 
 dubinsCurve dubinsArc(double x0, double y0, double th0, double Kmax, double L);
 
@@ -75,7 +65,7 @@ double rangeSymm(double angle);
 
 double sinc(double t);
 
-curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf, double kmax=Kmax);
+curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf/* , double kmax */);
 
 bool check(double s1, double k0, double s2, double k1, double s3, double k2, double th0, double thf);
 
@@ -91,6 +81,12 @@ solution RLR(double th0, double thf, double Kmax);
 
 solution LRL(double th0, double thf, double Kmax);
 
-std::string curvNames[6] = {"LSL", "RSR", "LSR", "RSL", "RLR", "LRL"};
+void plotArc(dubinsCurve arc, std::vector<arcVar>& plt);
+
+std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv);
+
+std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m);
+
+std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf);
 
 #endif
