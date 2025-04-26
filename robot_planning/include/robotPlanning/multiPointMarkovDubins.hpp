@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "../include/robotPlanning/point.hpp"
-
+  
 struct arcVar{
   double x;
   double y;
