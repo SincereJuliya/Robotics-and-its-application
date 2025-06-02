@@ -157,17 +157,18 @@ std::vector<Point> CellDecompositionMapGenerator::nearestByYOffset(const std::ve
     return best;
 }
 
-void CellDecompositionMapGenerator::cellDecomposition() {
-    auto uniqueXs = getObstaclesAndBordersUniqueAbscissas();
+void CellDecompositionMapGenerator::void cellDecomposition() {
+    auto uniqueXs = getObstalcesAndBordersUniqueAbscissas();
     std::vector<Point> leftPts, rightPts;
     std::map<Point, std::pair<Point, Point>> mapLeft, mapRight;
+    std::vector<Point> connectionPoints;
 
     auto pts = getPointsAtGivenAbscissa(uniqueXs.front());
     if (pts.size() == 1) {
         mapLeft[pts[0]] = {pts[0], pts[0]};
         leftPts.push_back(pts[0]);
     } else {
-        auto center = getLineCentralPoint(pts[0], pts[1]);
+        auto center = getLineCenteralPoint(pts[0], pts[1]);
         mapLeft[center] = {pts[0], pts[1]};
         leftPts.push_back(center);
     }
@@ -179,34 +180,49 @@ void CellDecompositionMapGenerator::cellDecomposition() {
             auto ib = getIntersectionWithBorders(x);
             pts.insert(pts.end(), ib.begin(), ib.end());
         }
-        auto io = getIntersectionWithObstacles(x);
+        auto io = getIntersectionWithObstacless(x);
         pts.insert(pts.end(), io.begin(), io.end());
         std::sort(pts.begin(), pts.end());
         pts.erase(std::unique(pts.begin(), pts.end()), pts.end());
 
         if (i < uniqueXs.size() - 1) {
             for (size_t j = 0; j + 1 < pts.size(); ++j) {
-                auto mid = getLineCentralPoint(pts[j], pts[j + 1]);
+                auto mid = getLineCenteralPoint(pts[j], pts[j + 1]);
                 if (isInsideObstacles(mid)) continue;
-                Point nearest = nearestByYOffset(leftPts, mid).front();
-                Point area = getAreaCentralPoint({mapLeft[nearest].first,
-                                                mapLeft[nearest].second,
-                                                pts[j], pts[j+1]});
-                g_.addVertice(area);
-                if (i > 1) g_.addEdge(nearest, area);
-                if (mapRight.find(mid) == mapRight.end()) {
-                    mapRight[mid] = {pts[j], pts[j+1]};
-                    rightPts.push_back(mid);
-                    g_.addVertice(mid);
+                std::vector<Point> nearestPts = nearestByYOffset(leftPts, mid);
+                for (const auto& nearest : nearestPts) {
+                    Point area = getAreaCenteralPoint({mapLeft[nearest].first,
+                                                    mapLeft[nearest].second,
+                                                    pts[j], pts[j+1]});
+                    g.addVertice(area);
+                    if (i > 1) g.addEdge(nearest, area);
+                    if (mapRight.find(mid) == mapRight.end()) {
+                        mapRight[mid] = {pts[j], pts[j+1]};
+                        rightPts.push_back(mid);
+                        g.addVertice(mid);
+                    }
+                    g.addEdge(area, mid);
+                    if(i==1){
+                        connectionPoints.push_back(area);
+                        if(j==pts.size()-2){
+                            for (size_t z = 0; z+1 < connectionPoints.size();z++){
+                                g.addEdge(connectionPoints[z], connectionPoints[z+1]);
+                            }
+                        }
+                    }
                 }
-                g_.addEdge(area, mid);
             }
         } else {
+            connectionPoints.clear();
             for (auto &lp : leftPts) {
                 auto pr = mapLeft[lp];
-                auto area = getAreaCentralPoint({pr.first, pr.second, pts.front(), pts.back()});
-                g_.addVertice(area);
-                if (!isInsideObstacles(lp)) g_.addEdge(area, lp);
+                auto area = getAreaCenteralPoint({pr.first, pr.second, pts.front(), pts.back()});
+                g.addVertice(area);
+                connectionPoints.push_back(area);
+                if (!isInsideObstacles(lp)) g.addEdge(area, lp);
+                for (size_t z = 0; z+1 < connectionPoints.size();z++){
+                            g.addEdge(connectionPoints[z], connectionPoints[z+1]);
+                }
             }
         }
         leftPts = rightPts;
