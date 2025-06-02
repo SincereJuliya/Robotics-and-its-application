@@ -1,0 +1,8 @@
+# ValidatePath.srv
+
+# Request: Path to validate
+geometry_msgs/PoseArray path
+
+---
+# Response: Path validity status
+bool valid

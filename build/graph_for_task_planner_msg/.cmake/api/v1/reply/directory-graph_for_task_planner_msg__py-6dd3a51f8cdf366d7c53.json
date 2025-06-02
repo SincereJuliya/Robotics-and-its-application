@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "graph_for_task_planner_msg__py",
+		"source" : "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/graph_for_task_planner_msg__py"
+	}
+}

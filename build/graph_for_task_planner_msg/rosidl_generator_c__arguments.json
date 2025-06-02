@@ -1,0 +1,28 @@
+{
+  "package_name": "graph_for_task_planner_msg",
+  "output_dir": "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_generator_c/graph_for_task_planner_msg",
+  "template_dir": "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource",
+  "idl_tuples": [
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg:msg/Graph.idl",
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg:msg/Edge.idl",
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg:msg/Point.idl"
+  ],
+  "target_dependencies": [
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../../../lib/rosidl_generator_c/rosidl_generator_c",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../../../local/lib/python3.10/dist-packages/rosidl_generator_c/__init__.py",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/action__type_support.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/idl.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/idl__functions.c.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/idl__functions.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/idl__struct.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/idl__type_support.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/msg__functions.c.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/msg__functions.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/msg__struct.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/msg__type_support.h.em",
+    "/opt/ros/humble/share/rosidl_generator_c/cmake/../resource/srv__type_support.h.em",
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg/msg/Graph.idl",
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg/msg/Edge.idl",
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/graph_for_task_planner_msg/rosidl_adapter/graph_for_task_planner_msg/msg/Point.idl"
+  ]
+}

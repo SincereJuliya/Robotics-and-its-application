@@ -1,0 +1,6 @@
+setup.py
+motion_planner_msgs/__init__.py
+motion_planner_msgs.egg-info/PKG-INFO
+motion_planner_msgs.egg-info/SOURCES.txt
+motion_planner_msgs.egg-info/dependency_links.txt
+motion_planner_msgs.egg-info/top_level.txt

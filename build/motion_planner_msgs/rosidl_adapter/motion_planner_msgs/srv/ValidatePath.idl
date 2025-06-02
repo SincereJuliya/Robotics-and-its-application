@@ -1,0 +1,22 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from motion_planner_msgs/srv/ValidatePath.srv
+// generated code does not contain a copyright notice
+
+#include "geometry_msgs/msg/PoseArray.idl"
+
+module motion_planner_msgs {
+  module srv {
+    @verbatim (language="comment", text=
+      "ValidatePath.srv")
+    struct ValidatePath_Request {
+      @verbatim (language="comment", text=
+        "Request: Path to validate")
+      geometry_msgs::msg::PoseArray path;
+    };
+    @verbatim (language="comment", text=
+      "Response: Path validity status")
+    struct ValidatePath_Response {
+      boolean valid;
+    };
+  };
+};

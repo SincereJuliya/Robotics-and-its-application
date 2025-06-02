@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "motion_planner_msgs__py",
+		"source" : "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/motion_planner_msgs/motion_planner_msgs__py"
+	}
+}

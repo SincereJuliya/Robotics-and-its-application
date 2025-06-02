@@ -1,0 +1,12 @@
+// generated from rosidl_generator_cpp/resource/idl.hpp.em
+// generated code does not contain a copyright notice
+
+#ifndef GRAPH_FOR_TASK_PLANNER_MSG__MSG__POINT_HPP_
+#define GRAPH_FOR_TASK_PLANNER_MSG__MSG__POINT_HPP_
+
+#include "graph_for_task_planner_msg/msg/detail/point__struct.hpp"
+#include "graph_for_task_planner_msg/msg/detail/point__builder.hpp"
+#include "graph_for_task_planner_msg/msg/detail/point__traits.hpp"
+#include "graph_for_task_planner_msg/msg/detail/point__type_support.hpp"
+
+#endif  // GRAPH_FOR_TASK_PLANNER_MSG__MSG__POINT_HPP_

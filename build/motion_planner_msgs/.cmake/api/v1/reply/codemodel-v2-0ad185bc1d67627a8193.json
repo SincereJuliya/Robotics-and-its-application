@@ -1,0 +1,233 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-9bd2883684d2c1a28710.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "motion_planner_msgs__py",
+					"jsonFile" : "directory-motion_planner_msgs__py-0a7c254dd0eec5aceea0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/motion_planner_msgs/motion_planner_msgs__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "motion_planner_msgs",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_motion_planner_msgs_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_motion_planner_msgs_egg-e14ec5b7623f447ca83b.json",
+					"name" : "ament_cmake_python_build_motion_planner_msgs_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_motion_planner_msgs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_motion_planner_msgs-5900ef4c96deced5f0b1.json",
+					"name" : "ament_cmake_python_copy_motion_planner_msgs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs-474eb3d2a06dd5c16af1.json",
+					"name" : "motion_planner_msgs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__cpp-490d5f29493f2e087628.json",
+					"name" : "motion_planner_msgs__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "motion_planner_msgs__py::@4b2682a56338f0c75fc9",
+					"jsonFile" : "target-motion_planner_msgs__py-f8fbffeff4db25fd1051.json",
+					"name" : "motion_planner_msgs__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_generator_c-42009ec96eb7e9e4c00c.json",
+					"name" : "motion_planner_msgs__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_generator_py-2c1fb130576decd3e13e.json",
+					"name" : "motion_planner_msgs__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_c-4c51f4a7d48998f083f8.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_c__pyext-30e0c717cb9c50eb3ec0.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_cpp-b652c83171c07f2e04da.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_fastrtps_c-e800a43ab56ed253697e.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_fastrtps_c__pyext-d7f1a149839c30e8a686.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_fastrtps_cpp-f04e5d84b44a6d2db458.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_introspection_c-7debaea49afd2b3cdf47.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_introspection_c__pyext-d30f74fb353de04cdb98.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs__rosidl_typesupport_introspection_cpp-03b7a7a1f8bb74df8a22.json",
+					"name" : "motion_planner_msgs__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "motion_planner_msgs_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-motion_planner_msgs_uninstall-2eeb8a32cd0bfae41498.json",
+					"name" : "motion_planner_msgs_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-d13dda04f0f497a95397.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/seventeen/Documents/GitHub/Robotics-and-its-application/build/motion_planner_msgs",
+		"source" : "/home/seventeen/Documents/GitHub/Robotics-and-its-application/motion_planner_msgs"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

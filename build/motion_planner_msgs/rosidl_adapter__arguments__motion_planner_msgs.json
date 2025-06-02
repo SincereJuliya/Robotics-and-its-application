@@ -1,0 +1,6 @@
+{
+  "package_name": "motion_planner_msgs",
+  "non_idl_tuples": [
+    "/home/seventeen/Documents/GitHub/Robotics-and-its-application/motion_planner_msgs:srv/ValidatePath.srv"
+  ]
+}
