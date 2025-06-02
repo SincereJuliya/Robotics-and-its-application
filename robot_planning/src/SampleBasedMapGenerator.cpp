@@ -92,7 +92,7 @@ Graph SampleBasedMapGenerator::generateGraph() {
         return G_;
     }
 
-    const int maxIterations = 4;
+    const int maxIterations = 10;
     // init!
     Point initP{0.0f, 0.0f};
     int count = 0;

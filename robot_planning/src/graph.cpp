@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <cmath> // For sqrt and pow
 #include "/home/sincerejuliya/Documents/ros_ws/src/robot_planning/include/robotPlanning/graph.hpp"
 
 Graph::Graph() {}
@@ -123,6 +124,30 @@ graph_for_task_planner_msg::msg::Graph Graph::toROSMsg() const {
     return graph_msg;
 }
 
+// Method to find the nearest point in the graph to a given goal point
+Point Graph::findNearestPoint(const Point& goal) const {
+    // Initialize variables to keep track of the nearest point and the smallest distance
+    Point nearest_point;
+    double min_distance = std::numeric_limits<double>::infinity(); // Set a very high initial distance
+
+    // Iterate over all the vertices in the graph
+    for (const auto& vertex_pair : mGraph) {
+        const Point& current_point = vertex_pair.first;
+
+        // Compute the Euclidean distance between the current point and the goal
+        double distance = std::sqrt(std::pow(current_point.getX() - goal.getX(), 2) + 
+                                    std::pow(current_point.getY() - goal.getY(), 2));
+
+        // If this point is closer to the goal, update nearest_point and min_distance
+        if (distance < min_distance) {
+            min_distance = distance;
+            nearest_point = current_point;
+        }
+    }
+
+    // Return the nearest point
+    return nearest_point;
+}
 
 /* int main(){
     Graph mg;

@@ -2,7 +2,7 @@
 #define __MULTIPOINTMARKOVDUBINS_H_
 
 #include <vector>
-#include "../include/robotPlanning/point.hpp"
+#include "point.hpp"
 
 struct arcVar{
   double x;
