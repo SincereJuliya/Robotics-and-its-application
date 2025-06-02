@@ -8,7 +8,7 @@ SampleBasedMapGenerator::SampleBasedMapGenerator() {
 }
 
 float SampleBasedMapGenerator::getSearchRadius() const {
-    return 10.0f;   
+    return 4.5f;   
 }
 
 float SampleBasedMapGenerator::getRandomPosition(float middle, float r) const {
@@ -48,7 +48,7 @@ bool SampleBasedMapGenerator::isInsideAnyObstacle(const Point& p) const {
 
 bool SampleBasedMapGenerator::isReachedGate(const Point& p) const {
     for (const auto& gate : gates_) {
-        if (computeDistance(gate, p) < 1.0f) return true;
+        if (computeDistance(gate, p) <= 0.0f) return true;
     }
     return false;
 }
@@ -85,29 +85,37 @@ void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle>& obstacle
     obstacles_ = obstacles;
 }
 
-Graph SampleBasedMapGenerator::generateGraph() {
+Graph SampleBasedMapGenerator::generateGraph(const Point& init) {
     G_.clear();
     if (gates_.empty() || borders_.empty() || obstacles_.empty()) {
         std::cerr << "SampleBasedMapGenerator: missing data for graph generation.\n";
         return G_;
     }
 
-    const int maxIterations = 10;
+    const int maxIterations = 4;
     // init!
-    Point initP{0.0f, 0.0f};
+    Point initP = {init.getX(), init.getY()};
     int count = 0;
 
     while (count < maxIterations) {
         Point newP = getRandomPoint(initP, getSearchRadius());
         if (isInsideAnyObstacle(newP)) continue;
+
+        // Check for duplicates
+        if (G_.containsVertex(newP)) continue;
+
         ++count;
 
         if (G_.getVertices().empty()) {
             G_.addEdge(initP, newP);
         } else {
             Point nearest = findNearest(G_, newP);
-            G_.addEdge(nearest, newP);
+            if (!G_.edgeExists(nearest, newP)) {
+                G_.addEdge(nearest, newP);
+            }
         }
+
+        initP = newP;  // Update initP to the last added point
 
         if (isReachedGate(newP)) break;
     }

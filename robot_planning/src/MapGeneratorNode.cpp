@@ -1,6 +1,8 @@
 #include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/pose_array.hpp"
 #include "geometry_msgs/msg/polygon_stamped.hpp"
+#include <geometry_msgs/msg/pose.hpp>
+#include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
 #include "obstacles_msgs/msg/obstacle_array_msg.hpp"
 #include "graph_for_task_planner_msg/msg/graph.hpp"
 #include "../include/robotPlanning/point.hpp"
@@ -13,15 +15,18 @@ private:
     std::unique_ptr<IMapGenerator> generator_;
 
     // Store received data
+    Point start;
     std::vector<Point> gates_;
     std::vector<Point> borders_;
     std::vector<Obstacle> obstacles_;
 
+    bool start_received_ = false;
     bool gates_received_ = false;
     bool borders_received_ = false;
     bool obstacles_received_ = false;
     bool data_generated_ = false;
     
+    rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr init_subscriber_;
     rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr gates_sub_;
     rclcpp::Subscription<geometry_msgs::msg::PolygonStamped>::SharedPtr borders_sub_;
     rclcpp::Subscription<obstacles_msgs::msg::ObstacleArrayMsg>::SharedPtr obstacles_sub_;
@@ -37,6 +42,10 @@ public:
         } else {
             generator_ = std::make_unique<CellDecompositionMapGenerator>();
         }
+
+        init_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+            "/shelfino/amcl_pose", rclcpp::QoS(10),
+            std::bind(&MapGeneratorNode::startCallback, this, std::placeholders::_1));
 
         gates_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
             "gates", rclcpp::QoS(10),
@@ -57,12 +66,20 @@ public:
     }
 
 private:
+    void startCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg) {
+        start = Point{msg->pose.pose.position.x, msg->pose.pose.position.y};
+        start_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received start pose: (%.2f, %.2f)", start.getX(), start.getY());
+        attemptGenerate();
+    }
+
     void gatesCallback(const geometry_msgs::msg::PoseArray::SharedPtr msg) {
         gates_.clear();
         for (const auto &pose : msg->poses) {
             gates_.emplace_back(pose.position.x, pose.position.y);
         }
         gates_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received %zu gates.", gates_.size());
         attemptGenerate();
     }
 
@@ -72,6 +89,7 @@ private:
             borders_.emplace_back(pt.x, pt.y);
         }
         borders_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received borders with %zu points.", borders_.size());
         attemptGenerate();
     }
 
@@ -87,20 +105,30 @@ private:
                                     }());
         }
         obstacles_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received %zu obstacles.", obstacles_.size());
         attemptGenerate();
     }
 
     void attemptGenerate() {
-        if (gates_received_ && borders_received_ && obstacles_received_ && !data_generated_) {
+        if ( start_received_ && gates_received_ && borders_received_ && obstacles_received_ && !data_generated_) {
+            RCLCPP_INFO(get_logger(), "All required data received; generating graph...");
             generator_->setGates(gates_);
             generator_->setBorders(borders_);
             generator_->setObstacles(obstacles_);
 
             RCLCPP_INFO(get_logger(), "All data received; generating graph.");
-            Graph graph = generator_->generateGraph();
+            Graph graph = generator_->generateGraph(start);
 
             publishGraph(graph);
             data_generated_ = true;
+        }
+        else {
+            RCLCPP_INFO(get_logger(), "Waiting for all data to be received: "
+                "start: %s, gates: %s, borders: %s, obstacles: %s",
+                start_received_ ? "yes" : "no",
+                gates_received_ ? "yes" : "no",
+                borders_received_ ? "yes" : "no",
+                obstacles_received_ ? "yes" : "no");
         }
     }
 

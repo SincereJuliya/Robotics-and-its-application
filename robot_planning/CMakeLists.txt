@@ -35,7 +35,9 @@ add_executable(taskPlannerNode
   src/graph.cpp 
   src/point.cpp 
   src/IPathPlanner.cpp
-  src/AStar.cpp
+  #src/AStar.cpp
+  src/agreedy.cpp
+  src/victim.cpp
 )
 add_executable(followPath src/followPath.cpp)
 add_executable(motionPlannerNode 
@@ -65,6 +67,7 @@ ament_target_dependencies(motionPlannerNode
 )
 
 ament_target_dependencies(followPath rclcpp rclcpp_components rclcpp_action nav2_msgs std_msgs nav_msgs tf2 tf2_geometry_msgs geometry_msgs)
+
 
 install(TARGETS
   mapGeneratorNode

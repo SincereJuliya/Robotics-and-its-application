@@ -18,7 +18,10 @@ public:
     double computeEuclideanDistance(const Point& p);
     bool operator <(const Point& p )const;
     bool operator==(const Point& p) const;
+    bool operator!=(const Point& p) const;
     friend std::ostream& operator <<(std::ostream& os, const Point& p);
+    std::string toString() const; 
+    
 };
 
 std::ostream& operator <<(std::ostream& os, const Point& p);
