@@ -47,7 +47,9 @@ public:
     AStarGreedy(Graph& graph, const std::vector<Victim>& victims,
                 const Point& start, const Point& goal, double timeLimit);
 
+    double angleBetween(const Point& a, const Point& b, const Point& c);
     std::vector<Point> findBestPath(double& totalValueCollected);
+
 
 private:
     Graph& mGraph;

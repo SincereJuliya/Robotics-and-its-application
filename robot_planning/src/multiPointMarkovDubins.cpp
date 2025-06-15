@@ -297,7 +297,8 @@ curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf,
 }
 
 void plotArc(dubinsCurve arc, std::vector<arcVar>& plt){
-  int nPts=arc.L/0.2;
+  //int nPts=arc.L/0.2;
+  int nPts = std::max(1, static_cast<int>(arc.L / 0.2));
   std::cout << "nPts: " << nPts << "\n";
   //int nPts=30; //to be changed to given distance and not fixed one
   double s;
@@ -318,50 +319,65 @@ std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv){
   return plot;
 }
 
-std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m){
-  double h = 2*M_PI/k;  
-  std::vector<double> ths;
-  ths.push_back(th0);
+std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m) {
+    double h = 2 * M_PI / k;  
+    std::vector<double> ths;
+    ths.push_back(th0);
 
-  std::cout << "number of points: " << points.size() << "\n";
-  for(std::vector<Point>::size_type i=0; i<points.size()-1; i++){ //for each point
-    double minTh, minL, minThi;
-    double thi=0;
-    double lenght;
+    for (std::size_t i = 0; i < points.size() - 1; ++i) {
+        double thi = ths[i];
+        double bestTh = 0;
+        double minL = std::numeric_limits<double>::infinity();
 
-    thi = ths[i];
-    minL = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),0).values.L+1;
-    if(i!=(points.size()-1)){
-      std::cout << "starting first selection\n";
-      for (int a=0; a<k;a++){ //find the angle with the shortest path among k slides
-        double th = a*h;   
-        lenght = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),th).values.L;
-        if(lenght<minL && lenght>0){
-          minL = lenght;
-          minTh = th;
+        if (i != points.size() - 2) {
+            // Coarse sampling
+            for (int a = 0; a < k; ++a) {
+                double th = fmod(a * h, 2 * M_PI);
+                double length = dubinsShortestPath(
+                    points[i].getX(), points[i].getY(), thi,
+                    points[i+1].getX(), points[i+1].getY(), th
+                ).values.L;
+
+                if (length < minL && length > 0) {
+                    minL = length;
+                    bestTh = th;
+                }
+            }
+
+            // Refinement loop
+            for (int r = 0; r < m; ++r) {
+                h = 2 * M_PI * (pow(3, r) / pow(2 * k, r));
+
+                double localBestTh = bestTh;
+                double localMinL = minL;
+
+                for (double j = -1.5 * h; j <= 1.5 * h; j += h) {
+                    double th = fmod(bestTh + j + 2 * M_PI, 2 * M_PI);
+                    double length = dubinsShortestPath(
+                        points[i].getX(), points[i].getY(), thi,
+                        points[i+1].getX(), points[i+1].getY(), th
+                    ).values.L;
+
+                    if (length < localMinL && length > 0) {
+                        localMinL = length;
+                        localBestTh = th;
+                    }
+                }
+
+                bestTh = localBestTh;
+                minL = localMinL;
+            }
+
+            ths.push_back(bestTh);
+        } else {
+            // Last segment: fix to final angle
+            ths.push_back(thf);
         }
-      }
-      //refinement interations
-      std::cout << "starting refinement step\n";
-      for(int r=0; r<m; r++){
-        h = 2*M_PI*((pow(3, r)/(pow(2*k, r))));
-        minL = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),minTh-(3/2)*h).values.L+1; 
-        for(double j=minTh-(3/2)*h; j<=minTh+(3/2)*h; j+=h){ //refinement step (m-times)
-          lenght = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),j).values.L;
-          if(lenght<minL && lenght>0){
-            minL = lenght;
-            minThi = j;
-          }
-        }
-      } 
-      ths.push_back(minThi);
-    }else{
-      lenght = dubinsShortestPath(points[i].getX(),points[i].getY(),thi,points[i+1].getX(),points[i+1].getY(),thf).values.L;
-      ths.push_back(thf);
     }
-  }
-  return ths;
+
+    return ths;
 }
+
 
 //need to check if the path is colliding with any object with at +/- distance (2/3 width of the robot)
 std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf){
@@ -381,6 +397,7 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double
 
   return plan;
 }
+
 /*   
 int main(){
   std::vector<Point> pts = { Point{67.91, 124.28}, Point{872.23, 452.31}, Point{290.71, 117.93}};
@@ -399,4 +416,4 @@ int main(){
   
  
   return 0;
-}*/
+}*/ 

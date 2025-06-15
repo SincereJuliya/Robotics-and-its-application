@@ -411,7 +411,7 @@ private:
             RCLCPP_INFO(this->get_logger(), "Planning A* from (%.2f, %.2f) to (%.2f, %.2f)",
                         start.getX(), start.getY(), goal.getX(), goal.getY());
 
-            double timeLimit = 70.0;
+            double timeLimit = 60.0;
 
             AStarGreedy planner(graph_, victims_, start, goal, timeLimit);
             double valueCollected = 0.0;
@@ -427,9 +427,9 @@ private:
             // print the size of oprimizedpath
             RCLCPP_INFO(this->get_logger(), "bestPath Path size: %zu", bestPath.size());
 
-            return bestPath;
+            //return bestPath;
 
-            /* // Optimize the bestPath by adding intermediate points if the distance between two points exceeds 1.5
+            // Optimize the bestPath by adding intermediate points if the distance between two points exceeds 4
             std::vector<Point> optimizedPath;
             for (size_t i = 0; i < bestPath.size() - 1; ++i) {
                 optimizedPath.push_back(bestPath[i]);
@@ -437,19 +437,29 @@ private:
                 Point next = bestPath[i + 1];
                 double distance = current.computeEuclideanDistance(next);
 
-                if (distance > 3) {
-                    int numIntermediatePoints = static_cast<int>(distance / 3);
-                    double dx = (next.getX() - current.getX()) / (numIntermediatePoints + 1);
-                    double dy = (next.getY() - current.getY()) / (numIntermediatePoints + 1);
+                int numIntermediatePoints = 1;
+
+                if(distance > 4.5){
+                    numIntermediatePoints = static_cast<int>(distance / 3);
+                }
+                else if (distance > 3 && distance <= 4.5) {
+                    numIntermediatePoints = static_cast<int>(distance / 2);
+                }
+                
+                if (numIntermediatePoints > 1) 
+                {
+                    double dx = (next.getX() - current.getX()) / (numIntermediatePoints);
+                    double dy = (next.getY() - current.getY()) / (numIntermediatePoints);
 
                     for (int j = 1; j <= numIntermediatePoints; ++j) {
-                        optimizedPath.emplace_back(current.getX() + j * dx, current.getY() + j * dy);
+                        Point add = Point(current.getX() + j * dx, current.getY() + j * dy);
+                        if( next != add ) optimizedPath.emplace_back(add);
                     }
                 }
             }
-            optimizedPath.push_back(bestPath.back()); // Add the last point
 
-            optimizedPath.push_back(Point{3.50, -10}); // Add the last point
+            optimizedPath.push_back(bestPath.back()); // Add the last point
+            optimizedPath.push_back(Point{-3,5}); // Add the last point
 
             //print the optimixed path
             RCLCPP_INFO(this->get_logger(), "Optimized Path:");
@@ -459,7 +469,8 @@ private:
             // print the size of oprimizedpath
             RCLCPP_INFO(this->get_logger(), "Optimized Path size: %zu", optimizedPath.size());
 
-            return optimizedPath; */
+            return optimizedPath; 
+
 /* 
             planner_ = std::make_unique<AStar>(graph_, start, goal);
 

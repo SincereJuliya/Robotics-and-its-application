@@ -157,8 +157,24 @@ std::vector<Point> CellDecompositionMapGenerator::nearestByYOffset(const std::ve
     return best;
 }
 
+double CellDecompositionMapGenerator::pointDistance(const Point& a, const Point& b) const {
+    double dx = a.getX() - b.getX();
+    double dy = a.getY() - b.getY();
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+
 void CellDecompositionMapGenerator::cellDecomposition() {
-    auto uniqueXs = getObstaclesAndBordersUniqueAbscissas();
+    // Step 1: Reduce the number of unique abscissas
+    auto allXs = getObstaclesAndBordersUniqueAbscissas();
+    std::vector<double> uniqueXs;
+    double minXGap = 3.0; // Minimum distance between vertical lines
+    for (double x : allXs) {
+        if (uniqueXs.empty() || std::abs(x - uniqueXs.back()) > minXGap) {
+            uniqueXs.push_back(x);
+        }
+    }
+
     std::vector<Point> leftPts, rightPts;
     std::map<Point, std::pair<Point, Point>> mapLeft, mapRight;
     std::vector<Point> connectionPoints;
@@ -182,31 +198,46 @@ void CellDecompositionMapGenerator::cellDecomposition() {
         }
         auto io = getIntersectionWithObstacles(x);
         pts.insert(pts.end(), io.begin(), io.end());
+
+        // Sort and remove near-duplicates
         std::sort(pts.begin(), pts.end());
-        pts.erase(std::unique(pts.begin(), pts.end()), pts.end());
+        pts.erase(std::unique(pts.begin(), pts.end(),
+                    [this](const Point& a, const Point& b) {
+                        return pointDistance(a, b) < 1e-3;
+                    }), pts.end());
 
         if (i < uniqueXs.size() - 1) {
             for (size_t j = 0; j + 1 < pts.size(); ++j) {
+                // Filter: skip if segment is too short
+                if (pointDistance(pts[j],pts[j + 1]) < 3.0) continue;
+
                 auto mid = getLineCentralPoint(pts[j], pts[j + 1]);
+
+                // Filter: skip if mid is too close to previous
+                if (!rightPts.empty() && pointDistance(mid, rightPts.back()) < 2.0) continue;
+
                 if (isInsideObstacles(mid)) continue;
                 std::vector<Point> nearestPts = nearestByYOffset(leftPts, mid);
+
                 for (const auto& nearest : nearestPts) {
                     Point area = getAreaCentralPoint({mapLeft[nearest].first,
-                                                    mapLeft[nearest].second,
-                                                    pts[j], pts[j+1]});
+                                                     mapLeft[nearest].second,
+                                                     pts[j], pts[j + 1]});
                     g_.addVertice(area);
                     if (i > 1) g_.addEdge(nearest, area);
+
                     if (mapRight.find(mid) == mapRight.end()) {
-                        mapRight[mid] = {pts[j], pts[j+1]};
+                        mapRight[mid] = {pts[j], pts[j + 1]};
                         rightPts.push_back(mid);
                         g_.addVertice(mid);
                     }
                     g_.addEdge(area, mid);
-                    if(i==1){
+
+                    if (i == 1) {
                         connectionPoints.push_back(area);
-                        if(j==pts.size()-2){
-                            for (size_t z = 0; z+1 < connectionPoints.size();z++){
-                                g_.addEdge(connectionPoints[z], connectionPoints[z+1]);
+                        if (j == pts.size() - 2) {
+                            for (size_t z = 0; z + 1 < connectionPoints.size(); z++) {
+                                g_.addEdge(connectionPoints[z], connectionPoints[z + 1]);
                             }
                         }
                     }
@@ -214,14 +245,14 @@ void CellDecompositionMapGenerator::cellDecomposition() {
             }
         } else {
             connectionPoints.clear();
-            for (auto &lp : leftPts) {
+            for (auto& lp : leftPts) {
                 auto pr = mapLeft[lp];
                 auto area = getAreaCentralPoint({pr.first, pr.second, pts.front(), pts.back()});
                 g_.addVertice(area);
                 connectionPoints.push_back(area);
                 if (!isInsideObstacles(lp)) g_.addEdge(area, lp);
-                for (size_t z = 0; z+1 < connectionPoints.size();z++){
-                            g_.addEdge(connectionPoints[z], connectionPoints[z+1]);
+                for (size_t z = 0; z + 1 < connectionPoints.size(); z++) {
+                    g_.addEdge(connectionPoints[z], connectionPoints[z + 1]);
                 }
             }
         }

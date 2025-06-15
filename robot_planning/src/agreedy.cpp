@@ -125,7 +125,7 @@ void AStarGreedy::twoOptOptimization(std::vector<Point>& order) {
     }
 }
 
-
+/*
 std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
     totalValueCollected = 0.0;
 
@@ -179,10 +179,28 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
     std::cout << std::endl;
 
     return fullPath;
+} */
+
+double AStarGreedy::angleBetween(const Point& a, const Point& b, const Point& c) {
+    double abx = b.getX() - a.getX();
+    double aby = b.getY() - a.getY();
+    double bcx = c.getX() - b.getX();
+    double bcy = c.getY() - b.getY();
+
+    double ab_len = std::sqrt(abx*abx + aby*aby);
+    double bc_len = std::sqrt(bcx*bcx + bcy*bcy);
+
+    if (ab_len == 0 || bc_len == 0) return 0;
+
+    double cos_angle = (abx*bcx + aby*bcy) / (ab_len * bc_len);
+    if (cos_angle > 1.0) cos_angle = 1.0;
+    if (cos_angle < -1.0) cos_angle = -1.0;
+
+    double angle = std::acos(cos_angle); // радианы
+    return angle; // возвращаем в радианах, можно умножить на 180/π если нужно градусы
 }
 
-
-/* osnova
+// osnova
 std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
     totalValueCollected = 0.0;
 
@@ -228,11 +246,20 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
             }
 
             // Проверяем, что суммарное время с добавлением жертвы не превышает лимит
-            double newTotalCost = totalCost - (costCurrentToGoal + costToVictim + costVictimToGoal);
+            double newTotalCost = totalCost - costCurrentToGoal + costToVictim + costVictimToGoal;
             if (newTotalCost > mTimeLimit) continue;
 
+            // Расчет угла поворота
+            double turnAngle = angleBetween(bestPoint, current, vp); // в радианах
+
+            // Коэффициенты штрафа за поворот
+            double alpha = 6.0; // подбирай экспериментально
+            double turnPenalty = alpha * turnAngle;
+
+            std::cout << "Victim at " << vp.toString() << " | angle: " << turnAngle << " | penalty: " << (alpha * turnAngle) << std::endl;
+
             // Жадный критерий (например, радиус / времени)
-            double ratio = v.radius / (costToVictim + costVictimToGoal);
+            double ratio = v.radius / (costToVictim + costVictimToGoal + turnPenalty);
             if (ratio > bestRatio) {
                 bestRatio = ratio;
                 bestVictim = &v;
@@ -243,6 +270,8 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
         if (!bestVictim) break;
 
         // Вставляем жертву в order перед целью
+        // print what we add
+        std::cout << "Adding victim at " << bestPoint.toString() << " with radius " << bestVictim->radius << std::endl;
         order.insert(order.end() - 1, bestPoint);
         visitedVictims.insert(bestPoint);
 
@@ -271,12 +300,18 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
             continue;
         }
         const std::vector<Point>& segment = mPaths[{order[i], order[i+1]}];
-        // Добавляем сегмент, избегая дублирования точек
+        /* // Добавляем сегмент, избегая дублирования точек
         for (size_t j = 1; j < segment.size(); ++j) {
             if (visitedNodes.insert(segment[j]).second) {
                 fullPath.push_back(segment[j]);
             }
+        } */
+        for (size_t j = 0; j < segment.size(); ++j) {
+            if (fullPath.empty() || segment[j] != fullPath.back()) {
+                fullPath.push_back(segment[j]);
+            }
         }
+
     } 
 
     // Считаем итоговое значение собранных жертв по order (кроме старта и цели)
@@ -297,7 +332,7 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
 
     return fullPath;
 
-}*/
+}
 
 /* 
 std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {

@@ -11,6 +11,18 @@ float SampleBasedMapGenerator::getSearchRadius() const {
     return 4.5f;   
 }
 
+void SampleBasedMapGenerator::setGates(const std::vector<Point>& gates) {
+    gates_ = gates;
+}
+
+void SampleBasedMapGenerator::setBorders(const std::vector<Point>& borders) {
+    borders_ = borders;
+}
+
+void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle>& obstacles) {
+    obstacles_ = obstacles;
+}
+
 float SampleBasedMapGenerator::getRandomPosition(float middle, float r) const {
     return (middle - r) + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (2 * r)));
 }
@@ -73,26 +85,18 @@ Point SampleBasedMapGenerator::findNearest(const Graph& graph, const Point& p) c
     return nearest;
 }
 
-void SampleBasedMapGenerator::setGates(const std::vector<Point>& gates) {
-    gates_ = gates;
-}
-
-void SampleBasedMapGenerator::setBorders(const std::vector<Point>& borders) {
-    borders_ = borders;
-}
-
-void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle>& obstacles) {
-    obstacles_ = obstacles;
-}
-
+// attempt to generate a graph based on random sampling
 Graph SampleBasedMapGenerator::generateGraph(const Point& init) {
     G_.clear();
+
     if (gates_.empty() || borders_.empty() || obstacles_.empty()) {
         std::cerr << "SampleBasedMapGenerator: missing data for graph generation.\n";
         return G_;
     }
 
-    const int maxIterations = 4;
+    // i want to get 4 random points around the initial point - bc the map is not big
+    const int maxIterations = 15;
+
     // init!
     Point initP = {init.getX(), init.getY()};
     int count = 0;

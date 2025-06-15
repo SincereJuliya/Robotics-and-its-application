@@ -28,6 +28,7 @@ private:
     Point getAreaCentralPoint(const std::vector<Point>& area);
     Point getLineCentralPoint(const Point& p1, const Point& p2);
     void convertCirclesToSquares();
+    double pointDistance(const Point& a, const Point& b) const;
     std::vector<double> getObstaclesUniqueAbscissas();
     std::vector<double> getObstaclesAndBordersUniqueAbscissas();
     std::vector<Point> getObstaclesPoints();
