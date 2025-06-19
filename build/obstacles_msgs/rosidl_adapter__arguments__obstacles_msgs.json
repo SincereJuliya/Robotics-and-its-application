@@ -1,7 +1,0 @@
-{
-  "package_name": "obstacles_msgs",
-  "non_idl_tuples": [
-    "/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/obstacles_msgs:msg/ObstacleMsg.msg",
-    "/home/seventeen/Robotics-and-its-application/src/Shelfino_ROS2/obstacles_msgs:msg/ObstacleArrayMsg.msg"
-  ]
-}

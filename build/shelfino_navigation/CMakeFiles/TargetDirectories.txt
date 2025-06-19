@@ -1,9 +1,0 @@
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/uninstall.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/shelfino_navigation_uninstall.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/test.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/edit_cache.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/rebuild_cache.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/list_install_components.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/install.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/install/local.dir
-/home/seventeen/Robotics-and-its-application/build/shelfino_navigation/CMakeFiles/install/strip.dir

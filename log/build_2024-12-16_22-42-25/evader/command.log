@@ -1,4 +1,0 @@
-Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
-Invoked command in '/home/seventeen/Robotics-and-its-application/build/evader' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/evader -- -j8 -l8
-Invoking command in '/home/seventeen/Robotics-and-its-application/build/evader': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/evader
-Invoked command in '/home/seventeen/Robotics-and-its-application/build/evader' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /home/seventeen/.local/bin/cmake --install /home/seventeen/Robotics-and-its-application/build/evader
