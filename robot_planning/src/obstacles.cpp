@@ -75,12 +75,9 @@ double Obstacle::getMinDist(){
 
 bool Obstacle::isInsideObstacle(Point p) const{
     std::vector<Point> vertices_ = vertices;
-<<<<<<< Updated upstream
-=======
 
     double buffer = 0.25;
 
->>>>>>> Stashed changes
     if(type==BOX){
         int cnt=0;
         vertices_.push_back(vertices_[0]);
@@ -104,7 +101,7 @@ bool Obstacle::isInsideObstacle(Point p) const{
             double err;
             //with the following check, check if the point lains on the line that connects two point and in case it was check if inside the range of x and y
             err = abs((((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))*(p.getX()-p1.getX()))+p1.getY()- p.getY());
-            if(err<0.0028){ //still need to check if inside the range of the variables
+            if(err<buffer){ //still need to check if inside the range of the variables
                 if((p.getY()<p1.getY())!=(p.getY()<p2.getY())&&(p.getX()<p1.getX())!=(p.getX()<p2.getX())){
                     vertices_.pop_back();
                     return true;
@@ -124,7 +121,7 @@ bool Obstacle::isInsideObstacle(Point p) const{
         vertices_.pop_back();
         return ((cnt%2)==1);
     }
-    return ((pow(p.getX()-vertices_[0].getX(),2)+pow(p.getY()-vertices_[0].getY(),2))<=pow(radius,2)); 
+    return ((pow(p.getX()-vertices_[0].getX(),2)+pow(p.getY()-vertices_[0].getY(),2))<=(radius + buffer) * (radius + buffer));
     
 }
 

@@ -17,7 +17,7 @@ public:
     void setGates(const std::vector<Point>& gates) override;
     void setBorders(const std::vector<Point>& borders) override;
     void setObstacles(const std::vector<Obstacle>& obstacles) override;
-    Graph generateGraph() override;
+    Graph generateGraph(const Point& init) override;
 
 private:
     std::vector<Point> gates_;

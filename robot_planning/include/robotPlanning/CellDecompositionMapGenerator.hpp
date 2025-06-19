@@ -14,7 +14,7 @@ public:
     void setGates(const std::vector<Point>& gates) override;
     void setBorders(const std::vector<Point>& borders) override;
     void setObstacles(const std::vector<Obstacle>& obstacles) override;
-    Graph generateGraph() override;
+    Graph generateGraph(const Point& init) override;
 
 
 private:    
@@ -28,6 +28,7 @@ private:
     Point getAreaCentralPoint(const std::vector<Point>& area);
     Point getLineCentralPoint(const Point& p1, const Point& p2);
     void convertCirclesToSquares();
+    double pointDistance(const Point& a, const Point& b) const;
     std::vector<double> getObstaclesUniqueAbscissas();
     std::vector<double> getObstaclesAndBordersUniqueAbscissas();
     std::vector<Point> getObstaclesPoints();

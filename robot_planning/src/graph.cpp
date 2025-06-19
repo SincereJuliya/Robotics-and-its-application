@@ -12,12 +12,27 @@ Graph::Graph(const Graph& g) {
 }
 
 void Graph::addVertice(Point vertex){
-    mGraph[vertex] = {};
+    if(!containsVertex(vertex)){
+        mGraph[vertex] = {};
+    }
 }
 
 void Graph::addEdge(Point v1, Point v2){
-    mGraph[v1].push_back(v2);
-    mGraph[v2].push_back(v1);
+    if (!edgeExists(v1, v2)) {
+        mGraph[v1].push_back(v2);
+        mGraph[v2].push_back(v1);
+    }
+}
+
+bool Graph::edgeExists(const Point& v1, const Point& v2) const {
+    auto it = mGraph.find(v1);
+    if (it != mGraph.end()) {
+        const std::vector<Point>& neighbors = it->second;
+        return std::any_of(neighbors.begin(), neighbors.end(), [&v2](const Point& p) {
+            return p == v2;  
+        });
+    }
+    return false;
 }
 
 void Graph::printGraph(){
@@ -45,14 +60,14 @@ void Graph::removeVertex(Point vertex){
 }
 
 std::vector<Point> Graph::getVertices() const{
-    std::cout << "vertices: " ;
+    //std::cout << "vertices: " ;
     std::vector<Point> vertices;
 
     for(auto& element: mGraph){
         vertices.push_back(element.first);
-        std::cout << element.first << "  ";
+        //std::cout << element.first << "  ";
     }
-    std::cout << "\n";
+    //std::cout << "\n";
 
 return vertices;
 }
@@ -63,12 +78,12 @@ std::vector<Point> Graph::getEdge(Point vertex){
         return {};
     }
     
-    std::cout << "edges of vertex (" << vertex.getX() <<  "," << vertex.getY() << "): " ;
+    /* std::cout << "edges of vertex (" << vertex.getX() <<  "," << vertex.getY() << "): " ;
     for(const auto& i: mGraph[vertex]){
         std::cout << i << " ";
 
     }
-    std::cout << "\n";
+    std::cout << "\n"; */
     return mGraph[vertex]; 
 }
 
@@ -124,30 +139,41 @@ graph_for_task_planner_msg::msg::Graph Graph::toROSMsg() const {
     return graph_msg;
 }
 
-// Method to find the nearest point in the graph to a given goal point
 Point Graph::findNearestPoint(const Point& goal) const {
-    // Initialize variables to keep track of the nearest point and the smallest distance
-    Point nearest_point;
-    double min_distance = std::numeric_limits<double>::infinity(); // Set a very high initial distance
+    if (mGraph.empty()) {
+        std::cerr << "Graph is empty. Cannot find the nearest point.\n";
+        // Можно бросить исключение или вернуть точку с координатами NaN или специальное значение
+        throw std::runtime_error("Graph is empty");
+    }
 
-    // Iterate over all the vertices in the graph
-    for (const auto& vertex_pair : mGraph) {
-        const Point& current_point = vertex_pair.first;
+    auto it = mGraph.begin();
+    Point nearest_point = it->first;
+    double min_distance = std::sqrt(std::pow(nearest_point.getX() - goal.getX(), 2) + 
+                                    std::pow(nearest_point.getY() - goal.getY(), 2));
 
-        // Compute the Euclidean distance between the current point and the goal
-        double distance = std::sqrt(std::pow(current_point.getX() - goal.getX(), 2) + 
+    for (++it; it != mGraph.end(); ++it) {
+        const Point& current_point = it->first;
+        double distance = std::sqrt(std::pow(current_point.getX() - goal.getX(), 2) +
                                     std::pow(current_point.getY() - goal.getY(), 2));
-
-        // If this point is closer to the goal, update nearest_point and min_distance
-        if (distance < min_distance) {
+        if (distance < min_distance && distance > 0) { // Ensure we don't return the goal itself if it's in the graph
+        
             min_distance = distance;
             nearest_point = current_point;
         }
     }
-
-    // Return the nearest point
     return nearest_point;
 }
+
+
+bool  Graph::containsPoint(const Point& point) const {
+    return mGraph.find(point) != mGraph.end();
+}
+
+bool Graph::containsVertex(const Point& p) const {
+    return mGraph.find(p) != mGraph.end();
+}
+
+
 
 /* int main(){
     Graph mg;

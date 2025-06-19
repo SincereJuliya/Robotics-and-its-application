@@ -41,7 +41,7 @@ public:
     virtual void setGates(const std::vector<Point>& gates) = 0;
     virtual void setBorders(const std::vector<Point>& borders) = 0;
     virtual void setObstacles(const std::vector<Obstacle>& obstacles) = 0;
-    virtual Graph generateGraph() = 0;
+    virtual Graph generateGraph(const Point& init) = 0;
 };
 
 #endif // IMAPGENERATOR_HPP

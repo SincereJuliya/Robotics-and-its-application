@@ -1,4 +1,4 @@
-#include <rclcpp/rclcpp.hpp>
+/* #include <rclcpp/rclcpp.hpp>
 #include <graph_for_task_planner_msg/msg/graph.hpp>
 #include <graph_for_task_planner_msg/msg/point.hpp>
 #include <graph_for_task_planner_msg/msg/edge.hpp>
@@ -220,9 +220,6 @@ int main(int argc, char *argv[]) {
     rclcpp::spin(std::make_shared<TaskPlannerNode>());
     rclcpp::shutdown();
     return 0;
-<<<<<<< Updated upstream
-}
-=======
 } */
 #include <rclcpp/rclcpp.hpp>
 #include <graph_for_task_planner_msg/msg/graph.hpp>
@@ -638,4 +635,3 @@ int main(int argc, char* argv[]) {
     rclcpp::shutdown();
     return 0;
 }
->>>>>>> Stashed changes

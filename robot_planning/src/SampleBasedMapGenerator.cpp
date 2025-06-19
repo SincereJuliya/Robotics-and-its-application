@@ -8,9 +8,6 @@ SampleBasedMapGenerator::SampleBasedMapGenerator() {
 }
 
 float SampleBasedMapGenerator::getSearchRadius() const {
-<<<<<<< Updated upstream
-    return 10.0f;   
-=======
     return 6.2f;   
 }
 
@@ -24,7 +21,6 @@ void SampleBasedMapGenerator::setBorders(const std::vector<Point>& borders) {
 
 void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle>& obstacles) {
     obstacles_ = obstacles;
->>>>>>> Stashed changes
 }
 
 float SampleBasedMapGenerator::getRandomPosition(float middle, float r) const {
@@ -64,7 +60,7 @@ bool SampleBasedMapGenerator::isInsideAnyObstacle(const Point& p) const {
 
 bool SampleBasedMapGenerator::isReachedGate(const Point& p) const {
     for (const auto& gate : gates_) {
-        if (computeDistance(gate, p) < 1.0f) return true;
+        if (computeDistance(gate, p) <= 0.0f) return true;
     }
     return false;
 }
@@ -89,47 +85,41 @@ Point SampleBasedMapGenerator::findNearest(const Graph& graph, const Point& p) c
     return nearest;
 }
 
-void SampleBasedMapGenerator::setGates(const std::vector<Point>& gates) {
-    gates_ = gates;
-}
-
-void SampleBasedMapGenerator::setBorders(const std::vector<Point>& borders) {
-    borders_ = borders;
-}
-
-void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle>& obstacles) {
-    obstacles_ = obstacles;
-}
-
-Graph SampleBasedMapGenerator::generateGraph() {
+// attempt to generate a graph based on random sampling
+Graph SampleBasedMapGenerator::generateGraph(const Point& init) {
     G_.clear();
+
     if (gates_.empty() || borders_.empty() || obstacles_.empty()) {
         std::cerr << "SampleBasedMapGenerator: missing data for graph generation.\n";
         return G_;
     }
 
-<<<<<<< Updated upstream
-    const int maxIterations = 10;
-=======
     // i want to get 4 random points around the initial point - bc the map is not big
     const int maxIterations = 20;
 
->>>>>>> Stashed changes
     // init!
-    Point initP{0.0f, 0.0f};
+    Point initP = {init.getX(), init.getY()};
     int count = 0;
 
     while (count < maxIterations) {
         Point newP = getRandomPoint(initP, getSearchRadius());
         if (isInsideAnyObstacle(newP)) continue;
+
+        // Check for duplicates
+        if (G_.containsVertex(newP)) continue;
+
         ++count;
 
         if (G_.getVertices().empty()) {
             G_.addEdge(initP, newP);
         } else {
             Point nearest = findNearest(G_, newP);
-            G_.addEdge(nearest, newP);
+            if (!G_.edgeExists(nearest, newP)) {
+                G_.addEdge(nearest, newP);
+            }
         }
+
+        initP = newP;  // Update initP to the last added point
 
         if (isReachedGate(newP)) break;
     }
