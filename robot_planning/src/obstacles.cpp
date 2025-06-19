@@ -75,6 +75,12 @@ double Obstacle::getMinDist(){
 
 bool Obstacle::isInsideObstacle(Point p) const{
     std::vector<Point> vertices_ = vertices;
+<<<<<<< Updated upstream
+=======
+
+    double buffer = 0.25;
+
+>>>>>>> Stashed changes
     if(type==BOX){
         int cnt=0;
         vertices_.push_back(vertices_[0]);

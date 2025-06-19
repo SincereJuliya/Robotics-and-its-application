@@ -4,6 +4,7 @@
 #include <math.h> 
 #include <cassert>
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
+#include "../include/robotPlanning/obstacles.hpp"
 
 int ksigns [6][3] = {
   { 1, 0, 1},  //LSL
@@ -318,10 +319,34 @@ std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv){
   return plot;
 }
 
+<<<<<<< Updated upstream
 std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m){
   double h = 2*M_PI/k;  
   std::vector<double> ths;
   ths.push_back(th0);
+=======
+bool isPathCollisionFree(std::vector<arcVar>& dubinsCurve, const std::vector<Obstacle>& obstacles) {
+    for (const arcVar& arc : dubinsCurve) {
+        for (const Obstacle& obs : obstacles) 
+        {
+            // Check if the point is inside any obstacle
+
+            if (obs.isInsideObstacle(Point{arc.x, arc.y})) {
+                std::cout << "Collision detected at point (" << arc.x << ", " << arc.y << "}\n";
+                return false;  // Collision detected
+            }
+        }
+    }
+    return true;  // All points are safe
+}
+
+
+/// Optimizes heading angles using a coarse-to-fine sampling method
+std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m, const std::vector<Obstacle>& obstacles) {
+    double h = 2 * M_PI / k;
+    std::vector<double> ths;
+    ths.push_back(th0);
+>>>>>>> Stashed changes
 
   std::cout << "number of points: " << points.size() << "\n";
   for(std::vector<Point>::size_type i=0; i<points.size()-1; i++){ //for each point
@@ -364,20 +389,30 @@ std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double
 }
 
 //need to check if the path is colliding with any object with at +/- distance (2/3 width of the robot)
-std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf){
+std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf, std::vector<Obstacle> obstacles){
   std::vector<arcVar> plan;
   std::vector<arcVar> planTmp;
   std::vector<double> optAngles;
   curve dubinsPortion;
 
-  optAngles = optimizeAngles(points, th0, thf, 4, 4);
-  for(std::vector<Point>::size_type  i=0; i<points.size()-2; i++){
+  optAngles = optimizeAngles(points, th0, thf, 4, 4, obstacles);
+  if (optAngles.empty()) {
+        std::cerr << "Failed to optimize angles - no collision-free path found\n";
+        return plan;  // empty plan
+  }
+
+  for(std::vector<Point>::size_type i=0; i<points.size()-2; i++){
+
     dubinsPortion = dubinsShortestPath(points[i].getX(), points[i].getY(), optAngles[i], points[i+1].getX(), points[i+1].getY(), optAngles[i+1]);
+
     planTmp = plotDubins(dubinsPortion.values);
     for(long unsigned int j =0; j<planTmp.size(); j++){
       plan.push_back(planTmp[j]);
     }
+
   }
+
+  plan = isPathCollisionFree(plan, obstacles) ? plan : std::vector<arcVar>{};
 
   return plan;
 }

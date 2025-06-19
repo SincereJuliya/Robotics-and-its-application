@@ -24,10 +24,14 @@ public:
 
   explicit FollowPathActionClient(const rclcpp::NodeOptions & options)
   : Node("followPath", options) {
+    rclcpp::QoS qos(10);
+    qos.reliable();
+    qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
+
     this->client_ptr_ = rclcpp_action::create_client<FollowPath>(this, "/shelfino/follow_path");
-    this->publisherRobot = this->create_publisher<nav_msgs::msg::Path>("shelfino/plan1", 10);
+    this->publisherRobot = this->create_publisher<nav_msgs::msg::Path>("shelfino/plan1", qos);
     this->planSubscriber = this->create_subscription<geometry_msgs::msg::PoseArray>(
-      "dubins_plan", 10, std::bind(&FollowPathActionClient::getPlan, this, std::placeholders::_1));
+      "dubins_plan", qos, std::bind(&FollowPathActionClient::getPlan, this, std::placeholders::_1));
   }
 
   void send_goal() {

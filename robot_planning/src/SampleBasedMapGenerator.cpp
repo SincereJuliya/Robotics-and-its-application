@@ -8,7 +8,23 @@ SampleBasedMapGenerator::SampleBasedMapGenerator() {
 }
 
 float SampleBasedMapGenerator::getSearchRadius() const {
+<<<<<<< Updated upstream
     return 10.0f;   
+=======
+    return 6.2f;   
+}
+
+void SampleBasedMapGenerator::setGates(const std::vector<Point>& gates) {
+    gates_ = gates;
+}
+
+void SampleBasedMapGenerator::setBorders(const std::vector<Point>& borders) {
+    borders_ = borders;
+}
+
+void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle>& obstacles) {
+    obstacles_ = obstacles;
+>>>>>>> Stashed changes
 }
 
 float SampleBasedMapGenerator::getRandomPosition(float middle, float r) const {
@@ -92,7 +108,13 @@ Graph SampleBasedMapGenerator::generateGraph() {
         return G_;
     }
 
+<<<<<<< Updated upstream
     const int maxIterations = 10;
+=======
+    // i want to get 4 random points around the initial point - bc the map is not big
+    const int maxIterations = 20;
+
+>>>>>>> Stashed changes
     // init!
     Point initP{0.0f, 0.0f};
     int count = 0;

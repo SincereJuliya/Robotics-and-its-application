@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "point.hpp"
+#include "obstacles.hpp"
 
 struct arcVar{
   double x;
@@ -85,8 +86,10 @@ void plotArc(dubinsCurve arc, std::vector<arcVar>& plt);
 
 std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv);
 
-std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m);
+bool isPathCollisionFree(const curve& dubinsCurve, const std::vector<Obstacle>& obstacles);
 
-std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf);
+std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m, const std::vector<Obstacle>& obstacles);
+
+std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf, std::vector<Obstacle> obstacles);
 
 #endif

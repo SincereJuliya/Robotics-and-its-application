@@ -31,27 +31,38 @@ public:
     MapGeneratorNode()
         : Node("mapGeneratorNode")
     {
-        std::string strategy = this->declare_parameter<std::string>("strategy", "cell");
+        std::string strategy = this->declare_parameter<std::string>("strategy", "sample");
         if (strategy == "sample") {
             generator_ = std::make_unique<SampleBasedMapGenerator>();
         } else {
             generator_ = std::make_unique<CellDecompositionMapGenerator>();
         }
 
+<<<<<<< Updated upstream
+=======
+        rclcpp::QoS qos(10);
+        qos.reliable();
+        qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
+
+        init_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+            "/shelfino/amcl_pose", qos,
+            std::bind(&MapGeneratorNode::startCallback, this, std::placeholders::_1));
+
+>>>>>>> Stashed changes
         gates_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
-            "gates", rclcpp::QoS(10),
+            "/gates", qos,
             std::bind(&MapGeneratorNode::gatesCallback, this, std::placeholders::_1));
 
         borders_sub_ = this->create_subscription<geometry_msgs::msg::PolygonStamped>(
-            "borders", rclcpp::QoS(10),
+            "/borders", qos,
             std::bind(&MapGeneratorNode::bordersCallback, this, std::placeholders::_1));
 
         obstacles_sub_ = this->create_subscription<obstacles_msgs::msg::ObstacleArrayMsg>(
-            "obstacles", rclcpp::QoS(10),
+            "/obstacles", qos,
             std::bind(&MapGeneratorNode::obstaclesCallback, this, std::placeholders::_1));
 
         graph_pub_ = this->create_publisher<graph_for_task_planner_msg::msg::Graph>(
-            "generated_graph", rclcpp::QoS(10));
+            "/generated_graph", qos);
 
         RCLCPP_INFO(this->get_logger(), "MapGeneratorNode initialized using '%s' strategy.", strategy.c_str());
     }
