@@ -10,7 +10,51 @@
 #include "../include/robotPlanning/CellDecompositionMapGenerator.hpp"
 #include "../include/robotPlanning/IMapGenerator.hpp"
 
+
+/* ---------------------------------------------------------------------------------------- */
+/*  node for 2 map generations - SampleBasedMapGenerator + CellDecompositionMapGenerator    */
+/* ---------------------------------------------------------------------------------------- */
 class MapGeneratorNode : public rclcpp::Node {
+public:
+    MapGeneratorNode() : Node("mapGeneratorNode") 
+    {
+        auto qos = get_transient_qos();
+
+        /* ---------------------------------------------------------------------------------------- */
+        /*                     initialization of the method for map generation                      */
+        /* ---------------------------------------------------------------------------------------- */
+        std::string strategy = this->declare_parameter<std::string>("strategy", "cell");
+        if (strategy == "sample") generator_ = std::make_unique<SampleBasedMapGenerator>();
+            else generator_ = std::make_unique<CellDecompositionMapGenerator>();
+        
+        /* ---------------------------------------------------------------------------------------- */
+        /*                                      subscribers                                         */
+        /* ---------------------------------------------------------------------------------------- */
+        init_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+            "/shelfino/amcl_pose", qos,
+            std::bind(&MapGeneratorNode::startCallback, this, std::placeholders::_1));
+
+        gates_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
+            "/gates", qos,
+            std::bind(&MapGeneratorNode::gatesCallback, this, std::placeholders::_1));
+
+        borders_subscriber_ = this->create_subscription<geometry_msgs::msg::PolygonStamped>(
+            "/borders", qos,
+            std::bind(&MapGeneratorNode::bordersCallback, this, std::placeholders::_1));
+
+        obstacles_subscriber_ = this->create_subscription<obstacles_msgs::msg::ObstacleArrayMsg>(
+            "/obstacles", qos,
+            std::bind(&MapGeneratorNode::obstaclesCallback, this, std::placeholders::_1));
+            
+        /* ---------------------------------------------------------------------------------------- */
+        /*                                      publish                                             */
+        /* ---------------------------------------------------------------------------------------- */
+        graph_publisher_ = this->create_publisher<graph_for_task_planner_msg::msg::Graph>(
+            "/generated_graph", qos);
+
+        RCLCPP_INFO(this->get_logger(), "MapGeneratorNode is ready using '%s' strategy.", strategy.c_str());
+    }
+
 private:
     std::unique_ptr<IMapGenerator> generator_;
 
@@ -24,52 +68,24 @@ private:
     bool gates_received_ = false;
     bool borders_received_ = false;
     bool obstacles_received_ = false;
-    bool data_generated_ = false;
+    bool data_generated_ = false;  
     
     rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr init_subscriber_;
-    rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr gates_sub_;
-    rclcpp::Subscription<geometry_msgs::msg::PolygonStamped>::SharedPtr borders_sub_;
-    rclcpp::Subscription<obstacles_msgs::msg::ObstacleArrayMsg>::SharedPtr obstacles_sub_;
-    rclcpp::Publisher<graph_for_task_planner_msg::msg::Graph>::SharedPtr graph_pub_;
+    rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr gates_subscriber_;
+    rclcpp::Subscription<geometry_msgs::msg::PolygonStamped>::SharedPtr borders_subscriber_;
+    rclcpp::Subscription<obstacles_msgs::msg::ObstacleArrayMsg>::SharedPtr obstacles_subscriber_;
+    rclcpp::Publisher<graph_for_task_planner_msg::msg::Graph>::SharedPtr graph_publisher_;
 
-public:
-    MapGeneratorNode()
-        : Node("mapGeneratorNode")
-    {
-        std::string strategy = this->declare_parameter<std::string>("strategy", "sample");
-        if (strategy == "sample") {
-            generator_ = std::make_unique<SampleBasedMapGenerator>();
-        } else {
-            generator_ = std::make_unique<CellDecompositionMapGenerator>();
-        }
-
-        rclcpp::QoS qos(10);
+    rclcpp::QoS get_transient_qos(size_t depth = 10) {
+        rclcpp::QoS qos(depth);
         qos.reliable();
         qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
-
-        init_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
-            "/shelfino/amcl_pose", qos,
-            std::bind(&MapGeneratorNode::startCallback, this, std::placeholders::_1));
-
-        gates_sub_ = this->create_subscription<geometry_msgs::msg::PoseArray>(
-            "/gates", qos,
-            std::bind(&MapGeneratorNode::gatesCallback, this, std::placeholders::_1));
-
-        borders_sub_ = this->create_subscription<geometry_msgs::msg::PolygonStamped>(
-            "/borders", qos,
-            std::bind(&MapGeneratorNode::bordersCallback, this, std::placeholders::_1));
-
-        obstacles_sub_ = this->create_subscription<obstacles_msgs::msg::ObstacleArrayMsg>(
-            "/obstacles", qos,
-            std::bind(&MapGeneratorNode::obstaclesCallback, this, std::placeholders::_1));
-
-        graph_pub_ = this->create_publisher<graph_for_task_planner_msg::msg::Graph>(
-            "/generated_graph", qos);
-
-        RCLCPP_INFO(this->get_logger(), "MapGeneratorNode initialized using '%s' strategy.", strategy.c_str());
+        return qos;
     }
 
-private:
+    /* ------------------------------------------------------------------------------------------ */
+    /*                                      callbacks                                             */
+    /* ------------------------------------------------------------------------------------------ */
     void startCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg) {
         start = Point{msg->pose.pose.position.x, msg->pose.pose.position.y};
         start_received_ = true;
@@ -113,7 +129,11 @@ private:
         attemptGenerate();
     }
 
-    void attemptGenerate() {
+    /* ------------------------------------------------------------------------------------------ */
+    /*                attempt to generate the graph if everything already come                    */
+    /* ------------------------------------------------------------------------------------------ */
+    void attemptGenerate() 
+    {
         if ( start_received_ && gates_received_ && borders_received_ && obstacles_received_ && !data_generated_) {
             RCLCPP_INFO(get_logger(), "All required data received; generating graph...");
             generator_->setGates(gates_);
@@ -136,19 +156,19 @@ private:
         }
     }
 
+    /* ------------------------------------------------------------------------------------------ */
+    /*                          publish the generated graph                                       */
+    /* ------------------------------------------------------------------------------------------ */
     void publishGraph(const Graph &graph) {
         graph_for_task_planner_msg::msg::Graph msg = graph.toROSMsg();
-        graph_pub_->publish(msg);
+        graph_publisher_->publish(msg);
         RCLCPP_INFO(get_logger(), "Published graph with %zu vertices.", graph.getVertices().size());
     }
 };
 
 int main(int argc, char **argv) {
-    rclcpp::init(argc, argv);  // Initialize ROS 2
-
-    // Create and spin the MapGeneratorNode
+    rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<MapGeneratorNode>());
-
-    rclcpp::shutdown();  // Shutdown ROS 2 after node stops
+    rclcpp::shutdown(); 
     return 0;
 }

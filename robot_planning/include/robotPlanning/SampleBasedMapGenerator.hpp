@@ -30,9 +30,15 @@ private:
     Point getRandomPoint(const Point& initP, float radius) const;
 
     bool isInsideBorder(const Point& p) const;
+    bool isTooCloseToBorder(const Point& p, double minDistance) const;
     bool isInsideAnyObstacle(const Point& p) const;
     bool isReachedGate(const Point& p) const;
 
     float computeDistance(const Point& a, const Point& b) const;
     Point findNearest(const Graph& graph, const Point& p) const;
+
+
+    bool collidesWithObstacleOrBorder(const Point& p1, const Point& p2) const;
+    void connectVisibleEdges(Graph& graph, const Point& newP) const;
+
 };

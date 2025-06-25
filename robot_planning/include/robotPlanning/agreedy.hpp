@@ -20,6 +20,13 @@ namespace std {
     };
 }
 
+struct PathOption {
+    std::vector<Point> order;
+    double totalCost;
+    double totalValue;
+    double score; // value / cost or similar
+};
+
 // Для хеширования пары Point-ов
 struct PointPairHash {
     std::size_t operator()(const std::pair<Point, Point>& p) const {
@@ -47,9 +54,10 @@ struct Node {
 class AStarGreedy {
 public:
     AStarGreedy(Graph& graph, const std::vector<Victim>& victims,
-                const Point& start, const Point& goal, double timeLimit, std::vector<Obstacle> obstacles = {});
+                const Point& start, const Point& goal, double timeLimit, std::vector<Obstacle> obstacles = {}, std::vector<Point> borders = {});
 
     double angleBetween(const Point& a, const Point& b, const Point& c);
+    std::vector<Point> run(double& totalValueCollected, int attempt);
     std::vector<Point> findBestPath(double& totalValueCollected, int attempt);
 
 
@@ -59,15 +67,19 @@ private:
     Point mStart, mGoal;
     double mTimeLimit;
     std::vector<Obstacle> mObstacles;
+    std::vector<Point> mBorders;
 
     double pathCostForOrder(const std::vector<Point>& order);
     void twoOptOptimization(std::vector<Point>& order);
+    bool collidesWithObstacleOrBorder(const Point& p1, const Point& p2) const ;
 
     std::unordered_map<std::pair<Point, Point>, std::vector<Point>, PointPairHash> mPaths;
     std::unordered_map<std::pair<Point, Point>, double, PointPairHash> mCosts;
 
     std::vector<Point> aStar(const Point& start, const Point& goal, double& pathCost);
     double heuristic(const Point& a, const Point& b);
+
+    bool isTooCloseToBorder(const Point& p, double margin) const;
 
     void buildMetaGraph();
     const Victim* findVictimAt(const Point& p) const;

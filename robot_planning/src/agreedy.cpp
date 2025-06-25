@@ -4,9 +4,10 @@
 #include <set>
 
 AStarGreedy::AStarGreedy(Graph& graph, const std::vector<Victim>& victims,
-                         const Point& start, const Point& goal, double timeLimit, std::vector<Obstacle> obstacles)
+                         const Point& start, const Point& goal, double timeLimit, std::vector<Obstacle> obstacles, std::vector<Point> borders)
     : mGraph(graph), mVictims(victims), mStart(start), mGoal(goal), mTimeLimit(timeLimit), 
-      mObstacles(obstacles) {
+      mObstacles(obstacles), mBorders(borders) 
+{
     buildMetaGraph();
     std::cout << "CONSTRUCTOR ASTARGREEDY\n";
     std::cout << "Start: " << mStart.toString() << ", Goal: " << mGoal.toString() << "\n";
@@ -66,73 +67,130 @@ std::vector<Point> AStarGreedy::aStar(const Point& start, const Point& goal, dou
     return {};
 }
 
+bool AStarGreedy::isTooCloseToBorder(const Point& p, double margin) const {
+    if (mBorders.size() < 2) return true;  // Not initialized, be conservative
+
+    auto pointToSegmentDistance = [](const Point& p, const Point& a, const Point& b) {
+        double dx = b.getX() - a.getX();
+        double dy = b.getY() - a.getY();
+
+        if (dx == 0 && dy == 0)
+            return std::hypot(p.getX() - a.getX(), p.getY() - a.getY());
+
+        double t = ((p.getX() - a.getX()) * dx + (p.getY() - a.getY()) * dy) / (dx * dx + dy * dy);
+        t = std::max(0.0, std::min(1.0, t));
+
+        double projX = a.getX() + t * dx;
+        double projY = a.getY() + t * dy;
+
+        return std::hypot(p.getX() - projX, p.getY() - projY);
+    };
+
+    for (size_t i = 0; i < mBorders.size(); ++i) {
+        const Point& a = mBorders[i];
+        const Point& b = mBorders[(i + 1) % mBorders.size()];
+        double dist = pointToSegmentDistance(p, a, b);
+        if (dist < margin) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool AStarGreedy::collidesWithObstacleOrBorder(const Point& p1, const Point& p2) const 
+{
+    double distance = std::hypot(p2.getX() - p1.getX(), p2.getY() - p1.getY());
+
+    // 3 samples per one unit of distance
+    const double samplesPerUnit = 3.0; 
+    int numSamples = std::max(1, static_cast<int>(distance * samplesPerUnit));
+
+    for (int i = 0; i <= numSamples; ++i) {
+        double t = static_cast<double>(i) / numSamples;
+        Point interp(
+            p1.getX() + t * (p2.getX() - p1.getX()),
+            p1.getY() + t * (p2.getY() - p1.getY())
+        );
+
+        for (const auto& obs : mObstacles) {
+            if (obs.isTooCloseToObstacle(interp, 0.1f) || obs.isInsideObstacle(interp)) {
+                return true;
+            }
+        }
+    }
+
+    return false; // No collision detected
+}
 
 void AStarGreedy::buildMetaGraph() {
     std::vector<Point> keyPoints = {mStart, mGoal};
     for (const Victim& v : mVictims)
-        keyPoints.push_back(Point(v.x, v.y));
+        keyPoints.emplace_back(v.x, v.y);
 
-    for (size_t i = 0; i < keyPoints.size(); ++i) {
-        for (size_t j = 0; j < keyPoints.size(); ++j) {
-            if (i == j) continue;
+    auto collidesWithObstacle = [&](const std::vector<Point>& path) 
+    {
+        for (const Point& p : path) {
+            // Allow passing through the goal
+            if (p == mGoal)
+                continue;
+
+            // Check collision with border
+            if (isTooCloseToBorder(p, 0.6f)) {
+                std::cerr << "Path collides with border at " << p.toString() << "\n";
+                return true;
+            }
+    
+            // Check collision with any obstacle
+            for (const Obstacle& obs : mObstacles) {
+                if (obs.isInsideObstacle(p) || obs.isTooCloseToObstacle(p, 0.4f)) {
+                    std::cerr << "Path collides with obstacle at " << p.toString() << "\n";
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    for (size_t i = 0; i < keyPoints.size(); ++i) 
+    {
+        for (size_t j = i + 1; j < keyPoints.size(); ++j) 
+        {
+            const Point& p1 = keyPoints[i];
+            const Point& p2 = keyPoints[j];
+
+            /* // Check simple direct-line collision before running A*
+            if (collidesWithObstacleOrBorder(p1, p2)) {
+                std::cerr << "Skipped A* from " << p1.toString() << " to " << p2.toString()
+                        << " due to direct collision.\n";
+                continue;
+            } */
 
             double cost;
-            std::vector<Point> path = aStar(keyPoints[i], keyPoints[j], cost);
+            std::vector<Point> path = aStar(p1, p2, cost);
 
-            if (path.empty() || path.back() != keyPoints[j]) {
-                std::cerr << "Warning: path from " << keyPoints[i].toString()
-                          << " does not reach " << keyPoints[j].toString()
-                          << " but ends at " << (path.empty() ? "empty" : path.back().toString()) << "\n";
+            if (path.empty() || path.back() != p2) {
+                std::cerr << "Invalid path from " << p1.toString()
+                        << " to " << p2.toString()
+                        << ", ends at " << (path.empty() ? "empty" : path.back().toString()) << "\n";
                 continue;
             }
 
-            // Check each point in path to see if inside any obstacle
-            bool collides = false;
-            for (const Point& p : path) {
-                for (const Obstacle& obs : mObstacles) {
-                    if (obs.isInsideObstacle(p)) {
-                        collides = true;
-                        std::cerr << "Collision detected: Point " << p.toString()
-                                  << " is inside obstacle.\n";
-                        break;
-                    }
-                }
-                if (collides) break;
-            }
-            if (collides) continue;
+            // Optional: further check the path itself for precision
+            if (collidesWithObstacle(path)) continue;
 
-            mPaths[{keyPoints[i], keyPoints[j]}] = path;
-            mCosts[{keyPoints[i], keyPoints[j]}] = cost;
+            mPaths[{p1, p2}] = path;
+            mPaths[{p2, p1}] = std::vector<Point>(path.rbegin(), path.rend());
+
+            mCosts[{p1, p2}] = cost;
+            mCosts[{p2, p1}] = cost;
+
         }
     }
+
+    std ::cout << "Meta graph built with " << mPaths.size() << " paths and " << mCosts.size() << " costs.\n";
+
 }
-
-
-/* 
-void AStarGreedy::buildMetaGraph() {
-    std::vector<Point> keyPoints = {mStart, mGoal};
-    for (const Victim& v : mVictims)
-        keyPoints.push_back(Point(v.x, v.y));
-
-    for (size_t i = 0; i < keyPoints.size(); ++i) {
-        for (size_t j = 0; j < keyPoints.size(); ++j) {
-            if (i == j) continue;
-            double cost;
-            std::vector<Point> path = aStar(keyPoints[i], keyPoints[j], cost);
-
-            if (!path.empty()) {
-                if (path.back() != keyPoints[j]) {
-                    std::cerr << "Warning: path from " << keyPoints[i].toString()
-                              << " does not reach " << keyPoints[j].toString()
-                              << " but ends at " << path.back().toString() << "\n";
-                    continue; 
-                }
-                mPaths[{keyPoints[i], keyPoints[j]}] = path;
-                mCosts[{keyPoints[i], keyPoints[j]}] = cost;
-            }
-        }
-    }
-} */
 
 const Victim* AStarGreedy::findVictimAt(const Point& p) const {
     for (const auto& v : mVictims)
@@ -194,6 +252,158 @@ double AStarGreedy::angleBetween(const Point& a, const Point& b, const Point& c)
     return angle;
 }
 
+/* std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int attempt) {
+    std::vector<PathOption> candidates;
+
+    for (int k = 0; k < 10 * (attempt + 1); ++k) {
+        std::vector<Point> order = {mStart, mGoal};
+        std::unordered_set<Point> visited;
+        double totalCost = mCosts[{mStart, mGoal}];
+        double remainingTime = mTimeLimit;
+
+        Point current = mStart;
+        double totalValue = 0;
+
+        while (true) {
+            std::vector<std::pair<double, const Victim*>> ranked;
+
+            for (const auto& v : mVictims) {
+                Point vp(v.x, v.y);
+                if (visited.count(vp)) continue;
+                if (!mCosts.count({current, vp}) || !mCosts.count({vp, mGoal})) continue;
+
+                double toV = mCosts[{current, vp}];
+                double vToGoal = mCosts[{vp, mGoal}];
+                double oldToGoal = mCosts[{current, mGoal}];
+                double newCost = totalCost - oldToGoal + toV + vToGoal;
+
+                if (newCost >= remainingTime) continue;
+
+                double angle = angleBetween(order.size() > 1 ? order[order.size() - 2] : current, current, vp);
+                double penalty = 5.0 * angle;
+                std::cout << "Angle penalty for victim at " << vp.toString() << ": " << penalty << "\n";
+
+                // Additional penalty: proximity to obstacles and borders
+                double minObsDist = std::numeric_limits<double>::max();
+                double minBorderDist = std::numeric_limits<double>::max();
+
+                // Check distance to each obstacle
+                for (const Obstacle& obs : mObstacles) {
+                    double d = obs.distanceTo(vp);  
+                    minObsDist = std::min(minObsDist, d);
+                }
+
+                // Check distance to each border point
+                for (const Point& bp : mBorders) {
+                    double dx = vp.getX() - bp.getX();
+                    double dy = vp.getY() - bp.getY();
+                    double d = std::sqrt(dx * dx + dy * dy);
+                    minBorderDist = std::min(minBorderDist, d);
+                }
+
+                // Apply penalty if too close
+                if (minObsDist < 0.3) penalty += 10.0 * (0.5 - minObsDist);
+                if (minBorderDist < 0.3) penalty += 10.0 * (0.5 - minBorderDist);
+
+                std::cout << "Distance to obstacles: " << minObsDist << ", to borders: " << minBorderDist << "\n";
+
+                double ratio = v.radius / (toV + vToGoal + penalty);
+                ranked.emplace_back(ratio, &v);
+            }
+
+            if (ranked.empty()) break;
+            std::sort(ranked.begin(), ranked.end(), [](auto& a, auto& b) { return a.first > b.first; });
+
+            int victimIdx = k % ranked.size();  // sample different ones based on k
+            const Victim* chosen = ranked[victimIdx].second;
+            Point chosenP(chosen->x, chosen->y);
+
+            order.insert(order.end() - 1, chosenP);
+            visited.insert(chosenP);
+            totalValue += chosen->radius;
+
+            totalCost = 0.0;
+            for (size_t i = 0; i + 1 < order.size(); ++i)
+                totalCost += mCosts[{order[i], order[i+1]}];
+            current = chosenP;
+        }
+
+        if (order.size() > 2) twoOptOptimization(order);
+
+        double finalCost = pathCostForOrder(order);
+        if (finalCost <= mTimeLimit)
+            candidates.push_back({order, finalCost, totalValue, totalValue / finalCost});
+    }
+
+    // Sort by score
+    std::sort(candidates.begin(), candidates.end(), [](const PathOption& a, const PathOption& b) {
+        return a.score > b.score;
+    });
+
+    if (attempt >= candidates.size()) {
+        std::cerr << "No path found for attempt #" << attempt << "\n";
+        return {};
+    }
+
+    const auto& selected = candidates[attempt];
+    totalValueCollected = selected.totalValue;
+
+    // Now build the detailed path from mPaths
+    std::vector<Point> fullPath;
+    fullPath.push_back(selected.order[0]);
+
+    for (size_t i = 0; i + 1 < selected.order.size(); ++i) {
+        const auto& segment = mPaths[{selected.order[i], selected.order[i+1]}];
+        for (const auto& pt : segment)
+            if (fullPath.empty() || pt != fullPath.back())
+                fullPath.push_back(pt);
+    }
+
+    return fullPath;
+} */
+
+std::vector<Point> AStarGreedy::run(double& totalValueCollected, int attempt) 
+{
+    std::vector<Point> bestPath = findBestPath(totalValueCollected, attempt);
+
+    /* std::vector<Point> optimizedPath;
+
+    for (size_t i = 0; i < bestPath.size() - 1; ++i) {
+        optimizedPath.push_back(bestPath[i]);
+        Point current = bestPath[i];
+        Point next = bestPath[i + 1];
+        double distance = current.computeEuclideanDistance(next);
+
+        int numIntermediatePoints = 1;
+
+        if(distance > 4.5){
+            numIntermediatePoints = static_cast<int>(distance / 3);
+        }
+        else if (distance > 3 && distance <= 4.5) {
+            numIntermediatePoints = static_cast<int>(distance / 2);
+        }
+                
+        if (numIntermediatePoints > 1) 
+        {
+            double dx = (next.getX() - current.getX()) / (numIntermediatePoints);
+            double dy = (next.getY() - current.getY()) / (numIntermediatePoints);
+
+            for (int j = 1; j <= numIntermediatePoints; ++j) {
+                Point add = Point(current.getX() + j * dx, current.getY() + j * dy);
+                if( next != add ) optimizedPath.emplace_back(add);
+            }
+        }
+    }
+
+    optimizedPath.push_back(bestPath.back()); // Add the last point
+    optimizedPath.push_back(Point{-3,5}); */
+
+    bestPath.push_back(bestPath.back()); // Add the last point
+
+    return bestPath;
+
+}
+
 // osnova
 std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int attempt) {
     totalValueCollected = 0.0;
@@ -205,6 +415,7 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
     }
 
     double directCost = mCosts[{mStart, mGoal}];
+    std::cout << "Direct path cost from start to goal: " << directCost << std::endl;
     if (directCost > mTimeLimit) {
         std::cerr << "Warning: Direct path from start to goal exceeds time limit!" << std::endl;
         return {};
@@ -232,7 +443,7 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
             double costVictimToGoal = mCosts[{vp, mGoal}];
             double costCurrentToGoal = mCosts[{current, mGoal}];
 
-            if ((costToVictim + costVictimToGoal) > costCurrentToGoal) {
+            if ((costToVictim) > costCurrentToGoal) {
                 // Жертва дальше ворот — пропускаем
                 continue;
             }
@@ -251,12 +462,38 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
 
             // Коэффициенты штрафа за поворот
             double alpha = 5.0; // подбирай экспериментально
-            double turnPenalty = alpha * turnAngle;
+            double penalty = alpha * turnAngle;
+
+            std::cout << "Angle penalty for victim at " << vp.toString() << ": " << penalty << "\n";
+
+            // Additional penalty: proximity to obstacles and borders
+            double minObsDist = std::numeric_limits<double>::max();
+            double minBorderDist = std::numeric_limits<double>::max();
+
+            // Check distance to each obstacle
+            for (const Obstacle& obs : mObstacles) {
+                    double d = obs.distanceTo(vp);  
+                    minObsDist = std::min(minObsDist, d);
+            }
+
+                // Check distance to each border point
+            for (const Point& bp : mBorders) {
+                    double dx = vp.getX() - bp.getX();
+                    double dy = vp.getY() - bp.getY();
+                    double d = std::sqrt(dx * dx + dy * dy);
+                    minBorderDist = std::min(minBorderDist, d);
+            }
+
+                // Apply penalty if too close
+            if (minObsDist < 0.4) penalty += 10.0 * (0.4 - minObsDist);
+            if (minBorderDist < 0.6) penalty += 10.0 * (0.6 - minBorderDist);
+
+            std::cout << "Distance to obstacles: " << minObsDist << ", to borders: " << minBorderDist << "\n";
 
             std::cout << "Victim at " << vp.toString() << " | angle: " << turnAngle << " | penalty: " << (alpha * turnAngle) << std::endl;
 
             // Жадный критерий (например, радиус / времени)
-            double ratio = v.radius / (costToVictim + costVictimToGoal + turnPenalty);
+            double ratio = v.radius / (costToVictim + costVictimToGoal + penalty);
             if (ratio > bestRatio) {
                 mTimeLimit -= newTotalCost; // уменьшаем лимит времени на стоимость пути
                 printf("Current time limit after adding the victim: %.2f\n", mTimeLimit);
@@ -299,12 +536,7 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
             continue;
         }
         const std::vector<Point>& segment = mPaths[{order[i], order[i+1]}];
-        /* // Добавляем сегмент, избегая дублирования точек
-        for (size_t j = 1; j < segment.size(); ++j) {
-            if (visitedNodes.insert(segment[j]).second) {
-                fullPath.push_back(segment[j]);
-            }
-        } */
+
         for (size_t j = 0; j < segment.size(); ++j) {
             if (fullPath.empty() || segment[j] != fullPath.back()) {
                 fullPath.push_back(segment[j]);
@@ -332,159 +564,4 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
     return fullPath;
 
 }
-
-/* 
-std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
-    Point current = mStart;
-    std::unordered_set<Point> visitedVictims;
-
-    std::vector<Point> order;  // Порядок посещения ключевых точек
-    order.push_back(mStart);
-
-    totalValueCollected = 0.0;
-    double totalCost = 0.0;
-
-    // Жадный выбор жертв — только ключевые точки, без построения полного пути
-    while (true) {
-        const Victim* bestVictim = nullptr;
-        double bestRatio = -1;
-        Point bestPoint;
-
-        for (const auto& v : mVictims) {
-            Point vp(v.x, v.y);
-            if (visitedVictims.count(vp)) continue;
-
-            double cost = mCosts.count({current, vp}) ? mCosts[{current, vp}] : std::numeric_limits<double>::infinity();
-            double toGoal = mCosts.count({vp, mGoal}) ? mCosts[{vp, mGoal}] : std::numeric_limits<double>::infinity();
-
-            if (totalCost + cost + toGoal > mTimeLimit) continue;
-
-            double ratio = v.radius / (cost + toGoal + totalCost);
-            if (ratio > bestRatio) {
-                bestRatio = ratio;
-                bestVictim = &v;
-                bestPoint = vp;
-            }
-        }
-
-        if (!bestVictim) break;
-
-        double costToBest = mCosts[{current, bestPoint}];
-        totalCost += costToBest;
-        totalValueCollected += bestVictim->radius;
-        visitedVictims.insert(bestPoint);
-        order.push_back(bestPoint);
-        current = bestPoint;
-    }
-
-    order.push_back(mGoal);
-
-    // Оптимизируем порядок посещения жертв
-    twoOptOptimization(order);
-
-    // Строим полный путь из детальных сегментов по оптимизированному порядку
-    std::vector<Point> fullPath;
-    std::unordered_set<Point> visitedNodes;
-    fullPath.push_back(order[0]);
-    visitedNodes.insert(order[0]);
-
-    for (size_t i = 0; i + 1 < order.size(); ++i) {
-        if (!mPaths.count({order[i], order[i+1]})) {
-            std::cerr << "No path between " << order[i].toString() << " and " << order[i+1].toString() << std::endl;
-            continue;
-        }
-        const std::vector<Point>& segment = mPaths[{order[i], order[i+1]}];
-        for (size_t j = 1; j < segment.size(); ++j) {
-            if (visitedNodes.insert(segment[j]).second) {
-                fullPath.push_back(segment[j]);
-            }
-        }
-    }
-
-    return fullPath;
-} */
-
-
-/*
-std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected) {
-    Point current = mStart;
-    std::unordered_set<Point> visitedVictims;
-    //
-    std::unordered_set<Point> visitedNodes;
-
-    std::vector<Point> fullPath;
-    double totalCost = 0.0;
-    totalValueCollected = 0.0;
-
-    fullPath.push_back(current);
-    visitedNodes.insert(current);  // отметим стартовую точку как посещённую
-
-    while (true) {
-        const Victim* bestVictim = nullptr;
-        double bestRatio = -1;
-        double bestCost = 0;
-        Point bestPoint;
-
-        for (const auto& v : mVictims) {
-            Point vp(v.x, v.y);
-            if (visitedVictims.count(vp)) continue;
-
-            double cost = mCosts.count({current, vp}) ? mCosts[{current, vp}] : std::numeric_limits<double>::infinity();
-            double toGoal = mCosts.count({vp, mGoal}) ? mCosts[{vp, mGoal}] : std::numeric_limits<double>::infinity();
-
-            if (totalCost + cost + toGoal > mTimeLimit) continue;
-
-            double ratio = v.radius / (cost + toGoal); // вместо v.radius / cost
-            if (ratio > bestRatio) {
-                bestRatio = ratio;
-                bestVictim = &v;
-                bestPoint = vp;
-                bestCost = cost;
-            }
-        }
-
-        if (!bestVictim) break;
-
-        std::vector<Point> pathToVictim = mPaths[{current, bestPoint}];
-        pathToVictim.erase(pathToVictim.begin());  // avoid duplicating current
-        fullPath.insert(fullPath.end(), pathToVictim.begin(), pathToVictim.end());
-
-        totalCost += bestCost;
-        totalValueCollected += bestVictim->radius;
-        visitedVictims.insert(bestPoint);
-        current = bestPoint;
-    }
-
-    // Add final path to goal
-    //if (mPaths.count({current, mGoal})) {
-    //    std::vector<Point> pathToGoal = mPaths[{current, mGoal}];
-    //    pathToGoal.erase(pathToGoal.begin());
-     //   fullPath.insert(fullPath.end(), pathToGoal.begin(), pathToGoal.end());
-    //}
  
-
-    // Добавить финальный путь до цели
-    if (mPaths.count({current, mGoal})) {
-        std::vector<Point> pathToGoal = mPaths[{current, mGoal}];
-        for (size_t i = 1; i < pathToGoal.size(); ++i) {
-            if (visitedNodes.insert(pathToGoal[i]).second)
-                fullPath.push_back(pathToGoal[i]);
-        }
-    } else {
-        std::cerr << "Warning: No path from " << current.toString() << " to goal. Attempting direct A*...\n";
-        double fallbackCost;
-        auto fallbackPath = aStar(current, mGoal, fallbackCost);
-        if (!fallbackPath.empty()) {
-            for (size_t i = 1; i < fallbackPath.size(); ++i) {
-                if (visitedNodes.insert(fallbackPath[i]).second)
-                    fullPath.push_back(fallbackPath[i]);
-            }
-        } else {
-            std::cerr << "Error: fallback path also failed. Robot may be stuck.\n";
-        }
-    }
-
-    return fullPath; 
-}
-
-*/

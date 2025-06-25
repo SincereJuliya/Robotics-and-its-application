@@ -17,10 +17,12 @@ public:
     void convertToSquare();
     obstacleType getType();
     double getMinDist();
+    bool isTooCloseToObstacle(const Point& p, double minDistance) const;
     bool isInsideObstacle(Point p) const;
     std::vector<double> getAbscissas();
     bool belongsToObstacle(Point p1, Point p2, Point p3, Point p4, bool extr);
     std::vector<Point> isIntersecting(double x);
+    double distanceTo(const Point& p) const;
 };
 
 #endif

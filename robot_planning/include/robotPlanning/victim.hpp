@@ -45,6 +45,7 @@ struct Victim : public VictimDefault {
     this->yaw = 0.0;
     this->type = VictimDefault_TYPE::VICTIM_CYLINDER;
   }
+  
 };
 
 
