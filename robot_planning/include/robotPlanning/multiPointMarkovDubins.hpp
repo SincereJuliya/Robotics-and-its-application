@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "point.hpp"
+#include "obstacles.hpp"
 
 struct arcVar{
   double x;
@@ -22,6 +23,37 @@ struct tripleDubinsCurve{
   dubinsCurve a2;
   dubinsCurve a3;
   double L;
+
+  double totalLength() const {
+    return a1.L + a2.L + a3.L;
+  }
+
+  static Point integrate(double x0, double y0, double th0, double s, double k) {
+      if (std::abs(k) < 1e-6) {
+          return Point(x0 + s * cos(th0), y0 + s * sin(th0));
+      } else {
+          double R = 1.0 / k;
+          double dtheta = k * s;
+          double cx = x0 - R * sin(th0);
+          double cy = y0 + R * cos(th0);
+          double x = cx + R * sin(th0 + dtheta);
+          double y = cy - R * cos(th0 + dtheta);
+          return Point(x, y);
+      }
+  }
+
+  Point evaluate(double s) const {
+      if (s <= a1.L) {
+          return integrate(a1.i.x, a1.i.y, a1.i.th, s, a1.k);
+      } else if (s <= a1.L + a2.L) {
+          return integrate(a2.i.x, a2.i.y, a2.i.th, s - a1.L, a2.k);
+      } else if (s <= a1.L + a2.L + a3.L) {
+          return integrate(a3.i.x, a3.i.y, a3.i.th, s - a1.L - a2.L, a3.k);
+      } else {
+          return Point(a3.f.x, a3.f.y);  // Clamp to final endpoint
+      }
+  }
+
 };
 
 struct toStandard{
@@ -65,7 +97,13 @@ double rangeSymm(double angle);
 
 double sinc(double t);
 
-curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf/* , double kmax */);
+bool isTooCloseToBorder(const Point& p, double margin, const std::vector<Point>& mBorders);
+
+curve dubinsShortestPath(double x0, double y0, double th0,
+                                 double xf, double yf, double thf,
+                                 const std::vector<Obstacle>& obstacles,
+                                 double sampleStep, 
+                                 const std::vector<Point>& borders);
 
 bool check(double s1, double k0, double s2, double k1, double s3, double k2, double th0, double thf);
 
@@ -85,8 +123,10 @@ void plotArc(dubinsCurve arc, std::vector<arcVar>& plt);
 
 std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv);
 
-std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m);
+bool isPathCollisionFree(const curve& dubinsCurve, const std::vector<Obstacle>& obstacles);
 
-std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf);
+std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m, const std::vector<Obstacle>& obstacles, const std::vector<Point>& borders);
+
+std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf, int k, int m, std::vector<Obstacle>& obstacles, std::vector<Point>& borders);
 
 #endif

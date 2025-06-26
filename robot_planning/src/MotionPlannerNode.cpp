@@ -4,13 +4,37 @@
 #include <geometry_msgs/msg/pose.hpp>
 #include "../include/robotPlanning/point.hpp"
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
+#include "obstacles_msgs/msg/obstacle_array_msg.hpp"
+#include "../include/robotPlanning/obstacles.hpp"
 #include <tf2/LinearMath/Quaternion.h>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp> // Для tf2::toMsg / fromMsg
+#include <tf2/utils.h>                         // Для tf2::getYaw
+
 
 class MotionPlannerNode : public rclcpp::Node {
 public:
-    MotionPlannerNode() : Node("motionPlannerNode") {
-        // Use a lambda to bind the service callback
+    MotionPlannerNode() : Node("motionPlannerNode") 
+    {    
+        auto qos = get_transient_qos();
+
+        /* ---------------------------------------------------------------------------------------- */
+        /*                                      subscribers                                         */
+        /* ---------------------------------------------------------------------------------------- */
+        obstacles_sub_ = this->create_subscription<obstacles_msgs::msg::ObstacleArrayMsg>(
+            "/obstacles", qos,
+            std::bind(&MotionPlannerNode::obstaclesCallback, this, std::placeholders::_1));
+
+        borders_sub_ = this->create_subscription<geometry_msgs::msg::PolygonStamped>(
+            "/borders", qos,
+            std::bind(&MotionPlannerNode::bordersCallback, this, std::placeholders::_1));
+
+        init_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+            "/shelfino/amcl_pose", qos,
+            std::bind(&MotionPlannerNode::startCallback, this, std::placeholders::_1));
+
+        /* ---------------------------------------------------------------------------------------- */
+        /*                                      service                                             */
+        /* ---------------------------------------------------------------------------------------- */
         service_ = this->create_service<motion_planner_msgs::srv::ValidatePath>(
             "validate_path", 
             [this](
@@ -20,53 +44,178 @@ public:
             }
         );
 
-        path_publisher_ = this->create_publisher<geometry_msgs::msg::PoseArray>("dubins_plan", 10);
+        /* ---------------------------------------------------------------------------------------- */
+        /*                                      publisher                                           */
+        /* ---------------------------------------------------------------------------------------- */
+        path_publisher_ = this->create_publisher<geometry_msgs::msg::PoseArray>("dubins_plan", qos);
 
-        RCLCPP_INFO(this->get_logger(), "MotionPlanner service is ready.");
+        RCLCPP_INFO(this->get_logger(), "MotionPlannerNode is ready.");
     }
 
 private:
-    // Method to convert PoseArray to a vector of Points
-    std::vector<Point> convertPoseArrayToPoints(const geometry_msgs::msg::PoseArray& pose_array_msg) {
-        std::vector<Point> points;
+    std::vector<Obstacle> obstacles_;
+    std::vector<Point> borders_;
+    std::vector<Point> pathFromMsg;
+    std::vector<arcVar> dubinsPath;
+    double th_start = 0.0;
+    double th_goal_ = 0.0;  // Current angle of the robot, initialized to 0
 
-        for (const auto& pose : pose_array_msg.poses) {
-            // Extract position and create Point objects
-            points.push_back(Point((double)(pose.position.x), (double)(pose.position.y)));
+
+    bool data_generated_ = false;
+    bool path_received_ = false;
+    bool obstacles_received_ = false;
+    bool borders_received_ = false;
+    bool start_received_ = false;
+
+    rclcpp::Subscription<obstacles_msgs::msg::ObstacleArrayMsg>::SharedPtr obstacles_sub_;
+    rclcpp::Subscription<geometry_msgs::msg::PolygonStamped>::SharedPtr borders_sub_;
+    rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr init_subscriber_;
+    rclcpp::Service<motion_planner_msgs::srv::ValidatePath>::SharedPtr service_;
+    rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr path_publisher_;
+
+    rclcpp::QoS get_transient_qos(size_t depth = 10) {
+        rclcpp::QoS qos(depth);
+        qos.reliable();
+        qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
+        return qos;
+    }
+
+    /* ------------------------------------------------------------------------------------------ */
+    /*                                      callbacks                                             */
+    /* ------------------------------------------------------------------------------------------ */
+    void obstaclesCallback(const obstacles_msgs::msg::ObstacleArrayMsg::SharedPtr msg) {
+        obstacles_.clear();
+        for (const auto &obs_msg : msg->obstacles) {
+            obstacles_.emplace_back(obs_msg.radius,
+                                    [&]() {
+                                        std::vector<Point> pts;
+                                        for (auto &p : obs_msg.polygon.points)
+                                            pts.emplace_back(p.x, p.y);
+                                        return pts;
+                                    }());
         }
+        obstacles_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received %zu obstacles.", obstacles_.size());
+        attemptGenerate();
+    }
 
-        return points;
+    void bordersCallback(const geometry_msgs::msg::PolygonStamped::SharedPtr msg) {
+        borders_.clear();
+        for (const auto &pt : msg->polygon.points) {
+            borders_.emplace_back(pt.x, pt.y);
+        }
+        borders_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received borders with %zu points.", borders_.size());
+        attemptGenerate();
+    }
+
+    void startCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg) {
+        if(start_received_) {
+            RCLCPP_WARN(this->get_logger(), "Start pose already received, ignoring new message.");
+            return;  // Ignore if start pose is already set
+        }
+        th_start = tf2::getYaw(msg->pose.pose.orientation);
+        start_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received start pose: (%.2f, %.2f) with yaw %.2f", 
+                    msg->pose.pose.position.x, msg->pose.pose.position.y, th_start);
+        attemptGenerate();  // Start path generation attempt
     }
 
     void validatePathCallback(
                                const std::shared_ptr<motion_planner_msgs::srv::ValidatePath::Request> request,
-                               std::shared_ptr<motion_planner_msgs::srv::ValidatePath::Response> response) {
-
+                               std::shared_ptr<motion_planner_msgs::srv::ValidatePath::Response> response) 
+    {
+        pathFromMsg.clear();
         pathFromMsg = convertPoseArrayToPoints(request->path);
+        path_received_ = true;
         RCLCPP_INFO(this->get_logger(), "Received path with %zu points.", pathFromMsg.size());
-
-        // here should be the process of generating the dubins path and so on 
-        dubinsPath = multiPointMarvkovDubinsPlan(pathFromMsg, 0,0);
-        publishDubinsPath();
+        dubinsPath.clear();
         
-        // Validate the path (this is just an example, implement your actual validation logic here)
-        if (request->path.poses.empty()) {
+        attemptGenerate();
+
+        if (request->path.poses.empty()) 
+        {
+            RCLCPP_WARN(this->get_logger(), "Received empty path, cannot validate.");
             response->valid = false;
-        } else {
-            // Assume the path is valid for now
-            response->valid = true;
-            publishDubinsPath();  // Call the method to publish the Dubins path
+            path_received_ = false;
+
+        } 
+        else 
+        {
+            if(dubinsPath.empty()) 
+            {
+                RCLCPP_WARN(this->get_logger(), "Dubins path is empty, cannot validate.");
+                response->valid = false;
+                data_generated_ = false;
+                path_received_ = false;
+
+            } else{
+                RCLCPP_INFO(this->get_logger(), "Validating Dubins path with %zu arcs.", dubinsPath.size());
+                response->valid = true;
+                data_generated_ = true;
+                publishDubinsPath();
+
+            }
+
         }
 
         RCLCPP_INFO(this->get_logger(), "Path validation result: %s", response->valid ? "valid" : "invalid");
+
     }
 
-    void publishDubinsPath() {
+    /* ------------------------------------------------------------------------------------------ */
+    /*                               attempt to generate                                          */
+    /* ------------------------------------------------------------------------------------------ */
+    void attemptGenerate() 
+    {
+        if ( path_received_ && obstacles_received_ && borders_received_ && start_received_ && !data_generated_ ) 
+        {
+            RCLCPP_INFO(get_logger(), "All required data received; generating Dubins...");
+            
+            //print th
+            RCLCPP_INFO(get_logger(), "Start angle: %.2f, Goal angle: %.2f", th_start, th_goal_);
+            dubinsPath = multiPointMarvkovDubinsPlan(pathFromMsg, th_start, th_goal_, 16, 16, obstacles_, borders_);
+            data_generated_ = true;
+        }
+        else 
+        {
+            RCLCPP_INFO(get_logger(), "Waiting for all data to be received:",
+                path_received_ ? "yes" : "no",
+                obstacles_received_ ? "yes" : "no",
+                borders_received_ ? "yes" : "no");
+        }
+    }
+
+    /* ------------------------------------------------------------------------------------------ */
+    /*                               convert PoseArray to Points                                  */
+    /* ------------------------------------------------------------------------------------------ */
+    // Method to convert PoseArray to a vector of Points
+    std::vector<Point> convertPoseArrayToPoints(const geometry_msgs::msg::PoseArray& pose_array_msg) {
+        std::vector<Point> points;
+        for (const auto& pose : pose_array_msg.poses) {
+            points.push_back(Point((double)(pose.position.x), (double)(pose.position.y)));
+        }
+        
+         if (!pose_array_msg.poses.empty()) {
+            th_goal_ = tf2::getYaw(pose_array_msg.poses.back().orientation);  // Yaw from last pose
+        } else {
+            th_goal_ = 0.0; // fallback if empty
+        }
+        return points;
+
+    }
+
+    /* ------------------------------------------------------------------------------------------ */
+    /*                               publish Dubins Path                                          */
+    /* ------------------------------------------------------------------------------------------ */
+    void publishDubinsPath() 
+    {
         geometry_msgs::msg::PoseArray pose_array_msg;
         pose_array_msg.header.frame_id = "map";
         pose_array_msg.header.stamp = this->get_clock()->now();
 
-        for (const auto& arc : dubinsPath) {
+        for (const auto& arc : dubinsPath) 
+        {
             geometry_msgs::msg::Pose pose;
             pose.position.x = arc.x;
             pose.position.y = arc.y;
@@ -74,7 +223,7 @@ private:
 
             // Convert heading (yaw) to quaternion
             tf2::Quaternion q;
-            q.setRPY(0, 0, arc.th);  // Roll=0, Pitch=0, Yaw=theta
+            q.setRPY(0, 0, arc.th);     // Roll=0, Pitch=0, Yaw=theta
             pose.orientation.x = q.x();
             pose.orientation.y = q.y();
             pose.orientation.z = q.z();
@@ -85,41 +234,8 @@ private:
 
         path_publisher_->publish(pose_array_msg);
         RCLCPP_INFO(this->get_logger(), "Published Dubins path with %zu poses.", dubinsPath.size());
+
     }
-
-
-    // Method for FollowPathClass 
-    /* // Method to convert PoseArray to a vector of arcVar objects
-    std::vector<arcVar> convertPoseArrayToArcVars(const geometry_msgs::msg::PoseArray::SharedPtr& pose_array_msg) {
-        std::vector<arcVar> arc_vars;
-
-        for (const auto& pose : pose_array_msg->poses) {
-            // Extract position (x, y, z) from the Pose
-            double x = pose.position.x;
-            double y = pose.position.y;
-            double z = pose.position.z;
-
-            // Extract orientation (quaternion)
-            tf2::Quaternion q(pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w);
-            
-            // Convert quaternion to Euler angles (roll, pitch, yaw)
-            double roll, pitch, yaw;
-            tf2::Matrix3x3(q).getRPY(roll, pitch, yaw);
-
-            // Use yaw (rotation around Z-axis) as heading (th)
-            double th = yaw;
-
-            // Create arcVar and add to vector
-            arc_vars.push_back(arcVar(x, y, th));
-        }
-
-        return arc_vars;
-    } */
-
-    rclcpp::Service<motion_planner_msgs::srv::ValidatePath>::SharedPtr service_;
-    rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr path_publisher_;
-    std::vector<Point> pathFromMsg;
-    std::vector<arcVar> dubinsPath;
 
 };
 

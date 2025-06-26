@@ -23,6 +23,13 @@ public:
     void removeVertex(Point vertex);
     std::vector<Point> getVertices() const;
     std::vector<Point> getEdge(Point vertex);
+    //find if the graph contains a point
+    bool containsPoint(const Point& point) const;
+
+
+    bool containsVertex(const Point& p) const;
+    bool edgeExists(const Point& from, const Point& to) const;
+
 
     void clear();
     // Convert Graph to ROS 2 message

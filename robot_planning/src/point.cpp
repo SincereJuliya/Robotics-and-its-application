@@ -33,6 +33,14 @@ bool Point::operator==(const Point& p) const {
     return std::abs(x - p.x) < 1e-6 && std::abs(y - p.y) < 1e-6;
 }
 
+bool Point::operator!=(const Point& p) const {
+    return !(*this == p);
+}
+
 std::ostream& operator <<(std::ostream& os, const Point& p){
     return os << "(" << p.getX() << "," << p.getY() << ")";
+}
+
+std::string Point::toString() const {
+    return std::to_string(int(std::round(x))) + "," + std::to_string(int(std::round(y)));
 }

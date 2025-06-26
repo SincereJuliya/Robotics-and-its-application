@@ -73,8 +73,51 @@ double Obstacle::getMinDist(){
     return 2*radius;
 }
 
+bool Obstacle::isTooCloseToObstacle(const Point& p, double minDistance) const {
+    double buffer = minDistance;
+    //std::cout << "Checking if point " << p.toString() << " is too close to obstacle with type " << type << "\n";
+    if (type == CIRCLE) {
+        double dx = p.getX() - vertices[0].getX();  // center
+        double dy = p.getY() - vertices[0].getY();
+        double distSq = dx * dx + dy * dy;
+        double safeRadius = radius + buffer;
+        return distSq <= safeRadius * safeRadius;
+        
+    }
+
+    if (type == BOX) {
+        // Compute minimum distance from point to box edges or corners
+        double px = p.getX(), py = p.getY();
+
+        // Find box bounds (assumes 4 vertices, aligned or convex)
+        double minX = vertices[0].getX(), maxX = vertices[0].getX();
+        double minY = vertices[0].getY(), maxY = vertices[0].getY();
+        for (const Point& v : vertices) {
+            minX = std::min(minX, v.getX());
+            maxX = std::max(maxX, v.getX());
+            minY = std::min(minY, v.getY());
+            maxY = std::max(maxY, v.getY());
+        }
+
+        // Expand the box by buffer (safe distance)
+        minX -= buffer;
+        maxX += buffer;
+        minY -= buffer;
+        maxY += buffer;
+
+        // If point lies within the expanded box, it's too close
+        return px >= minX && px <= maxX && py >= minY && py <= maxY;
+    }
+
+    return false;
+}
+
+
 bool Obstacle::isInsideObstacle(Point p) const{
     std::vector<Point> vertices_ = vertices;
+
+    double buffer = 0.25;
+
     if(type==BOX){
         int cnt=0;
         vertices_.push_back(vertices_[0]);
@@ -98,7 +141,7 @@ bool Obstacle::isInsideObstacle(Point p) const{
             double err;
             //with the following check, check if the point lains on the line that connects two point and in case it was check if inside the range of x and y
             err = abs((((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))*(p.getX()-p1.getX()))+p1.getY()- p.getY());
-            if(err<0.0028){ //still need to check if inside the range of the variables
+            if(err<buffer){ //still need to check if inside the range of the variables
                 if((p.getY()<p1.getY())!=(p.getY()<p2.getY())&&(p.getX()<p1.getX())!=(p.getX()<p2.getX())){
                     vertices_.pop_back();
                     return true;
@@ -118,7 +161,7 @@ bool Obstacle::isInsideObstacle(Point p) const{
         vertices_.pop_back();
         return ((cnt%2)==1);
     }
-    return ((pow(p.getX()-vertices_[0].getX(),2)+pow(p.getY()-vertices_[0].getY(),2))<=pow(radius,2)); 
+    return ((pow(p.getX()-vertices_[0].getX(),2)+pow(p.getY()-vertices_[0].getY(),2))<=(radius + buffer) * (radius + buffer));
     
 }
 
@@ -165,6 +208,25 @@ std::vector<Point> Obstacle::isIntersecting(double x){
         vertices.pop_back();
         return intersections;
 }
+
+double Obstacle::distanceTo(const Point& p) const {
+    if (type == CIRCLE) {
+        Point center = vertices[0];
+        double dist = sqrt(pow(p.getX() - center.getX(), 2) + pow(p.getY() - center.getY(), 2));
+        return std::max(0.0, dist - radius);
+    } else if (type == BOX) {
+        double minX = vertices[0].getX();
+        double maxX = vertices[2].getX();
+        double minY = vertices[0].getY();
+        double maxY = vertices[2].getY();
+
+        double dx = std::max({minX - p.getX(), 0.0, p.getX() - maxX});
+        double dy = std::max({minY - p.getY(), 0.0, p.getY() - maxY});
+        return sqrt(dx * dx + dy * dy);
+    }
+    return std::numeric_limits<double>::infinity();
+}
+
 
 /* int main(int argc, char** argv){    
     std::vector<Point> vec1 = {Point{-1.22492, -1.36989}, Point{-1.80755, -0.869648}, Point{-2.1845, -1.30868}, Point{-1.60187, -1.80892}};
