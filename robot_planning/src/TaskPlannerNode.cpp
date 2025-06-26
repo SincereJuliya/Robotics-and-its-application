@@ -18,6 +18,10 @@
 #include "../include/robotPlanning/victim.hpp"
 
 #include "motion_planner_msgs/srv/validate_path.hpp"
+#include <tf2/LinearMath/Quaternion.h>         // Для tf2::Quaternion
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp> // Для tf2::toMsg / fromMsg
+#include <tf2/utils.h>                         // Для tf2::getYaw
+
 
 /* ---------------------------------------------------------------------------------------- */
 /*          node for task planning - for the A* algorithm to find a path in a graph         */
@@ -68,11 +72,15 @@ private:
     std::unique_ptr<IPathPlanner> planner_;
 
     std::vector<Point> gates_;
+    double th_current_goal_ = 0.0;  // Current angle of the robot, initialized to 0
+    std::vector<double> th_gates_;
+
     int attempt_count_ = 0;  // Track the number of attempts to generate a path
     Point start;
     std::vector<Victim> victims_;  // Store victim positions
     std::vector<Obstacle> obstacles_;  // Store obstacle positions
     std::vector<Point> borders_;
+    std::vector<std::pair<Point, Point>> failedSegments_;
 
     bool start_received_ = false;
     bool gates_received_ = false;
@@ -113,6 +121,7 @@ private:
         gates_.clear();
         for (const auto& pose : msg->poses) {
             gates_.emplace_back(pose.position.x, pose.position.y);
+            th_gates_.push_back(tf2::getYaw(pose.orientation));
         }
         gates_received_ = true;
         RCLCPP_INFO(this->get_logger(), "Received %zu gates.", gates_.size());
@@ -216,7 +225,7 @@ private:
             return;
         }
 
-        if (attempt_count_ > 6) {
+        if (attempt_count_ > 20) {
             RCLCPP_ERROR(this->get_logger(), "Exceeded max retry attempts.");
             return;
         }
@@ -244,6 +253,23 @@ private:
         validatePath(path);  // Use the async version with callback
     }
 
+    void processFailedSegments(AStarGreedy& planner) {
+        double penaltyValue = 1000.0;  // Large penalty to avoid edges with collisions
+
+        for (const auto& segment : failedSegments_) {
+            const Point& p1 = segment.first;
+            const Point& p2 = segment.second;
+
+            planner.addEdgePenaltyClosest(p1, p2, penaltyValue);
+
+            RCLCPP_INFO(this->get_logger(), "Added penalty for edge between (%.5f, %.5f) and (%.5f, %.5f)",
+                p1.getX(), p1.getY(), p2.getX(), p2.getY());
+        }
+
+        failedSegments_.clear();  // Clear after processing
+    }
+
+
     /* ------------------------------------------------------------------------------------------ */
     /*                          generate the path using A* Greedy algorithm                       */
     /* ------------------------------------------------------------------------------------------ */
@@ -258,7 +284,8 @@ private:
             RCLCPP_INFO(this->get_logger(), "Start point integrated into the graph.");
 
             Point goal = attempt <= 2 ? gates_.front() : gates_.back();
-            connectVisibleEdges(graph, goal);
+            th_current_goal_ = attempt <= 2 ? th_gates_.front() : th_gates_.back();
+            connectVisibleEdges(graph, goal); 
             RCLCPP_INFO(this->get_logger(), "Goal point integrated into the graph.");
 
             integrateVictimsIntoGraph(graph, victims_);
@@ -272,9 +299,18 @@ private:
 
             //
             // thats a topic
-            double timeLimit = ( 60 * std::pow(0.8, attempt - stx) );
+            double timeLimit = 60;
 
             AStarGreedy planner(graph, victims_, start, goal, timeLimit, obstacles_, borders_);
+
+            //print failed segments if any
+            if (!failedSegments_.empty()) {
+                processFailedSegments(planner);
+                planner.buildMetaGraph();
+                RCLCPP_WARN(this->get_logger(), "NOT Processing %zu failed segments from previous attempts.", failedSegments_.size());
+
+            }
+
             RCLCPP_INFO(this->get_logger(), "A* Greedy planner initialized with time limit: %.2f seconds", timeLimit);
 
             double valueCollected = 0.0;
@@ -314,6 +350,49 @@ private:
         auto request = std::make_shared<motion_planner_msgs::srv::ValidatePath::Request>();
         request->path = convertToPathMessage(path);
 
+        auto future_result = motion_planner_client_->async_send_request(request,
+            [this, path](rclcpp::Client<motion_planner_msgs::srv::ValidatePath>::SharedFuture result) 
+            {
+                auto res = result.get();
+
+                if (res->valid) 
+                {
+                    RCLCPP_INFO(this->get_logger(), "Generated path is valid.");
+                    data_generated_ = true;
+                    path_validated_ = true;
+                } 
+                else 
+                {
+                    RCLCPP_WARN(this->get_logger(), "Generated path is invalid (attempt %d)", attempt_count_);
+                    data_generated_ = false;
+
+                    // Print failed segments if any
+                    if (!res->failed_segments.empty()) {
+                        for (const auto& seg : res->failed_segments) {
+                            RCLCPP_WARN(this->get_logger(), "Failed segment: Start (%.5f, %.5f), End (%.5f, %.5f)", 
+                                seg.start.x, seg.start.y, seg.end.x, seg.end.y);
+                            failedSegments_.emplace_back(Point(seg.start.x, seg.start.y), Point(seg.end.x, seg.end.y));
+                        }
+                    }
+
+                    if (attempt_count_ < 20) 
+                    {
+                        RCLCPP_INFO(this->get_logger(), "Retrying...");
+                        attempt_count_ += 1;
+                        attemptGenerate();  // triggers a new path generation
+                    } 
+                    else 
+                    {
+                        RCLCPP_ERROR(this->get_logger(), "Failed to generate a valid path after 20 attempts.");
+                    }
+                }
+            }
+        );
+
+
+        /* auto request = std::make_shared<motion_planner_msgs::srv::ValidatePath::Request>();
+        request->path = convertToPathMessage(path);
+
         // Send the request asynchronously and handle the response in the callback
         auto future_result = motion_planner_client_->async_send_request(request,
             [this, path](rclcpp::Client<motion_planner_msgs::srv::ValidatePath>::SharedFuture result) 
@@ -328,7 +407,7 @@ private:
                 else {
                     RCLCPP_WARN(this->get_logger(), "Generated path is invalid (attempt %d)", attempt_count_);
                     data_generated_ = false;
-                    if (attempt_count_ < 6) 
+                    if (attempt_count_ < 20) 
                     {
                         RCLCPP_INFO(this->get_logger(), "Retrying...");
                         attempt_count_ += 1;
@@ -345,7 +424,7 @@ private:
 
             }
 
-        );
+        ); */
 
     }
 
@@ -449,11 +528,18 @@ private:
             pose.position.x = p.getX();
             pose.position.y = p.getY();
             pose.position.z = 0.0;
-            pose.orientation.w = 1.0;
+
+            // Convert yaw angle to quaternion
+            double yaw = th_current_goal_; // radians
+            tf2::Quaternion q;
+            q.setRPY(0, 0, yaw);  // Yaw-only rotation
+            pose.orientation = tf2::toMsg(q); // Convert to geometry_msgs::Quaternion
+
             msg.poses.push_back(pose);
         }
         return msg;
     }
+
 };
 
 int main(int argc, char* argv[]) {

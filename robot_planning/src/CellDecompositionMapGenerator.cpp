@@ -165,10 +165,10 @@ double CellDecompositionMapGenerator::pointDistance(const Point& a, const Point&
 
 
 void CellDecompositionMapGenerator::cellDecomposition() {
-    // Step 1: Reduce the number of unique abscissas
+     // Step 1: Reduce the number of unique abscissas
     auto allXs = getObstaclesAndBordersUniqueAbscissas();
     std::vector<double> uniqueXs;
-    double minXGap = 3.0; // Minimum distance between vertical lines
+    double minXGap = 0.3; // Minimum distance between vertical lines
     for (double x : allXs) {
         if (uniqueXs.empty() || std::abs(x - uniqueXs.back()) > minXGap) {
             uniqueXs.push_back(x);
@@ -209,12 +209,12 @@ void CellDecompositionMapGenerator::cellDecomposition() {
         if (i < uniqueXs.size() - 1) {
             for (size_t j = 0; j + 1 < pts.size(); ++j) {
                 // Filter: skip if segment is too short
-                if (pointDistance(pts[j],pts[j + 1]) < 3.0) continue;
+                if (pointDistance(pts[j],pts[j + 1]) < 1.5) continue;
 
                 auto mid = getLineCentralPoint(pts[j], pts[j + 1]);
 
                 // Filter: skip if mid is too close to previous
-                if (!rightPts.empty() && pointDistance(mid, rightPts.back()) < 2.0) continue;
+                if (!rightPts.empty() && pointDistance(mid, rightPts.back()) < 1.5) continue;
 
                 if (isInsideObstacles(mid)) continue;
                 std::vector<Point> nearestPts = nearestByYOffset(leftPts, mid);
@@ -260,5 +260,61 @@ void CellDecompositionMapGenerator::cellDecomposition() {
         mapLeft = mapRight;
         rightPts.clear();
         mapRight.clear();
+    } 
+   /* auto uniqueXs = getObstaclesAndBordersUniqueAbscissas();
+    std::vector<Point> leftPts, rightPts;
+    std::map<Point, std::pair<Point, Point>> mapLeft, mapRight;
+
+    auto pts = getPointsAtGivenAbscissa(uniqueXs.front());
+    if (pts.size() == 1) {
+        mapLeft[pts[0]] = {pts[0], pts[0]};
+        leftPts.push_back(pts[0]);
+    } else {
+        auto center = getLineCentralPoint(pts[0], pts[1]);
+        mapLeft[center] = {pts[0], pts[1]};
+        leftPts.push_back(center);
     }
+
+    for (size_t i = 1; i < uniqueXs.size(); ++i) {
+        double x = uniqueXs[i];
+        pts = getPointsAtGivenAbscissa(x);
+        if (i < uniqueXs.size() - 1) {
+            auto ib = getIntersectionWithBorders(x);
+            pts.insert(pts.end(), ib.begin(), ib.end());
+        }
+        auto io = getIntersectionWithObstacles(x);
+        pts.insert(pts.end(), io.begin(), io.end());
+        std::sort(pts.begin(), pts.end());
+        pts.erase(std::unique(pts.begin(), pts.end()), pts.end());
+
+        if (i < uniqueXs.size() - 1) {
+            for (size_t j = 0; j + 1 < pts.size(); ++j) {
+                auto mid = getLineCentralPoint(pts[j], pts[j + 1]);
+                if (isInsideObstacles(mid)) continue;
+                Point nearest = nearestByYOffset(leftPts, mid).front();
+                Point area = getAreaCentralPoint({mapLeft[nearest].first,
+                                                mapLeft[nearest].second,
+                                                pts[j], pts[j+1]});
+                g_.addVertice(area);
+                if (i > 1) g_.addEdge(nearest, area);
+                if (mapRight.find(mid) == mapRight.end()) {
+                    mapRight[mid] = {pts[j], pts[j+1]};
+                    rightPts.push_back(mid);
+                    g_.addVertice(mid);
+                }
+                g_.addEdge(area, mid);
+            }
+        } else {
+            for (auto &lp : leftPts) {
+                auto pr = mapLeft[lp];
+                auto area = getAreaCentralPoint({pr.first, pr.second, pts.front(), pts.back()});
+                g_.addVertice(area);
+                if (!isInsideObstacles(lp)) g_.addEdge(area, lp);
+            }
+        }
+        leftPts = rightPts;
+        mapLeft = mapRight;
+        rightPts.clear();
+        mapRight.clear();
+    } */
 }

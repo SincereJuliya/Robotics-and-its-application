@@ -21,7 +21,7 @@ void Point::setX(double _x){
 void Point::setY(double _y){
     y=_y;
 }
-double Point::computeEuclideanDistance(const Point& p){
+double Point::computeEuclideanDistance(const Point& p) const{
     return (sqrt(pow((p.x-x),2)+pow((p.y-y),2)));
 }
 bool Point::operator <(const Point& p )const{

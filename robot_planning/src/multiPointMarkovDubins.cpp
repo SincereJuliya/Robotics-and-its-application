@@ -2,9 +2,17 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <algorithm>
+
 #include <cassert>
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 #include "../include/robotPlanning/obstacles.hpp"
+
+const float minDistObs = 0.3f; // Minimum distance to obstacles
+const float minDistBorder = 0.35f; // Minimum distance to borders
+
+std::vector<std::pair<Point, Point>> failedSegments_;
+
 
 int ksigns [6][3] = {
   { 1, 0, 1},  //LSL
@@ -340,7 +348,7 @@ curve dubinsShortestPath(double x0, double y0, double th0,
         bool collides = false;
         for (const Point& p : samples) {
             for (const Obstacle& obs : obstacles) {
-                if (obs.isInsideObstacle(p)  || obs.isTooCloseToObstacle(p, 0.6f) || isTooCloseToBorder(p, 0.6f, borders)) {
+                if (obs.isInsideObstacle(p)  || obs.isTooCloseToObstacle(p, minDistObs) || isTooCloseToBorder(p, minDistBorder, borders)) {
                     collides = true;
                     break;
                 }
@@ -383,10 +391,10 @@ curve dubinsShortestPath(double x0, double y0, double th0,
     res.curvType = pidx;
     res.values = dubinsRes;
     return res;
-}
+} 
  
 
-/*
+/* 
 curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf){
   toStandard var = scaleToStandard(x0, y0, th0, xf, yf, thf, Kmax);
   fromStandard ret;
@@ -435,7 +443,7 @@ void plotArc(dubinsCurve arc, std::vector<arcVar>& plt){
       s = arc.L/nPts*i;
       plt.push_back(circLine(s, arc.i.x, arc.i.y, arc.i.th, arc.k));
   }
-}
+} 
 
 std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv){
   std::vector<arcVar> plot;
@@ -453,7 +461,7 @@ bool isPathCollisionFree(std::vector<arcVar>& dubinsCurve, const std::vector<Obs
         {
             // Check if the point is inside any obstacle
 
-            if (obs.isInsideObstacle(Point{arc.x, arc.y}) || obs.isTooCloseToObstacle(Point{arc.x, arc.y}, 0.3f)) {
+            if (obs.isInsideObstacle(Point{arc.x, arc.y}) || obs.isTooCloseToObstacle(Point{arc.x, arc.y}, minDistObs)) {
                 std::cout << "Collision detected at point (" << arc.x << ", " << arc.y << "}\n";
                 return false;  // Collision detected
             }
@@ -665,6 +673,10 @@ std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double
     return ths;
 }
 
+std::vector<std::pair<Point, Point>> getFailedSegments() {
+    return failedSegments_;
+}
+
 //need to check if the path is colliding with any object with at +/- distance (2/3 width of the robot)
 std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf, int k, int m, std::vector<Obstacle>& obstacles, std::vector<Point>& borders){
   std::vector<arcVar> plan;
@@ -680,13 +692,40 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double
 
   for(std::vector<Point>::size_type i=0; i<points.size()-2; i++)
   {
-    dubinsPortion = dubinsShortestPath(points[i].getX(), points[i].getY(), optAngles[i], points[i+1].getX(), points[i+1].getY(), optAngles[i+1], obstacles, 0.2, borders);
+    dubinsPortion = dubinsShortestPath(points[i].getX(), points[i].getY(), optAngles[i], points[i+1].getX(), points[i+1].getY(), optAngles[i+1],obstacles, 0.2, borders);
 
     planTmp = plotDubins(dubinsPortion.values);
 
     for(long unsigned int j =0; j<planTmp.size(); j++)
     {
       plan.push_back(planTmp[j]);
+      
+      for(auto& obs : obstacles)
+      {
+        if(obs.isInsideObstacle(Point{planTmp[j].x, planTmp[j].y}) || obs.isTooCloseToObstacle(Point{planTmp[j].x, planTmp[j].y}, minDistObs) || isTooCloseToBorder(Point{planTmp[j].x, planTmp[j].y}, minDistBorder, borders))
+        {
+          std::cout << "Collision detected at point (" << planTmp[j].x << ", " << planTmp[j].y << ")\n";
+          std::cout << "Segment start: (" << points[i].getX() << ", " << points[i].getY() << ")\n";
+          std::cout << "Segment end:   (" << points[i+1].getX() << ", " << points[i+1].getY() << ")\n";
+
+          // im taking the start and end point of the segment
+          Point s1 = points[i];
+          Point s2 = points[i + 1];
+          //check if i already took them before
+          bool alreadyExists = std::any_of(failedSegments_.begin(), failedSegments_.end(),
+            [&](const std::pair<Point, Point>& seg) {
+            return (seg.first == s1 && seg.second == s2) || (seg.first == s2 && seg.second == s1);
+          });
+          // then add
+          if (!alreadyExists) {
+            failedSegments_.emplace_back(s1, s2);
+          }
+
+          return std::vector<arcVar>{}; // Return empty vector on collision
+
+        }
+      } 
+
     }
 
   }

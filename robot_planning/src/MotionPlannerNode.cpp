@@ -7,7 +7,8 @@
 #include "obstacles_msgs/msg/obstacle_array_msg.hpp"
 #include "../include/robotPlanning/obstacles.hpp"
 #include <tf2/LinearMath/Quaternion.h>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp> // Для tf2::toMsg / fromMsg
+#include <tf2/utils.h>                         // Для tf2::getYaw
 
 
 class MotionPlannerNode : public rclcpp::Node {
@@ -26,6 +27,10 @@ public:
         borders_sub_ = this->create_subscription<geometry_msgs::msg::PolygonStamped>(
             "/borders", qos,
             std::bind(&MotionPlannerNode::bordersCallback, this, std::placeholders::_1));
+
+        init_subscriber_ = this->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+            "/shelfino/amcl_pose", qos,
+            std::bind(&MotionPlannerNode::startCallback, this, std::placeholders::_1));
 
         /* ---------------------------------------------------------------------------------------- */
         /*                                      service                                             */
@@ -52,14 +57,21 @@ private:
     std::vector<Point> borders_;
     std::vector<Point> pathFromMsg;
     std::vector<arcVar> dubinsPath;
+    std::vector<std::pair<Point, Point>> failedSegments_;
+
+    double th_start = 0.0;
+    double th_goal_ = 0.0;  // Current angle of the robot, initialized to 0
+
 
     bool data_generated_ = false;
     bool path_received_ = false;
     bool obstacles_received_ = false;
     bool borders_received_ = false;
+    bool start_received_ = false;
 
     rclcpp::Subscription<obstacles_msgs::msg::ObstacleArrayMsg>::SharedPtr obstacles_sub_;
     rclcpp::Subscription<geometry_msgs::msg::PolygonStamped>::SharedPtr borders_sub_;
+    rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr init_subscriber_;
     rclcpp::Service<motion_planner_msgs::srv::ValidatePath>::SharedPtr service_;
     rclcpp::Publisher<geometry_msgs::msg::PoseArray>::SharedPtr path_publisher_;
 
@@ -99,6 +111,18 @@ private:
         attemptGenerate();
     }
 
+    void startCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg) {
+        if(start_received_) {
+            RCLCPP_WARN(this->get_logger(), "Start pose already received, ignoring new message.");
+            return;  // Ignore if start pose is already set
+        }
+        th_start = tf2::getYaw(msg->pose.pose.orientation);
+        start_received_ = true;
+        RCLCPP_INFO(this->get_logger(), "Received start pose: (%.2f, %.2f) with yaw %.2f", 
+                    msg->pose.pose.position.x, msg->pose.pose.position.y, th_start);
+        attemptGenerate();  // Start path generation attempt
+    }
+
     void validatePathCallback(
                                const std::shared_ptr<motion_planner_msgs::srv::ValidatePath::Request> request,
                                std::shared_ptr<motion_planner_msgs::srv::ValidatePath::Response> response) 
@@ -127,6 +151,21 @@ private:
                 data_generated_ = false;
                 path_received_ = false;
 
+                failedSegments_ = getFailedSegments();
+                if (!failedSegments_.empty()) {
+
+                    for (const auto& segment : failedSegments_) {
+                        const Point& p1 = segment.first;
+                        const Point& p2 = segment.second;
+
+                        response->failed_segments.push_back(convertToSegmentMsg(p1, p2));
+
+                        RCLCPP_WARN(this->get_logger(), "Failed segment: Start (%.5f, %.5f), End (%.5f, %.5f)", 
+                                    p1.getX(), p1.getY(), p2.getX(), p2.getY());
+                    }
+                }
+
+
             } else{
                 RCLCPP_INFO(this->get_logger(), "Validating Dubins path with %zu arcs.", dubinsPath.size());
                 response->valid = true;
@@ -146,33 +185,19 @@ private:
     /* ------------------------------------------------------------------------------------------ */
     void attemptGenerate() 
     {
-        if ( path_received_ && obstacles_received_ && borders_received_ && !data_generated_ ) 
+        if ( path_received_ && obstacles_received_ && borders_received_ && start_received_ && !data_generated_ ) 
         {
             RCLCPP_INFO(get_logger(), "All required data received; generating Dubins...");
             
-            double th0 = 0.0;
-            double thf = 0.0;
+            //print th
+            RCLCPP_INFO(get_logger(), "Start angle: %.2f, Goal angle: %.2f", th_start, th_goal_);
+            dubinsPath = multiPointMarvkovDubinsPlan(pathFromMsg, th_start, th_goal_, 16, 16, obstacles_, borders_);
 
-            if (pathFromMsg.size() >= 2) {
-                // Initial heading from point 0 to point 1
-                double dx0 = pathFromMsg[1].getX() - pathFromMsg[0].getX();
-                double dy0 = pathFromMsg[1].getY() - pathFromMsg[0].getY();
-                th0 = std::atan2(dy0, dx0);
-
-                // Final heading from second-to-last to last point
-                size_t n = pathFromMsg.size();
-                double dxf = pathFromMsg[n-1].getX() - pathFromMsg[n-2].getX();
-                double dyf = pathFromMsg[n-1].getY() - pathFromMsg[n-2].getY();
-                thf = std::atan2(dyf, dxf);
-            }
-
-            dubinsPath = multiPointMarvkovDubinsPlan(pathFromMsg, th0, thf, 8, 16, obstacles_, borders_);
             data_generated_ = true;
         }
         else 
         {
-            RCLCPP_INFO(get_logger(), "Waiting for all data to be received: "
-                "path: %s, obstacles: %s",
+            RCLCPP_INFO(get_logger(), "Waiting for all data to be received:",
                 path_received_ ? "yes" : "no",
                 obstacles_received_ ? "yes" : "no",
                 borders_received_ ? "yes" : "no");
@@ -188,9 +213,29 @@ private:
         for (const auto& pose : pose_array_msg.poses) {
             points.push_back(Point((double)(pose.position.x), (double)(pose.position.y)));
         }
+        
+         if (!pose_array_msg.poses.empty()) {
+            th_goal_ = tf2::getYaw(pose_array_msg.poses.back().orientation);  // Yaw from last pose
+        } else {
+            th_goal_ = 0.0; // fallback if empty
+        }
         return points;
 
     }
+    motion_planner_msgs::msg::Segment convertToSegmentMsg(const Point& p1, const Point& p2) {
+        motion_planner_msgs::msg::Segment segment;
+
+        segment.start.x = p1.getX();
+        segment.start.y = p1.getY();
+        segment.start.z = 0.0;
+
+        segment.end.x = p2.getX();
+        segment.end.y = p2.getY();
+        segment.end.z = 0.0;
+
+        return segment;
+    }
+
 
     /* ------------------------------------------------------------------------------------------ */
     /*                               publish Dubins Path                                          */

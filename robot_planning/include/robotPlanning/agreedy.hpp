@@ -60,6 +60,10 @@ public:
     std::vector<Point> run(double& totalValueCollected, int attempt);
     std::vector<Point> findBestPath(double& totalValueCollected, int attempt);
 
+    //void addEdgePenalty(const Point& p1, const Point& p2, double penalty); 
+    void addEdgePenaltyClosest(const Point& rawP1, const Point& rawP2, double penalty) ;
+
+    void buildMetaGraph();
 
 private:
     Graph& mGraph;
@@ -68,6 +72,10 @@ private:
     double mTimeLimit;
     std::vector<Obstacle> mObstacles;
     std::vector<Point> mBorders;
+
+    std::unordered_map<std::pair<Point, Point>, double, PointPairHash> mEdgePenalties; //
+
+    Point findClosestGraphNode(const Point& query) const;
 
     double pathCostForOrder(const std::vector<Point>& order);
     void twoOptOptimization(std::vector<Point>& order);
@@ -81,7 +89,6 @@ private:
 
     bool isTooCloseToBorder(const Point& p, double margin) const;
 
-    void buildMetaGraph();
     const Victim* findVictimAt(const Point& p) const;
 };
 

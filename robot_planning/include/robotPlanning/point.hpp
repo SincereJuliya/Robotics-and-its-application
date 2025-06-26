@@ -15,7 +15,7 @@ public:
     double getY()const;
     void setX(double _x);
     void setY(double _y);
-    double computeEuclideanDistance(const Point& p);
+    double computeEuclideanDistance(const Point& p) const;
     bool operator <(const Point& p )const;
     bool operator==(const Point& p) const;
     bool operator!=(const Point& p) const;
