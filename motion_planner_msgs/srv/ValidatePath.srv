@@ -6,3 +6,4 @@ geometry_msgs/PoseArray path
 ---
 # Response: Path validity status
 bool valid
+motion_planner_msgs/Segment[] failed_segments
