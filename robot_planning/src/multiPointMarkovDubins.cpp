@@ -8,6 +8,8 @@
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 #include "../include/robotPlanning/obstacles.hpp"
 
+#define VELOCITY 0.26
+
 const float minDistObs = 0.3f; // Minimum distance to obstacles
 const float minDistBorder = 0.35f; // Minimum distance to borders
 
@@ -477,6 +479,22 @@ double normalizeAngle(double angle) {
     return angle;
 }
 
+double computePathLength(const std::vector<arcVar>& path) {
+    double totalLength = 0.0;
+    for (size_t i = 1; i < path.size(); ++i) {
+        double dx = path[i].x - path[i-1].x;
+        double dy = path[i].y - path[i-1].y;
+        totalLength += std::sqrt(dx*dx + dy*dy);
+    }
+    return totalLength;
+}
+
+double computePathTime(const std::vector<arcVar>& path) {
+    double length = computePathLength(path);
+    return length / VELOCITY;
+}
+
+
 /*
 std::vector<double> optimizeAngles(
     const std::vector<Point>& points,
@@ -729,7 +747,8 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double
     }
 
   }
-
+  
+  std::cout << "Estimated path time: "<< computePathTime(plan) << "\n";
   //plan = isPathCollisionFree(plan, obstacles) ? plan : std::vector<arcVar>{};
 
   return plan;
