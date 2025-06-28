@@ -10,23 +10,25 @@
 #include "../include/robotPlanning/CellDecompositionMapGenerator.hpp"
 #include "../include/robotPlanning/IMapGenerator.hpp"
 
-
 /* ---------------------------------------------------------------------------------------- */
 /*  node for 2 map generations - SampleBasedMapGenerator + CellDecompositionMapGenerator    */
 /* ---------------------------------------------------------------------------------------- */
-class MapGeneratorNode : public rclcpp::Node {
+class MapGeneratorNode : public rclcpp::Node
+{
 public:
-    MapGeneratorNode() : Node("mapGeneratorNode") 
+    MapGeneratorNode() : Node("mapGeneratorNode")
     {
         auto qos = get_transient_qos();
 
         /* ---------------------------------------------------------------------------------------- */
         /*                     initialization of the method for map generation                      */
         /* ---------------------------------------------------------------------------------------- */
-        std::string strategy = this->declare_parameter<std::string>("strategy", "cell");
-        if (strategy == "sample") generator_ = std::make_unique<SampleBasedMapGenerator>();
-            else generator_ = std::make_unique<CellDecompositionMapGenerator>();
-        
+        std::string strategy = this->declare_parameter<std::string>("strategy", "sample");
+        if (strategy == "sample")
+            generator_ = std::make_unique<SampleBasedMapGenerator>();
+        else
+            generator_ = std::make_unique<CellDecompositionMapGenerator>();
+
         /* ---------------------------------------------------------------------------------------- */
         /*                                      subscribers                                         */
         /* ---------------------------------------------------------------------------------------- */
@@ -45,7 +47,7 @@ public:
         obstacles_subscriber_ = this->create_subscription<obstacles_msgs::msg::ObstacleArrayMsg>(
             "/obstacles", qos,
             std::bind(&MapGeneratorNode::obstaclesCallback, this, std::placeholders::_1));
-            
+
         /* ---------------------------------------------------------------------------------------- */
         /*                                      publish                                             */
         /* ---------------------------------------------------------------------------------------- */
@@ -68,15 +70,16 @@ private:
     bool gates_received_ = false;
     bool borders_received_ = false;
     bool obstacles_received_ = false;
-    bool data_generated_ = false;  
-    
+    bool data_generated_ = false;
+
     rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr init_subscriber_;
     rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr gates_subscriber_;
     rclcpp::Subscription<geometry_msgs::msg::PolygonStamped>::SharedPtr borders_subscriber_;
     rclcpp::Subscription<obstacles_msgs::msg::ObstacleArrayMsg>::SharedPtr obstacles_subscriber_;
     rclcpp::Publisher<graph_for_task_planner_msg::msg::Graph>::SharedPtr graph_publisher_;
 
-    rclcpp::QoS get_transient_qos(size_t depth = 10) {
+    rclcpp::QoS get_transient_qos(size_t depth = 10)
+    {
         rclcpp::QoS qos(depth);
         qos.reliable();
         qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
@@ -86,16 +89,19 @@ private:
     /* ------------------------------------------------------------------------------------------ */
     /*                                      callbacks                                             */
     /* ------------------------------------------------------------------------------------------ */
-    void startCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg) {
+    void startCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::SharedPtr msg)
+    {
         start = Point{msg->pose.pose.position.x, msg->pose.pose.position.y};
         start_received_ = true;
         RCLCPP_INFO(this->get_logger(), "Received start pose: (%.2f, %.2f)", start.getX(), start.getY());
         attemptGenerate();
     }
 
-    void gatesCallback(const geometry_msgs::msg::PoseArray::SharedPtr msg) {
+    void gatesCallback(const geometry_msgs::msg::PoseArray::SharedPtr msg)
+    {
         gates_.clear();
-        for (const auto &pose : msg->poses) {
+        for (const auto &pose : msg->poses)
+        {
             gates_.emplace_back(pose.position.x, pose.position.y);
         }
         gates_received_ = true;
@@ -103,9 +109,11 @@ private:
         attemptGenerate();
     }
 
-    void bordersCallback(const geometry_msgs::msg::PolygonStamped::SharedPtr msg) {
+    void bordersCallback(const geometry_msgs::msg::PolygonStamped::SharedPtr msg)
+    {
         borders_.clear();
-        for (const auto &pt : msg->polygon.points) {
+        for (const auto &pt : msg->polygon.points)
+        {
             borders_.emplace_back(pt.x, pt.y);
         }
         borders_received_ = true;
@@ -113,11 +121,14 @@ private:
         attemptGenerate();
     }
 
-    void obstaclesCallback(const obstacles_msgs::msg::ObstacleArrayMsg::SharedPtr msg) {
+    void obstaclesCallback(const obstacles_msgs::msg::ObstacleArrayMsg::SharedPtr msg)
+    {
         obstacles_.clear();
-        for (const auto &obs_msg : msg->obstacles) {
+        for (const auto &obs_msg : msg->obstacles)
+        {
             obstacles_.emplace_back(obs_msg.radius, // or appropriate constructor
-                                    [&]() {
+                                    [&]()
+                                    {
                                         std::vector<Point> pts;
                                         for (auto &p : obs_msg.polygon.points)
                                             pts.emplace_back(p.x, p.y);
@@ -132,9 +143,10 @@ private:
     /* ------------------------------------------------------------------------------------------ */
     /*                attempt to generate the graph if everything already come                    */
     /* ------------------------------------------------------------------------------------------ */
-    void attemptGenerate() 
+    void attemptGenerate()
     {
-        if ( start_received_ && gates_received_ && borders_received_ && obstacles_received_ && !data_generated_) {
+        if (start_received_ && gates_received_ && borders_received_ && obstacles_received_ && !data_generated_)
+        {
             RCLCPP_INFO(get_logger(), "All required data received; generating graph...");
             generator_->setGates(gates_);
             generator_->setBorders(borders_);
@@ -146,29 +158,32 @@ private:
             publishGraph(graph);
             data_generated_ = true;
         }
-        else {
+        else
+        {
             RCLCPP_INFO(get_logger(), "Waiting for all data to be received: "
-                "start: %s, gates: %s, borders: %s, obstacles: %s",
-                start_received_ ? "yes" : "no",
-                gates_received_ ? "yes" : "no",
-                borders_received_ ? "yes" : "no",
-                obstacles_received_ ? "yes" : "no");
+                                      "start: %s, gates: %s, borders: %s, obstacles: %s",
+                        start_received_ ? "yes" : "no",
+                        gates_received_ ? "yes" : "no",
+                        borders_received_ ? "yes" : "no",
+                        obstacles_received_ ? "yes" : "no");
         }
     }
 
     /* ------------------------------------------------------------------------------------------ */
     /*                          publish the generated graph                                       */
     /* ------------------------------------------------------------------------------------------ */
-    void publishGraph(const Graph &graph) {
+    void publishGraph(const Graph &graph)
+    {
         graph_for_task_planner_msg::msg::Graph msg = graph.toROSMsg();
         graph_publisher_->publish(msg);
         RCLCPP_INFO(get_logger(), "Published graph with %zu vertices.", graph.getVertices().size());
     }
 };
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<MapGeneratorNode>());
-    rclcpp::shutdown(); 
+    rclcpp::shutdown();
     return 0;
 }

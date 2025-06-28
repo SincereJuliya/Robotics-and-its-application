@@ -165,10 +165,10 @@ double CellDecompositionMapGenerator::pointDistance(const Point& a, const Point&
 
 
 void CellDecompositionMapGenerator::cellDecomposition() {
-     // Step 1: Reduce the number of unique abscissas
+    
     auto allXs = getObstaclesAndBordersUniqueAbscissas();
     std::vector<double> uniqueXs;
-    double minXGap = 0.3; // Minimum distance between vertical lines
+    double minXGap = 0.1;
     for (double x : allXs) {
         if (uniqueXs.empty() || std::abs(x - uniqueXs.back()) > minXGap) {
             uniqueXs.push_back(x);
@@ -209,7 +209,7 @@ void CellDecompositionMapGenerator::cellDecomposition() {
         if (i < uniqueXs.size() - 1) {
             for (size_t j = 0; j + 1 < pts.size(); ++j) {
                 // Filter: skip if segment is too short
-                if (pointDistance(pts[j],pts[j + 1]) < 1.5) continue;
+                if (pointDistance(pts[j],pts[j + 1]) < 2) continue;
 
                 auto mid = getLineCentralPoint(pts[j], pts[j + 1]);
 

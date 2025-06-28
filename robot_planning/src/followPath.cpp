@@ -17,13 +17,15 @@
 
 using namespace tf2;
 
-class FollowPathActionClient : public rclcpp::Node {
+class FollowPathActionClient : public rclcpp::Node
+{
 public:
   using FollowPath = nav2_msgs::action::FollowPath;
   using GoalHandle = rclcpp_action::ClientGoalHandle<FollowPath>;
 
-  explicit FollowPathActionClient(const rclcpp::NodeOptions & options)
-  : Node("followPath", options) {
+  explicit FollowPathActionClient(const rclcpp::NodeOptions &options)
+      : Node("followPath", options)
+  {
     rclcpp::QoS qos(10);
     qos.reliable();
     qos.durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
@@ -31,18 +33,21 @@ public:
     this->client_ptr_ = rclcpp_action::create_client<FollowPath>(this, "/shelfino/follow_path");
     this->publisherRobot = this->create_publisher<nav_msgs::msg::Path>("shelfino/plan1", qos);
     this->planSubscriber = this->create_subscription<geometry_msgs::msg::PoseArray>(
-      "dubins_plan", qos, std::bind(&FollowPathActionClient::getPlan, this, std::placeholders::_1));
+        "dubins_plan", qos, std::bind(&FollowPathActionClient::getPlan, this, std::placeholders::_1));
   }
 
-  void send_goal() {
+  void send_goal()
+  {
     using namespace std::placeholders;
 
-    if (plan.empty()) {
+    if (plan.empty())
+    {
       RCLCPP_WARN(this->get_logger(), "Plan is empty, goal not sent.");
       return;
     }
 
-    if (!this->client_ptr_->wait_for_action_server()) {
+    if (!this->client_ptr_->wait_for_action_server())
+    {
       RCLCPP_ERROR(this->get_logger(), "Action server not available after waiting");
       rclcpp::shutdown();
       return;
@@ -56,7 +61,8 @@ public:
     path_msg.header.stamp = this->get_clock()->now();
     path_msg.header.frame_id = "map";
 
-    for (size_t i = 0; i < plan.size(); i++) {
+    for (size_t i = 0; i < plan.size(); i++)
+    {
       geometry_msgs::msg::PoseStamped point;
       point.header = path_msg.header;
       point.pose.position.x = plan[i].x;
@@ -88,13 +94,14 @@ public:
 
     auto send_goal_options = rclcpp_action::Client<FollowPath>::SendGoalOptions();
     send_goal_options.goal_response_callback =
-      [this](const GoalHandle::SharedPtr & goal_handle) {
-        this->goal_response_callback(goal_handle);
-      };
+        [this](const GoalHandle::SharedPtr &goal_handle)
+    {
+      this->goal_response_callback(goal_handle);
+    };
     send_goal_options.feedback_callback =
-      std::bind(&FollowPathActionClient::feedback_callback, this, _1, _2);
+        std::bind(&FollowPathActionClient::feedback_callback, this, _1, _2);
     send_goal_options.result_callback =
-      std::bind(&FollowPathActionClient::result_callback, this, _1);
+        std::bind(&FollowPathActionClient::result_callback, this, _1);
 
     RCLCPP_INFO(this->get_logger(), "Attempting to send goal to action server...");
     this->client_ptr_->async_send_goal(goal_msg, send_goal_options);
@@ -109,34 +116,41 @@ private:
   rclcpp::Subscription<geometry_msgs::msg::PoseArray>::SharedPtr planSubscriber;
   std::vector<arcVar> msgToVec;
 
-  void goal_response_callback(const GoalHandle::SharedPtr & goal_handle) {
-    if (!goal_handle) {
+  void goal_response_callback(const GoalHandle::SharedPtr &goal_handle)
+  {
+    if (!goal_handle)
+    {
       RCLCPP_ERROR(this->get_logger(), "Goal was rejected by server");
-    } else {
+    }
+    else
+    {
       RCLCPP_INFO(this->get_logger(), "Goal accepted by server, waiting for result");
     }
   }
 
-  void feedback_callback(GoalHandle::SharedPtr, const std::shared_ptr<const FollowPath::Feedback> feedback) {
+  void feedback_callback(GoalHandle::SharedPtr, const std::shared_ptr<const FollowPath::Feedback> feedback)
+  {
     std::stringstream ss;
     ss << "distance to goal: " << feedback->distance_to_goal << "\n";
     ss << "speed: " << feedback->speed << "\n";
     RCLCPP_INFO(this->get_logger(), ss.str().c_str());
   }
 
-  void result_callback(const GoalHandle::WrappedResult & result) {
-    switch (result.code) {
-      case rclcpp_action::ResultCode::SUCCEEDED:
-        break;
-      case rclcpp_action::ResultCode::ABORTED:
-        RCLCPP_ERROR(this->get_logger(), "Goal was aborted");
-        return;
-      case rclcpp_action::ResultCode::CANCELED:
-        RCLCPP_ERROR(this->get_logger(), "Goal was canceled");
-        return;
-      default:
-        RCLCPP_ERROR(this->get_logger(), "Unknown result code");
-        return;
+  void result_callback(const GoalHandle::WrappedResult &result)
+  {
+    switch (result.code)
+    {
+    case rclcpp_action::ResultCode::SUCCEEDED:
+      break;
+    case rclcpp_action::ResultCode::ABORTED:
+      RCLCPP_ERROR(this->get_logger(), "Goal was aborted");
+      return;
+    case rclcpp_action::ResultCode::CANCELED:
+      RCLCPP_ERROR(this->get_logger(), "Goal was canceled");
+      return;
+    default:
+      RCLCPP_ERROR(this->get_logger(), "Unknown result code");
+      return;
     }
     std::stringstream ss;
     ss << "Result received: " << result.result;
@@ -144,10 +158,12 @@ private:
     rclcpp::shutdown();
   }
 
-  std::vector<arcVar> convertPoseArrayToArcVars(const geometry_msgs::msg::PoseArray& pose_array_msg) {
+  std::vector<arcVar> convertPoseArrayToArcVars(const geometry_msgs::msg::PoseArray &pose_array_msg)
+  {
     std::vector<arcVar> arc_vars;
 
-    for (const auto& pose : pose_array_msg.poses) {
+    for (const auto &pose : pose_array_msg.poses)
+    {
       double x = pose.position.x;
       double y = pose.position.y;
 
@@ -162,26 +178,31 @@ private:
     return arc_vars;
   }
 
-  void getPlan(const geometry_msgs::msg::PoseArray& pose_array_msg) {
-    if (!plan.empty()) {
+  void getPlan(const geometry_msgs::msg::PoseArray &pose_array_msg)
+  {
+    if (!plan.empty())
+    {
       return;
     }
 
     msgToVec = convertPoseArrayToArcVars(pose_array_msg);
-    for (size_t i = 0; i < msgToVec.size(); ++i) {
+    for (size_t i = 0; i < msgToVec.size(); ++i)
+    {
       RCLCPP_INFO(this->get_logger(), "Point %zu: x = %f, y = %f, th = %f", i, msgToVec[i].x, msgToVec[i].y, msgToVec[i].th);
       plan.push_back(msgToVec[i]);
     }
 
     RCLCPP_INFO(this->get_logger(), "Plan size: %zu", plan.size());
 
-    if (!plan.empty()) {
+    if (!plan.empty())
+    {
       send_goal();
     }
   }
 };
 
-int main(int argc, char * argv[]) {
+int main(int argc, char *argv[])
+{
   rclcpp::init(argc, argv);
   auto options = rclcpp::NodeOptions();
   auto node = std::make_shared<FollowPathActionClient>(options);

@@ -1,8 +1,9 @@
 #include "../include/robotPlanning/agreedy.hpp"
+#include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 #include <limits>
 #include <cmath>
 #include <set>
-
+#define VELOCITY 0.26
 const float minDistObs = 0.2f; // Minimum distance to obstacles
 const float minDistBorder = 0.2f; // Minimum distance to borders
 
@@ -29,6 +30,29 @@ double AStarGreedy::heuristic(const Point& a, const Point& b) {
     return std::sqrt(dx * dx + dy * dy);
 }
 
+/* double AStarGreedy::heuristic(const Point& a, const Point& b) {
+    double th0 = 0.0; // начальный угол — можно зафиксировать или угадать
+    double thf = 0.0; // конечный угол
+
+    double sampleStep = 0.2; // дискретизация (шаг)
+    curve dub = dubinsShortestPath(
+        a.getX(), a.getY(), th0,
+        b.getX(), b.getY(), thf,
+        mObstacles,
+        sampleStep,
+        mBorders
+    );
+
+    if (!dub.values.totalLength()) {
+        // На всякий случай fallback на евклидову, если путь не построен
+        double dx = a.getX() - b.getX();
+        double dy = a.getY() - b.getY();
+        return std::sqrt(dx * dx + dy * dy);
+    }
+
+    return dub.values.totalLength();
+}*/
+
 Point AStarGreedy::findClosestGraphNode(const Point& query) const{
     double minDist = std::numeric_limits<double>::infinity();
     Point closest;
@@ -42,12 +66,64 @@ Point AStarGreedy::findClosestGraphNode(const Point& query) const{
     }
 
     //print
-    std::cout << "Closest graph node to " << query.toString() 
+    /* std::cout << "Closest graph node to " << query.toString() 
               << " is " << closest.toString() 
-              << " with distance " << minDist << "\n";
+              << " with distance " << minDist << "\n"; */
 
     return closest;
 }
+
+void AStarGreedy::addVictimPenaltyFromSegment(const Point& rawP1, const Point& rawP2, std::vector<Point>& visitedVictims)
+{
+    // Distance threshold: how close a victim should be to be affected
+    constexpr double victimProximityThreshold = 1.0;
+
+    auto pointToSegmentDistance = [](const Point& p, const Point& a, const Point& b) {
+        double dx = b.getX() - a.getX();
+        double dy = b.getY() - a.getY();
+
+        if (dx == 0 && dy == 0)
+            return std::hypot(p.getX() - a.getX(), p.getY() - a.getY());
+
+        double t = ((p.getX() - a.getX()) * dx + (p.getY() - a.getY()) * dy) / (dx * dx + dy * dy);
+        t = std::max(0.0, std::min(1.0, t));
+
+        double projX = a.getX() + t * dx;
+        double projY = a.getY() + t * dy;
+
+        return std::hypot(p.getX() - projX, p.getY() - projY);
+    };
+
+    for (const Victim& v : mVictims)
+    {   
+        Point vp(v.x, v.y);
+
+        double dist = pointToSegmentDistance(vp, rawP1, rawP2);
+
+        if (dist < victimProximityThreshold)
+        {
+            if (std::find(visitedVictims.begin(), visitedVictims.end(), vp) == visitedVictims.end())
+            {
+                visitedVictims.push_back(vp);
+                /* std::cout << "Victim at " << vp.toString() 
+                          << " is within proximity of segment (" 
+                          << rawP1.toString() << ", " 
+                          << rawP2.toString() << ") with distance " 
+                          << dist << "\n"; */
+            }
+
+        }
+    }
+
+}
+
+void AStarGreedy::addVictimPenalty(const Point& rawP, double penalty) 
+{
+    slowVictimPenalties_[rawP] += penalty;  // Добавляем штраф для жертвы
+}
+
+
+
 
 void AStarGreedy::addEdgePenaltyClosest(const Point& rawP1, const Point& rawP2, double penalty) {
     // Найти ближайшие точки в графе
@@ -58,18 +134,10 @@ void AStarGreedy::addEdgePenaltyClosest(const Point& rawP1, const Point& rawP2, 
     mEdgePenalties[{p1, p2}] += penalty;
     mEdgePenalties[{p2, p1}] += penalty;  // если граф неориентированный
 
-    std::cout << "Added penalty " << penalty 
+    /* std::cout << "Added penalty " << penalty 
               << " for nearest edge (" << p1.toString() 
-              << ", " << p2.toString() << ")\n";
+              << ", " << p2.toString() << ")\n"; */
 }
-
-
-/* void AStarGreedy::addEdgePenalty(const Point& p1, const Point& p2, double penalty) {
-    mEdgePenalties[{p1, p2}] += penalty;
-    mEdgePenalties[{p2, p1}] += penalty;  // если граф неориентированный
-    std::cout << "Added penalty " << penalty << " for edge (" << p1.toString() << ", " << p2.toString() << ")\n";
-
-} */
 
 std::vector<Point> AStarGreedy::aStar(const Point& start, const Point& goal, double& pathCost) {
     std::unordered_map<Point, double> gScore;
@@ -100,19 +168,28 @@ std::vector<Point> AStarGreedy::aStar(const Point& start, const Point& goal, dou
         for (const Point& neighbor : mGraph.getEdge(current.point)) 
         {
             // Базовая стоимость перехода
-            double baseCost = 2.5 * heuristic(current.point, neighbor);
+            double baseCost = (2.5 * VELOCITY * heuristic(current.point, neighbor));
 
             // Добавляем штраф, если есть для ребра (current.point, neighbor)
-            double penalty = 0.0;
+            double penaltyEdge = 0.0;
             auto it = mEdgePenalties.find({current.point, neighbor});
             if (it != mEdgePenalties.end()) 
             {
                 //print
-                std::cout << "Applying penalty for edge (" << current.point.toString() << ", " << neighbor.toString() << "): " << it->second << "\n";
-                penalty = it->second; // например 1000.0
+                //std::cout << "Applying penalty for edge (" << current.point.toString() << ", " << neighbor.toString() << "): " << it->second << "\n";
+                penaltyEdge = it->second; // например 1000.0
             }
 
-            double tentativeG = gScore[current.point] + baseCost + penalty;
+            // Штрафы на жертву (т.е. на вершину neighbor)
+            double penaltyVictim = 0.0;
+            auto itVictim = slowVictimPenalties_.find(neighbor);
+            if (itVictim != slowVictimPenalties_.end())
+            {
+                //std::cout << "Applying penalty for victim at " << neighbor.toString() << ": " << itVictim->second << "\n";
+                penaltyVictim = itVictim->second;
+            }
+
+            double tentativeG = gScore[current.point] + baseCost + penaltyEdge + penaltyVictim;
 
             if (!gScore.count(neighbor) || tentativeG < gScore[neighbor]) 
             {
@@ -123,21 +200,6 @@ std::vector<Point> AStarGreedy::aStar(const Point& start, const Point& goal, dou
             }
         }
 
-
-
-        /* for (const Point& neighbor : mGraph.getEdge(current.point)) 
-        {
-            double tentativeG = gScore[current.point] + 2.5*heuristic(current.point, neighbor);
-
-            if (!gScore.count(neighbor) || tentativeG < gScore[neighbor]) 
-            {
-                gScore[neighbor] = tentativeG;
-                cameFrom[neighbor] = current.point;
-                Node neighborNode{neighbor, tentativeG, heuristic(neighbor, goal), 0.0, {}};
-                openSet.push(neighborNode);
-            }
-
-        } */
     }
 
     pathCost = std::numeric_limits<double>::infinity();
@@ -175,6 +237,38 @@ bool AStarGreedy::isTooCloseToBorder(const Point& p, double margin) const {
     return false;
 }
 
+double AStarGreedy::distanceToClosestBorder(const Point& p) const {
+    if (mBorders.size() < 2) return 0.0;  // Not initialized or malformed
+
+    auto pointToSegmentDistance = [](const Point& p, const Point& a, const Point& b) {
+        double dx = b.getX() - a.getX();
+        double dy = b.getY() - a.getY();
+
+        if (dx == 0 && dy == 0)
+            return std::hypot(p.getX() - a.getX(), p.getY() - a.getY());
+
+        double t = ((p.getX() - a.getX()) * dx + (p.getY() - a.getY()) * dy) / (dx * dx + dy * dy);
+        t = std::max(0.0, std::min(1.0, t));
+
+        double projX = a.getX() + t * dx;
+        double projY = a.getY() + t * dy;
+
+        return std::hypot(p.getX() - projX, p.getY() - projY);
+    };
+
+    double minDist = std::numeric_limits<double>::max();
+
+    for (size_t i = 0; i < mBorders.size(); ++i) {
+        const Point& a = mBorders[i];
+        const Point& b = mBorders[(i + 1) % mBorders.size()];
+        double dist = pointToSegmentDistance(p, a, b);
+        minDist = std::min(minDist, dist);
+    }
+
+    return minDist;
+}
+
+
 bool AStarGreedy::collidesWithObstacleOrBorder(const Point& p1, const Point& p2) const 
 {
     double distance = std::hypot(p2.getX() - p1.getX(), p2.getY() - p1.getY());
@@ -199,6 +293,23 @@ bool AStarGreedy::collidesWithObstacleOrBorder(const Point& p1, const Point& p2)
 
     return false; // No collision detected
 }
+
+double AStarGreedy::estimatePathTime(const std::vector<Point>& path) const {
+    if (path.size() < 2) return 0.0;
+
+    double time = 0.0;
+
+    for (size_t i = 1; i < path.size(); ++i) {
+        double dx = path[i].getX() - path[i - 1].getX();
+        double dy = path[i].getY() - path[i - 1].getY();
+        double dist = std::hypot(dx, dy);
+        time += dist / VELOCITY;
+    }
+
+    return time;
+}
+
+
 
 void AStarGreedy::buildMetaGraph() {
     mCosts.clear();
@@ -251,6 +362,15 @@ void AStarGreedy::buildMetaGraph() {
 
             // Optional: further check the path itself for precision
             if (collidesWithObstacle(path)) continue;
+
+            double estimatedTime = estimatePathTime(path);
+            if (estimatedTime > 60) {
+                std::cerr << "Skipping path " << p1.toString() << " → " << p2.toString()
+                        << " because time " << estimatedTime << " > limit " << 60 << "\n";
+                continue;
+            }
+            std::cout << "Path from " << p1.toString() << " to " << p2.toString()
+                      << " with cost " << cost << " and estimated time " << estimatedTime << "\n";
 
             mPaths[{p1, p2}] = path;
             mPaths[{p2, p1}] = std::vector<Point>(path.rbegin(), path.rend());
@@ -371,9 +491,11 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
         double bestRatio = -1;
         Point bestPoint;
 
+        double remainingTime = mTimeLimit;
+
         for (const auto& v : mVictims) {
             //print victim
-            std::cout << "Evaluating victim at (" << v.x << ", " << v.y << ") with radius " << v.radius << std::endl;
+            //std::cout << "Evaluating victim at (" << v.x << ", " << v.y << ") with radius " << v.radius << std::endl;
 
             Point vp(v.x, v.y);
 
@@ -383,7 +505,7 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
             } 
 
             if (!mCosts.count({current, vp}) || !mCosts.count({vp, mGoal})){ 
-                std::cout << "Victim at " << vp.toString() << " doesnt have a path." << std::endl;
+                //std::cout << "Victim at " << vp.toString() << " doesnt have a path." << std::endl;
                 continue;
             }
 
@@ -392,7 +514,7 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
             double costCurrentToGoal = mCosts[{current, mGoal}];
 
             if ((costToVictim) > costCurrentToGoal) {
-                std::cout << "Victim at " << vp.toString() << " is further than current to goal, skipping." << std::endl;
+                //std::cout << "Victim at " << vp.toString() << " is further than current to goal, skipping." << std::endl;
                 // Жертва дальше ворот — пропускаем
                 continue;
             }
@@ -404,19 +526,32 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
                       << costCurrentToGoal << std::endl;
 
             double newTotalCost = totalCost - costCurrentToGoal + costToVictim + costVictimToGoal;
-            if (newTotalCost >= mTimeLimit) continue;
+            std::cout << "New total cost if added: " << newTotalCost << std::endl;
+            if (newTotalCost >= remainingTime)
+            {
+                std::cout << "Adding victim at " << vp.toString() 
+                          << " would exceed remaining time, skipping." << std::endl;
+                continue;
+            }
 
             // Расчет угла поворота
             double turnAngle = angleBetween(bestPoint, current, vp); // в радианах
 
             // Коэффициенты штрафа за поворот
-            double alpha = 5.0; // подбирай экспериментально
+            double alpha = 5* VELOCITY ; // подбирай экспериментально
             double penalty = alpha * turnAngle;
-
-            if(isTooCloseToBorder(vp, minDistBorder))
+ 
+            if(isTooCloseToBorder(vp, 0.2f))
             {
                 std::cerr << "Warning: Victim at " << vp.toString() << " is too close to the border!" << std::endl;
                 continue; // Пропускаем жертву, если она слишком близко к границе
+            } 
+
+            // if too clode to the border, apply additional penalties
+            double minBorderDist = distanceToClosestBorder(vp);
+            if (minBorderDist < 0.6f) {
+                penalty += 15* VELOCITY * (0.6f*2 - minBorderDist); // штраф за близость к границе
+                //std::cout << "Penalty for being too close to border: " << minBorderDist << std::endl;
             }
 
             //if too close to the obstacles, apply additional penalties
@@ -426,9 +561,10 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
                 minObsDist = std::min(minObsDist, d);
             }
             if (minObsDist < minDistObs) {
-                penalty += 10.0 * (minDistObs*2 - minObsDist); // штраф за близость к препятствиям
-                std::cout << "Penalty for being too close to obstacles: " << minObsDist << std::endl;
+                penalty +=  10* VELOCITY  * (minDistObs*2 - minObsDist); // штраф за близость к препятствиям
+                //std::cout << "Penalty for being too close to obstacles: " << minObsDist << std::endl;
             }
+
             // Выводим информацию о жертве
             std::cout << "Evaluating victim at " << vp.toString() 
                       << " | value: " << v.radius
@@ -438,19 +574,31 @@ std::vector<Point> AStarGreedy::findBestPath(double& totalValueCollected, int at
                       << ", turn angle: " << turnAngle 
                       << ", penalty: " << penalty 
                       << ", minObsDist: " << minObsDist
+                      << ", minBorderDist: " << minBorderDist
                       << std::endl;
 
             // Жадный критерий (например, радиус / времени)
             double ratio = v.radius / (costToVictim + costVictimToGoal + penalty);
             if (ratio > bestRatio) {
-                printf("Current time limit after adding the victim: %.2f\n", mTimeLimit);
                 bestRatio = ratio;
                 bestVictim = &v;
                 bestPoint = vp;
             }
+            std::cout << "-------------------------------------------------------------------" << std::endl;
         }
 
         if (!bestVictim) break;
+
+        double costToVictim = mCosts[{current, bestPoint}];
+        double costVictimToGoal = mCosts[{bestPoint, mGoal}];
+        double costCurrentToGoal = mCosts[{current, mGoal}];
+        double addedCost = costToVictim + costVictimToGoal - costCurrentToGoal;
+
+        remainingTime -= addedCost;
+        if (remainingTime < 0) {
+            std::cout << "No more time left to add victims, stopping." << std::endl;
+            break; // Нет времени на добавление жертв
+        }
 
         // Вставляем жертву в order перед целью
         // print what we add

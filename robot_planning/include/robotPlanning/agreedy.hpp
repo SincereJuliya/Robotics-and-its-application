@@ -62,6 +62,8 @@ public:
 
     //void addEdgePenalty(const Point& p1, const Point& p2, double penalty); 
     void addEdgePenaltyClosest(const Point& rawP1, const Point& rawP2, double penalty) ;
+    void addVictimPenaltyFromSegment(const Point& rawP1, const Point& rawP2, std::vector<Point>& visitedVictims) ;
+    void addVictimPenalty(const Point& rawP, double penalty) ;
 
     void buildMetaGraph();
 
@@ -73,13 +75,16 @@ private:
     std::vector<Obstacle> mObstacles;
     std::vector<Point> mBorders;
 
+    std::unordered_map<Point, double> slowVictimPenalties_;
     std::unordered_map<std::pair<Point, Point>, double, PointPairHash> mEdgePenalties; //
+    double estimatePathTime(const std::vector<Point>& path) const;
 
     Point findClosestGraphNode(const Point& query) const;
 
     double pathCostForOrder(const std::vector<Point>& order);
     void twoOptOptimization(std::vector<Point>& order);
     bool collidesWithObstacleOrBorder(const Point& p1, const Point& p2) const ;
+    double distanceToClosestBorder(const Point& p) const ;
 
     std::unordered_map<std::pair<Point, Point>, std::vector<Point>, PointPairHash> mPaths;
     std::unordered_map<std::pair<Point, Point>, double, PointPairHash> mCosts;
