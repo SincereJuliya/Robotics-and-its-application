@@ -1,24 +1,51 @@
-// CellDecompositionMapGenerator.cpp
+/**
+ * @file CellDecompositionMapGenerator.cpp
+ * @brief Implements methods for map generation via cell decomposition from obstacles, borders, and gates.
+ */
+
 #include "../include/robotPlanning/CellDecompositionMapGenerator.hpp"
 #include <algorithm>
 #include <set>
 #include <cmath>
 #include <iostream>
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Constructor
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * @brief Default constructor.
+ */
 CellDecompositionMapGenerator::CellDecompositionMapGenerator() = default;
 
+/**
+ * @brief Set the map borders.
+ * @param borders Vector of border points.
+ */
 void CellDecompositionMapGenerator::setBorders(const std::vector<Point>& borders) {
     borders_ = borders;
 }
 
+/**
+ * @brief Set the obstacles in the map.
+ * @param obstacles Vector of obstacle objects.
+ */
 void CellDecompositionMapGenerator::setObstacles(const std::vector<Obstacle>& obstacles) {
     obstacles_ = obstacles;
 }
 
+/**
+ * @brief Set the gate positions in the map.
+ * @param gates Vector of gate points.
+ */
 void CellDecompositionMapGenerator::setGates(const std::vector<Point>& gates) {
     gates_ = gates;
 }
 
+/**
+ * @brief Generate a graph based on the current borders, obstacles, and gates using cell decomposition.
+ * @param init Initial starting point.
+ * @return Graph object representing the decomposed map.
+ */
 Graph CellDecompositionMapGenerator::generateGraph(const Point& init) {
     g_.clear();
     if (gates_.empty() || borders_.empty() || obstacles_.empty()) {
@@ -30,10 +57,21 @@ Graph CellDecompositionMapGenerator::generateGraph(const Point& init) {
     return g_;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Helper functions
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * @brief Comparison function for sorting points by X then Y.
+ */
 bool CellDecompositionMapGenerator::sortPoints(const Point &a, const Point &b) {
     return a < b;
 }
 
+/**
+ * @brief Compute the centroid of a polygonal area.
+ * @param area A vector of points defining the area.
+ * @return Central point (centroid).
+ */
 Point CellDecompositionMapGenerator::getAreaCentralPoint(const std::vector<Point>& area) {
     //
     double Cx = 0, Cy = 0; 
@@ -44,10 +82,19 @@ Point CellDecompositionMapGenerator::getAreaCentralPoint(const std::vector<Point
     return Point{Cx / area.size(), Cy / area.size()};
 }
 
+/**
+ * @brief Compute the midpoint of a vertical line segment between two points.
+ * @param p1 First point.
+ * @param p2 Second point.
+ * @return Central point on the line.
+ */
 Point CellDecompositionMapGenerator::getLineCentralPoint(const Point& p1, const Point& p2) {
     return Point{p1.getX(), p1.getY() - ((p1.getY() - p2.getY()) / 2)};
 }
 
+/**
+ * @brief Convert all circular obstacles to square approximations.
+ */
 void CellDecompositionMapGenerator::convertCirclesToSquares() {
     for (auto &obs : obstacles_) {
         if (obs.getType() == CIRCLE) {
@@ -56,6 +103,10 @@ void CellDecompositionMapGenerator::convertCirclesToSquares() {
     }
 }
 
+/**
+ * @brief Get all unique X-values (abscissas) from obstacle boundaries.
+ * @return Sorted vector of unique X-values.
+ */
 std::vector<double> CellDecompositionMapGenerator::getObstaclesUniqueAbscissas() {
     std::vector<double> x;
     for (auto &obs : obstacles_) {
@@ -68,6 +119,10 @@ std::vector<double> CellDecompositionMapGenerator::getObstaclesUniqueAbscissas()
     return x;
 }
 
+/**
+ * @brief Get unique X-values from both obstacles and border points.
+ * @return Sorted vector of unique X-values.
+ */
 std::vector<double> CellDecompositionMapGenerator::getObstaclesAndBordersUniqueAbscissas() {
     auto x = getObstaclesUniqueAbscissas();
     for (const auto &b : borders_) x.push_back(b.getX());
@@ -76,6 +131,10 @@ std::vector<double> CellDecompositionMapGenerator::getObstaclesAndBordersUniqueA
     return x;
 }
 
+/**
+ * @brief Get all points forming the obstacles.
+ * @return Vector of obstacle vertices.
+ */
 std::vector<Point> CellDecompositionMapGenerator::getObstaclesPoints() {
     std::vector<Point> pts;
     for (auto &obs : obstacles_) {
@@ -86,6 +145,10 @@ std::vector<Point> CellDecompositionMapGenerator::getObstaclesPoints() {
     return pts;
 }
 
+/**
+ * @brief Get all unique and sorted points from obstacles and borders.
+ * @return Sorted vector of combined points.
+ */
 std::vector<Point> CellDecompositionMapGenerator::getSortedObstaclesAndBordersPoints() {
     auto obsPts = getObstaclesPoints();
     std::vector<Point> unified;
@@ -94,6 +157,11 @@ std::vector<Point> CellDecompositionMapGenerator::getSortedObstaclesAndBordersPo
     return unified;
 }
 
+/**
+ * @brief Get all points located at a specific X-coordinate.
+ * @param x The X-coordinate.
+ * @return Vector of matching points.
+ */
 std::vector<Point> CellDecompositionMapGenerator::getPointsAtGivenAbscissa(double x) {
     std::vector<Point> result;
     auto pts = getSortedObstaclesAndBordersPoints();
@@ -103,6 +171,11 @@ std::vector<Point> CellDecompositionMapGenerator::getPointsAtGivenAbscissa(doubl
     return result;
 }
 
+/**
+ * @brief Check if a point lies within any obstacle.
+ * @param p Point to check.
+ * @return True if inside an obstacle, false otherwise.
+ */
 bool CellDecompositionMapGenerator::isInsideObstacles(const Point &p) {
     for (auto &obs : obstacles_)
         if (obs.isInsideObstacle(p))
@@ -110,6 +183,15 @@ bool CellDecompositionMapGenerator::isInsideObstacles(const Point &p) {
     return false;
 }
 
+/**
+ * @brief Check if an edge (composed of 4 corner points) intersects any obstacle.
+ * @param p1 First corner.
+ * @param p2 Second corner.
+ * @param p3 Third corner.
+ * @param p4 Fourth corner.
+ * @param extr External check flag.
+ * @return True if the edge belongs to an obstacle.
+ */
 bool CellDecompositionMapGenerator::edgeBelongsToObstacle(const Point &p1, const Point &p2,
                                                          const Point &p3, const Point &p4, bool extr) {
     for (auto &obs : obstacles_)
@@ -118,6 +200,11 @@ bool CellDecompositionMapGenerator::edgeBelongsToObstacle(const Point &p1, const
     return false;
 }
 
+/**
+ * @brief Get intersection points between the vertical line x=constant and borders.
+ * @param x X-coordinate of the line.
+ * @return Vector of intersection points.
+ */
 std::vector<Point> CellDecompositionMapGenerator::getIntersectionWithBorders(double x) {
     std::vector<Point> result;
     std::vector<Point> loop = borders_;
@@ -135,6 +222,11 @@ std::vector<Point> CellDecompositionMapGenerator::getIntersectionWithBorders(dou
     return result;
 }
 
+/**
+ * @brief Get intersection points between vertical line x=constant and obstacles.
+ * @param x X-coordinate of the line.
+ * @return Vector of intersection points.
+ */
 std::vector<Point> CellDecompositionMapGenerator::getIntersectionWithObstacles(double x) {
     std::vector<Point> result;
     for (auto &obs : obstacles_) {
@@ -144,6 +236,12 @@ std::vector<Point> CellDecompositionMapGenerator::getIntersectionWithObstacles(d
     return result;
 }
 
+/**
+ * @brief Find nearest points to a reference point based on minimal Y-offset.
+ * @param pts Set of candidate points.
+ * @param p Reference point.
+ * @return Vector of nearest points by Y.
+ */
 std::vector<Point> CellDecompositionMapGenerator::nearestByYOffset(const std::vector<Point>& pts,
                                                                    const Point &p) {
     std::vector<Point> best;
@@ -157,13 +255,24 @@ std::vector<Point> CellDecompositionMapGenerator::nearestByYOffset(const std::ve
     return best;
 }
 
+/**
+ * @brief Compute Euclidean distance between two points.
+ * @param a First point.
+ * @param b Second point.
+ * @return Distance as double.
+ */
 double CellDecompositionMapGenerator::pointDistance(const Point& a, const Point& b) const {
     double dx = a.getX() - b.getX();
     double dy = a.getY() - b.getY();
     return std::sqrt(dx * dx + dy * dy);
 }
 
-
+// ─────────────────────────────────────────────────────────────────────────────
+// Main CellDecomposition function
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * @brief Perform cell decomposition and build a connectivity graph based on borders and obstacles.
+ */
 void CellDecompositionMapGenerator::cellDecomposition() {
     
     auto allXs = getObstaclesAndBordersUniqueAbscissas();

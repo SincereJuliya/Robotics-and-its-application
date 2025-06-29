@@ -3,7 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include "/home/sincerejuliya/Documents/ros_ws/src/robot_planning/include/robotPlanning/graph.hpp"
+#include "../include/robotPlanning/graph.hpp"
 
 Graph::Graph() {}
 
