@@ -123,10 +123,13 @@ void plotArc(dubinsCurve arc, std::vector<arcVar>& plt);
 
 std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv);
 
+std::vector<std::pair<Point, Point>> getFailedSegments();
+std::vector<std::pair<Point, Point>> getSlowSegments();
+
 bool isPathCollisionFree(const curve& dubinsCurve, const std::vector<Obstacle>& obstacles);
 
 std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m, const std::vector<Obstacle>& obstacles, const std::vector<Point>& borders);
 
-std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf, int k, int m, std::vector<Obstacle>& obstacles, std::vector<Point>& borders);
+std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points,double th0, double thf, int k, int m, std::vector<Obstacle>& obstacles, std::vector<Point>& borders, int maxTime);
 
 #endif

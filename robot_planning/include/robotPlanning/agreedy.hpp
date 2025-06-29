@@ -55,11 +55,28 @@ class AStarGreedy {
 public:
     AStarGreedy(Graph& graph, const std::vector<Victim>& victims,
                 const Point& start, const Point& goal, double timeLimit, std::vector<Obstacle> obstacles = {}, std::vector<Point> borders = {});
+    
+    // default constructor
+    AStarGreedy(Graph& graph); // declare constructor that takes Graph&
+    
+    void setData(const std::vector<Victim>& victims,
+                          const Point& start,
+                          const Point& goal,
+                          double timeLimit,
+                          const std::vector<Obstacle>& obstacles,
+                          const std::vector<Point>& borders);
+
 
     double angleBetween(const Point& a, const Point& b, const Point& c);
     std::vector<Point> run(double& totalValueCollected, int attempt);
     std::vector<Point> findBestPath(double& totalValueCollected, int attempt);
 
+    //void addEdgePenalty(const Point& p1, const Point& p2, double penalty); 
+    void addEdgePenaltyClosest(const Point& rawP1, const Point& rawP2, double penalty) ;
+    void addVictimPenaltyFromSegment(const Point& rawP1, const Point& rawP2, std::vector<Victim>& visitedVictims) ;
+    void addVictimPenalty(const Point& rawP, int attempt, double victimValue = 0.0) ;
+
+    void buildMetaGraph();
 
 private:
     Graph& mGraph;
@@ -69,9 +86,16 @@ private:
     std::vector<Obstacle> mObstacles;
     std::vector<Point> mBorders;
 
+    std::unordered_map<Point, double> slowVictimPenalties_;
+    std::unordered_map<std::pair<Point, Point>, double, PointPairHash> mEdgePenalties; //
+    double estimatePathTime(const std::vector<Point>& path) const;
+
+    Point findClosestGraphNode(const Point& query) const;
+
     double pathCostForOrder(const std::vector<Point>& order);
     void twoOptOptimization(std::vector<Point>& order);
     bool collidesWithObstacleOrBorder(const Point& p1, const Point& p2) const ;
+    double distanceToClosestBorder(const Point& p) const ;
 
     std::unordered_map<std::pair<Point, Point>, std::vector<Point>, PointPairHash> mPaths;
     std::unordered_map<std::pair<Point, Point>, double, PointPairHash> mCosts;
@@ -81,7 +105,6 @@ private:
 
     bool isTooCloseToBorder(const Point& p, double margin) const;
 
-    void buildMetaGraph();
     const Victim* findVictimAt(const Point& p) const;
 };
 

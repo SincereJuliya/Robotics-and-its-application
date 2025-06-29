@@ -34,10 +34,10 @@ struct VictimDefault {
     }
     return os;
   }
+  
 };
 // Juliya : i took from the default code bc my env didnt allow to include the original header file
 struct Victim : public VictimDefault {
-  double weight;  // add this
   Victim(double _x, double _y, double _r = 0.5) : VictimDefault() {
     this->x = _x;
     this->y = _y;
@@ -47,6 +47,10 @@ struct Victim : public VictimDefault {
   }
   
 };
+
+inline bool operator==(const Victim& lhs, const Victim& rhs) {
+    return lhs.x == rhs.x && lhs.y == rhs.y;
+}
 
 
 #endif /* ACEAFEF4_8AAA_41A0_8846_5AAD774D272F */
