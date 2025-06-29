@@ -1,2 +1,0 @@
-Invoking command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_description -- -j8 -l8
-Invoked command in '/home/seventeen/Robotics-and-its-application/build/shelfino_description' returned '2': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/shelfino_description -- -j8 -l8

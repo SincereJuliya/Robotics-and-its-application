@@ -5,16 +5,18 @@
 #include <algorithm>
 
 #include <cassert>
+/**
+ * @file multiPointMarkovDubins.cpp
+ * @brief Implements Dubins path generation and collision checking with obstacles and borders.
+ */
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 #include "../include/robotPlanning/obstacles.hpp"
-
-#define VELOCITY 0.26
 
 const float minDistObs = 0.3f;     // Minimum distance to obstacles
 const float minDistBorder = 0.35f; // Minimum distance to borders
 
-std::vector<std::pair<Point, Point>> failedSegments_;
-std::vector<std::pair<Point, Point>> slowSegments_;
+std::vector<std::pair<Point, Point>> failedSegments_; ///< Segments that failed during planning
+std::vector<std::pair<Point, Point>> slowSegments_;   ///< Segments flagged as slow paths
 
 int ksigns[6][3] = {
     {1, 0, 1},   // LSL
@@ -29,6 +31,18 @@ double Kmax = 1.0;
 
 std::string curvNames[6] = {"LSL", "RSR", "LSR", "RSL", "RLR", "LRL"};
 
+/**
+ * @brief Scales the start and goal to a canonical Dubins form.
+ * 
+ * @param x0 Start x
+ * @param y0 Start y
+ * @param th0 Start orientation
+ * @param xf Goal x
+ * @param yf Goal y
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return toStandard Scaled parameters
+ */
 toStandard scaleToStandard(double x0, double y0, double th0, double xf, double yf, double thf, double Kmax)
 {
   toStandard ret;
@@ -45,6 +59,15 @@ toStandard scaleToStandard(double x0, double y0, double th0, double xf, double y
   return ret;
 }
 
+/**
+ * @brief Rescales the Dubins parameters from canonical form to world frame.
+ * 
+ * @param sc_s1 Scaled segment 1
+ * @param sc_s2 Scaled segment 2
+ * @param sc_s3 Scaled segment 3
+ * @param lamda Scaling factor
+ * @return fromStandard Real-world parameters
+ */
 fromStandard scaleFromStandard(double sc_s1, double sc_s2, double sc_s3, double lamda)
 {
   fromStandard ret;
@@ -55,6 +78,14 @@ fromStandard scaleFromStandard(double sc_s1, double sc_s2, double sc_s3, double 
   return ret;
 }
 
+/**
+ * @brief Computes the normalized sinc function.
+ * 
+ * Approximates sinc(t) = sin(t)/t with a Taylor expansion for small |t| to avoid division by zero.
+ * 
+ * @param t Input value
+ * @return double Value of sinc(t)
+ */
 double sinc(double t)
 {
   double s;
@@ -69,6 +100,12 @@ double sinc(double t)
   return s;
 };
 
+/**
+ * @brief Normalizes an angle to the [0, 2π) range.
+ * 
+ * @param angle Angle in radians
+ * @return double Normalized angle
+ */
 double mod2pi(double angle)
 {
   double ret = angle;
@@ -83,6 +120,12 @@ double mod2pi(double angle)
   return ret;
 };
 
+/**
+ * @brief Normalizes an angle to the [-π, π) range.
+ * 
+ * @param angle Angle in radians
+ * @return double Normalized angle
+ */
 double rangeSymm(double angle)
 {
   double ret = angle;
@@ -97,6 +140,16 @@ double rangeSymm(double angle)
   return ret;
 };
 
+/**
+ * @brief Generates an arc based on curvature and length.
+ * 
+ * @param L Length of arc
+ * @param x0 Initial x
+ * @param y0 Initial y
+ * @param th0 Initial heading
+ * @param k Curvature
+ * @return arcVar Final pose on arc
+ */
 arcVar circLine(double L, double x0, double y0, double th0, double k)
 {
   arcVar arc;
@@ -107,6 +160,22 @@ arcVar circLine(double L, double x0, double y0, double th0, double k)
   return arc;
 };
 
+/**
+ * @brief Checks if a triple-segment Dubins path satisfies endpoint constraints.
+ * 
+ * Used to verify if a particular segment configuration solves the boundary value problem.
+ * 
+ * @param s1 Length of first segment
+ * @param k0 Curvature of first segment
+ * @param s2 Length of second segment
+ * @param k1 Curvature of second segment
+ * @param s3 Length of third segment
+ * @param k2 Curvature of third segment
+ * @param th0 Initial orientation
+ * @param thf Final orientation
+ * @return true If the configuration satisfies boundary conditions and path is valid
+ * @return false Otherwise
+ */
 bool check(double s1, double k0, double s2, double k1, double s3, double k2, double th0, double thf)
 {
   double x0 = -1;
@@ -123,6 +192,16 @@ bool check(double s1, double k0, double s2, double k1, double s3, double k2, dou
   return ret;
 };
 
+/**
+ * @brief Constructs a single Dubins arc.
+ * 
+ * @param x0 Initial x
+ * @param y0 Initial y
+ * @param th0 Initial heading
+ * @param k Curvature
+ * @param L Arc length
+ * @return dubinsCurve Curve struct with initial and final poses
+ */
 dubinsCurve dubinsArc(double x0, double y0, double th0, double k, double L)
 {
   dubinsCurve c;
@@ -135,6 +214,20 @@ dubinsCurve dubinsArc(double x0, double y0, double th0, double k, double L)
   return c;
 };
 
+/**
+ * @brief Combines three Dubins arcs into a triple segment curve.
+ * 
+ * @param x0 Initial x
+ * @param y0 Initial y
+ * @param th0 Initial heading
+ * @param s1 Length of first segment
+ * @param s2 Length of second segment
+ * @param s3 Length of third segment
+ * @param k0 Curvature of first segment
+ * @param k1 Curvature of second segment
+ * @param k2 Curvature of third segment
+ * @return tripleDubinsCurve Combined Dubins path
+ */
 tripleDubinsCurve dubinsCur(double x0, double y0, double th0, double s1, double s2, double s3, double k0, double k1, double k2)
 {
   tripleDubinsCurve d;
@@ -147,6 +240,14 @@ tripleDubinsCurve dubinsCur(double x0, double y0, double th0, double s1, double 
   return d;
 };
 
+/**
+ * @brief Computes the LSL (Left-Straight-Left) Dubins path solution.
+ * 
+ * @param th0 Start orientation
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return solution Struct containing segment lengths and feasibility
+ */
 solution LSL(double th0, double thf, double Kmax)
 {
   solution ret;
@@ -172,6 +273,14 @@ solution LSL(double th0, double thf, double Kmax)
   return ret;
 }
 
+/**
+ * @brief Computes the RSR (Right-Straight-Right) Dubins path solution.
+ * 
+ * @param th0 Start orientation
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return solution Struct containing segment lengths and feasibility
+ */
 solution RSR(double th0, double thf, double Kmax)
 {
   solution ret;
@@ -197,6 +306,14 @@ solution RSR(double th0, double thf, double Kmax)
   return ret;
 }
 
+/**
+ * @brief Computes the LSR (Left-Straight-Right) Dubins path solution.
+ * 
+ * @param th0 Start orientation
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return solution Struct containing segment lengths and feasibility
+ */
 solution LSR(double th0, double thf, double Kmax)
 {
   solution ret;
@@ -223,6 +340,14 @@ solution LSR(double th0, double thf, double Kmax)
   return ret;
 }
 
+/**
+ * @brief Computes the RSL (Right-Straight-Left) Dubins path solution.
+ * 
+ * @param th0 Start orientation
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return solution Struct containing segment lengths and feasibility
+ */
 solution RSL(double th0, double thf, double Kmax)
 {
   solution ret;
@@ -249,6 +374,15 @@ solution RSL(double th0, double thf, double Kmax)
   return ret;
 }
 
+
+/**
+ * @brief Computes the RLR (Right-Left-Right) Dubins path solution.
+ * 
+ * @param th0 Start orientation
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return solution Struct containing segment lengths and feasibility
+ */
 solution RLR(double th0, double thf, double Kmax)
 {
   solution ret;
@@ -273,6 +407,14 @@ solution RLR(double th0, double thf, double Kmax)
   return ret;
 }
 
+/**
+ * @brief Computes the LRL (Left-Right-Left) Dubins path solution.
+ * 
+ * @param th0 Start orientation
+ * @param thf Goal orientation
+ * @param Kmax Maximum curvature
+ * @return solution Struct containing segment lengths and feasibility
+ */
 solution LRL(double th0, double thf, double Kmax)
 {
   solution ret;
@@ -298,6 +440,13 @@ solution LRL(double th0, double thf, double Kmax)
   return ret;
 }
 
+/**
+ * @brief Samples a Dubins path at regular intervals.
+ * 
+ * @param path The triple Dubins curve
+ * @param step Sampling resolution
+ * @return std::vector<Point> Sampled path points
+ */
 std::vector<Point> sampleDubinsPath(const tripleDubinsCurve &path, double step)
 {
   std::vector<Point> samples;
@@ -309,6 +458,15 @@ std::vector<Point> sampleDubinsPath(const tripleDubinsCurve &path, double step)
   return samples;
 }
 
+/**
+ * @brief Checks whether a point is too close to the map border.
+ * 
+ * @param p Point to test
+ * @param margin Minimum distance to border
+ * @param mBorders List of map border points
+ * @return true If point is too close to any border segment
+ * @return false Otherwise
+ */
 bool isTooCloseToBorder(const Point &p, double margin, const std::vector<Point> &mBorders)
 {
   if (mBorders.size() < 2)
@@ -345,6 +503,20 @@ bool isTooCloseToBorder(const Point &p, double margin, const std::vector<Point> 
   return false;
 }
 
+/**
+ * @brief Computes the shortest collision-free Dubins path.
+ * 
+ * @param x0 Start x
+ * @param y0 Start y
+ * @param th0 Start orientation
+ * @param xf Goal x
+ * @param yf Goal y
+ * @param thf Goal orientation
+ * @param obstacles List of obstacles
+ * @param sampleStep Step size for sampling
+ * @param borders Map borders for collision check
+ * @return curve Shortest feasible Dubins path
+ */
 curve dubinsShortestPath(double x0, double y0, double th0,
                          double xf, double yf, double thf,
                          const std::vector<Obstacle> &obstacles,
@@ -398,7 +570,6 @@ curve dubinsShortestPath(double x0, double y0, double th0,
 
     if (collides)
     {
-      // std::cout << "Rejected: " << curvNames[i] << " due to collision.\n";
       continue;
     }
 
@@ -412,11 +583,6 @@ curve dubinsShortestPath(double x0, double y0, double th0,
       pidx = i;
     }
 
-    /* std::cout << curvNames[i] << " L = " << Lcur * var.lamda
-              << ", s1 = " << sol.s1 * var.lamda
-              << ", s2 = " << sol.s2 * var.lamda
-              << ", s3 = " << sol.s3 * var.lamda
-              << "\n"; */
   }
 
   if (pidx >= 0)
@@ -430,7 +596,7 @@ curve dubinsShortestPath(double x0, double y0, double th0,
   }
   else
   {
-    // std::cerr << "No collision-free Dubins path found.\n";
+    //std::cerr << "No collision-free Dubins path found.\n";
   }
 
   res.curvType = pidx;
@@ -438,50 +604,15 @@ curve dubinsShortestPath(double x0, double y0, double th0,
   return res;
 }
 
-/*
-curve dubinsShortestPath(double x0, double y0, double th0, double xf, double yf, double thf){
-  toStandard var = scaleToStandard(x0, y0, th0, xf, yf, thf, Kmax);
-  fromStandard ret;
-  double s1, s2, s3;
-  curve res;
-  tripleDubinsCurve dubinsRes;
-
-  solution (* primitivesPtr[]) (double th0, double thf, double Kmax) = {LSL, RSR, LSR, RSL, RLR, LRL};
-  int pidx = -1;
-  solution sol;
-  double L=0;
-  double Lcur=0;
-
-  sol = (*primitivesPtr[0])(var.sc_th0, var.sc_thf, var.sc_Kmax);
-  L = sol.s1+sol.s2+sol.s3+1; //added 1 to make it longer than the real first value, to take it into consieration with the loop
-  for(int i=0;i<6;i++){
-    sol = (*primitivesPtr[i])(var.sc_th0, var.sc_thf, var.sc_Kmax);
-    Lcur = sol.s1+sol.s2+sol.s3;
-    if(sol.ok && Lcur < L){
-      L = Lcur;
-      s1 = sol.s1;
-      s2 = sol.s2;
-      s3 = sol.s3;
-      pidx = i;
-    }
-    std::cout << curvNames[i] << " L = " << Lcur*var.lamda << ", " << "s1 = " << sol.s1*var.lamda << " s2 = " << sol.s2*var.lamda << " s3 = " << sol.s3*var.lamda<< "\n";
-  }
-  if(pidx>=0){
-    ret = scaleFromStandard(s1, s2, s3, var.lamda);
-    dubinsRes = dubinsCur(x0, y0, th0, ret.s1, ret.s2, ret.s3, ksigns[pidx][0]*Kmax, ksigns[pidx][1]*Kmax, ksigns[pidx][2]*Kmax);
-  }
-
-  res.curvType = pidx;
-  res.values = dubinsRes;
-  return res;
-} */
-
+/**
+ * @brief Plots the points along a single Dubins arc.
+ * 
+ * @param arc The Dubins arc
+ * @param plt Output vector of arc points
+ */
 void plotArc(dubinsCurve arc, std::vector<arcVar> &plt)
 {
-  // int nPts=arc.L/0.2;
   int nPts = std::max(1, static_cast<int>(arc.L / 0.2));
-  // std::cout << "nPts: " << nPts << "\n";
-  //  int nPts=30; //to be changed to given distance and not fixed one
   double s;
 
   for (int i = 0; i < nPts; i++)
@@ -491,6 +622,12 @@ void plotArc(dubinsCurve arc, std::vector<arcVar> &plt)
   }
 }
 
+/**
+ * @brief Plots all three arcs of a full Dubins curve.
+ * 
+ * @param dubCurv The full triple segment Dubins path
+ * @return std::vector<arcVar> Sampled points along the full path
+ */
 std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv)
 {
   std::vector<arcVar> plot;
@@ -502,6 +639,14 @@ std::vector<arcVar> plotDubins(tripleDubinsCurve dubCurv)
   return plot;
 }
 
+/**
+ * @brief Checks if a Dubins curve is collision-free.
+ * 
+ * @param dubinsCurve Sampled points of Dubins path
+ * @param obstacles List of obstacles
+ * @return true If path is free of collisions
+ * @return false If any point is in collision
+ */
 bool isPathCollisionFree(std::vector<arcVar> &dubinsCurve, const std::vector<Obstacle> &obstacles)
 {
   for (const arcVar &arc : dubinsCurve)
@@ -520,6 +665,12 @@ bool isPathCollisionFree(std::vector<arcVar> &dubinsCurve, const std::vector<Obs
   return true; // All points are safe
 }
 
+/**
+ * @brief Normalizes angle to [-π, π].
+ * 
+ * @param angle Input angle
+ * @return double Normalized angle
+ */
 double normalizeAngle(double angle)
 {
   while (angle > M_PI)
@@ -529,6 +680,12 @@ double normalizeAngle(double angle)
   return angle;
 }
 
+/**
+ * @brief Computes the total length of a path.
+ * 
+ * @param path List of arc points
+ * @return double Total Euclidean length
+ */
 double computePathLength(const std::vector<arcVar> &path)
 {
   double totalLength = 0.0;
@@ -541,12 +698,31 @@ double computePathLength(const std::vector<arcVar> &path)
   return totalLength;
 }
 
+
+/**
+ * @brief Estimates the time to traverse a path at constant velocity.
+ * 
+ * @param path List of arc points
+ * @return double Time in seconds
+ */
 double computePathTime(const std::vector<arcVar> &path)
 {
   double length = computePathLength(path);
   return length / VELOCITY;
 }
 
+/**
+ * @brief Optimizes orientation angles for a set of points using Dubins curves.
+ * 
+ * @param points Waypoints
+ * @param th0 Start orientation
+ * @param thf Final orientation
+ * @param k Number of coarse samples
+ * @param m Number of refinement iterations
+ * @param obstacles List of obstacles
+ * @param borders Map borders
+ * @return std::vector<double> Optimized orientation angles
+ */
 std::vector<double> optimizeAngles(
     const std::vector<Point> &points,
     double th0,
@@ -697,80 +873,44 @@ std::vector<double> optimizeAngles(
   return ths;
 }
 
-/*
- /// Optimizes heading angles using a coarse-to-fine sampling method
-std::vector<double> optimizeAngles(std::vector<Point> points, double th0, double thf, int k, int m, const std::vector<Obstacle>& obstacles, const std::vector<Point>& borders) {
-    double h = 2 * M_PI / k;
-    std::vector<double> ths;
-    ths.push_back(th0);
-
-    for (std::size_t i = 0; i < points.size() - 1; ++i) {
-        double thi = ths[i];
-        double bestTh = 0;
-        double minL = std::numeric_limits<double>::infinity();
-
-        if (i != points.size() - 2) {
-            // Coarse sampling
-            for (int a = 0; a < k; ++a) {
-                double th = fmod(a * h, 2 * M_PI);
-
-                double length = dubinsShortestPath(
-                    points[i].getX(), points[i].getY(), thi,
-                    points[i+1].getX(), points[i+1].getY(), th, obstacles, 0.2, borders
-                ).values.L;
-
-                if (length < minL && length > 0) {
-                    minL = length;
-                    bestTh = th;
-                }
-
-
-            }
-
-            // Refinement loop
-            for (int r = 0; r < m; ++r) {
-                h = 2 * M_PI * (pow(3, r) / pow(2 * k, r));
-
-                double localBestTh = bestTh;
-                double localMinL = minL;
-
-                for (double j = -1.5 * h; j <= 1.5 * h; j += h) {
-                    double th = fmod(bestTh + j + 2 * M_PI, 2 * M_PI);
-                    double length = dubinsShortestPath(
-                        points[i].getX(), points[i].getY(), thi,
-                        points[i+1].getX(), points[i+1].getY(), th, obstacles, 0.2, borders
-                    ).values.L;
-
-                    if (length < localMinL && length > 0) {
-                        localMinL = length;
-                        localBestTh = th;
-                    }
-                }
-
-                bestTh = localBestTh;
-                minL = localMinL;
-            }
-
-            ths.push_back(bestTh);
-        } else {
-            // Last segment: fix to final angle
-            ths.push_back(thf);
-        }
-    }
-
-    return ths;
-}*/
-
+/**
+ * @brief Get the list of segments where the path planning failed due to collisions.
+ * 
+ * @return std::vector<std::pair<Point, Point>> Vector of pairs of Points representing failed segments.
+ */
 std::vector<std::pair<Point, Point>> getFailedSegments()
 {
   return failedSegments_;
 }
+
+/**
+ * @brief Get the list of segments that resulted in paths exceeding the maximum allowed time.
+ * 
+ * @return std::vector<std::pair<Point, Point>> Vector of pairs of Points representing slow segments.
+ */
 std::vector<std::pair<Point, Point>> getSlowSegments()
 {
   return slowSegments_;
 }
 
-// need to check if the path is colliding with any object with at +/- distance (2/3 width of the robot)
+
+/**
+ * @brief Plans a multi-point Dubins path through given waypoints while considering obstacles, borders, and a maximum time constraint.
+ * 
+ * This function optimizes the heading angles at the waypoints, computes the shortest Dubins paths between consecutive points,
+ * checks for collisions and proximity to obstacles or borders at each discretized point, and accumulates time to enforce a maximum allowed traversal duration.
+ * If a collision is detected or the time limit is exceeded, the function records the problematic segments and returns an empty plan.
+ * 
+ * @param points Vector of Point objects representing the waypoints of the path.
+ * @param th0 Initial heading angle at the first point.
+ * @param thf Final heading angle at the last point.
+ * @param k Parameter related to the optimization process.
+ * @param m Parameter related to the optimization process.
+ * @param obstacles Vector of Obstacle objects to check collisions against.
+ * @param borders Vector of Point objects defining the border polygon or boundary.
+ * @param maxTime Maximum allowed time (in seconds) for traversing the entire planned path.
+ * @return std::vector<arcVar> The planned path as a vector of arcVar points; empty if a collision or time violation occurs.
+ */
 std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, double th0, double thf, int k, int m, std::vector<Obstacle> &obstacles, std::vector<Point> &borders, int maxTime)
 {
   std::vector<arcVar> plan;
@@ -801,7 +941,7 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, doubl
       Point p{arc.x, arc.y};
 
       /* -------------------------------------------------------------------------------------------------------------------------------- */
-      // Время
+      // limitation of the time
       if (j > 0)
       {
         double dx = arc.x - planTmp[j - 1].x;
@@ -817,13 +957,14 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, doubl
         Point segmentEnd = points[i + 1];
         Point goal = points.back();
 
-        if (segmentEnd.computeEuclideanDistance(goal) <= 1.0)
+        // we were using this for the sample based - bc its the probabilistic generator
+        /* if (segmentEnd.computeEuclideanDistance(goal) <= 1.0)
         {
           std::cout << "Path exceeds time but ends close to goal at ("
                     << segmentEnd.getX() << ", " << segmentEnd.getY()
                     << "), skipping stop.\n";
           continue;
-        }
+        } */
 
         std::cout << "Path time exceeded " << maxTime << "s while accumulatedTime " << accumulatedTime << "s during segment ("
                   << points[i].getX() << ", " << points[i + 1].getY() << ")\n";
@@ -851,7 +992,7 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, doubl
 
       /* -------------------------------------------------------------------------------------------------------------------------------- */
 
-      // Препятствия, границы
+      // if the final path collides with obstacles/borders
       for (const auto &obs : obstacles)
       {
         if (obs.isInsideObstacle(p) || obs.isTooCloseToObstacle(p, 0.3f) || isTooCloseToBorder(p, 0.3f, borders))
@@ -876,48 +1017,12 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, doubl
         }
       }
       /* -------------------------------------------------------------------------------------------------------------------------------- */
-      /* // Время
-      if (j > 0)
-      {
-        double dx = arc.x - planTmp[j - 1].x;
-        double dy = arc.y - planTmp[j - 1].y;
-        double dist = std::hypot(dx, dy);
-        accumulatedTime += dist / VELOCITY;
-      }
 
-      if (accumulatedTime > 60)
-      {
-          std::cout << "Path time exceeded " << maxTime << "s while accumulatedTime " << accumulatedTime << "s during segment ("
-                    << points[i].getX() << ", " << points[i].getY() << ") -> ("
-                    << points[i + 1].getX() << ", " << points[i + 1].getY() << ")\n";
-
-          // Добавляем все предыдущие сегменты
-          for (size_t k = 0; k <= i; ++k)
-          {
-              Point s1 = points[k];
-              Point s2 = points[k + 1];
-
-              bool alreadyExists = std::any_of(slowSegments_.begin(), slowSegments_.end(),
-                                              [&](const std::pair<Point, Point> &seg)
-                                              {
-                                                  return (seg.first == s1 && seg.second == s2) ||
-                                                          (seg.first == s2 && seg.second == s1);
-                                              });
-
-              if (!alreadyExists)
-              {
-                  slowSegments_.emplace_back(s1, s2);
-              }
-          }
-
-          return {};
-      }
- */
-      /* -------------------------------------------------------------------------------------------------------------------------------- */
     }
   }
 
   return plan;
+
 }
 
 /*

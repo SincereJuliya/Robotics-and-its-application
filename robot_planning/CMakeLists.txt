@@ -35,13 +35,17 @@ add_executable(taskPlannerNode
   src/graph.cpp 
   src/point.cpp 
   src/IPathPlanner.cpp
-  src/AStar.cpp
+  src/obstacles.cpp
+  #src/AStar.cpp
+  src/agreedy.cpp
+  src/victim.cpp
 )
 add_executable(followPath src/followPath.cpp)
 add_executable(motionPlannerNode 
   src/MotionPlannerNode.cpp
   src/point.cpp 
   src/multiPointMarkovDubins.cpp
+  src/obstacles.cpp
 )
 
 ament_target_dependencies(mapGeneratorNode
@@ -54,7 +58,7 @@ ament_target_dependencies(mapGeneratorNode
   nav_msgs
   nav2_msgs
 )
-ament_target_dependencies(taskPlannerNode rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg motion_planner_msgs)
+ament_target_dependencies(taskPlannerNode rclcpp std_msgs geometry_msgs obstacles_msgs graph_for_task_planner_msg motion_planner_msgs tf2_geometry_msgs tf2)
 ament_target_dependencies(motionPlannerNode
   rclcpp
   motion_planner_msgs
@@ -62,9 +66,11 @@ ament_target_dependencies(motionPlannerNode
   graph_for_task_planner_msg
   tf2
   tf2_geometry_msgs
+  obstacles_msgs
 )
 
 ament_target_dependencies(followPath rclcpp rclcpp_components rclcpp_action nav2_msgs std_msgs nav_msgs tf2 tf2_geometry_msgs geometry_msgs)
+
 
 install(TARGETS
   mapGeneratorNode

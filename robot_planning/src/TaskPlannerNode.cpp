@@ -176,6 +176,7 @@ void TaskPlannerNode::victimsCallback(const obstacles_msgs::msg::ObstacleArrayMs
         RCLCPP_WARN(this->get_logger(), "Victims already received, ignoring new message.");
         return; // Ignore if victims are already set
     }
+}
 
     victims_.clear();
     for (const auto &obstacle : msg->obstacles)

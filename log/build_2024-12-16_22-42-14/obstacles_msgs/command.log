@@ -1,2 +1,0 @@
-Invoking command in '/home/seventeen/Robotics-and-its-application/build/obstacles_msgs': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/obstacles_msgs -- -j8 -l8
-Invoked command in '/home/seventeen/Robotics-and-its-application/build/obstacles_msgs' returned '2': /home/seventeen/.local/bin/cmake --build /home/seventeen/Robotics-and-its-application/build/obstacles_msgs -- -j8 -l8
