@@ -958,15 +958,6 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, doubl
         Point segmentEnd = points[i + 1];
         Point goal = points.back();
 
-        // we were using this for the sample based - bc its the probabilistic generator
-        /* if (segmentEnd.computeEuclideanDistance(goal) <= 1.0)
-        {
-          std::cout << "Path exceeds time but ends close to goal at ("
-                    << segmentEnd.getX() << ", " << segmentEnd.getY()
-                    << "), skipping stop.\n";
-          continue;
-        } */
-
         std::cout << "Path time exceeded " << maxTime << "s while accumulatedTime " << accumulatedTime << "s during segment ("
                   << points[i].getX() << ", " << points[i + 1].getY() << ")\n";
 
@@ -1025,23 +1016,3 @@ std::vector<arcVar> multiPointMarvkovDubinsPlan(std::vector<Point> points, doubl
   return plan;
 
 }
-
-/*
-int main(){
-  std::vector<Point> pts = { Point{67.91, 124.28}, Point{872.23, 452.31}, Point{290.71, 117.93}};
-  double th0 = 3.33;
-  double thf = 6.12;
-  std::vector<double> optAngles = optimizeAngles(pts, th0, thf, 2, 2);
-
-  std::cout << "number of angles: " << optAngles.size() << "\n";
-  std::cout << "number of points: " << pts.size() << "\n";
-
-  std::vector<arcVar> plan = multiPointMarvkovDubinsPlan(pts, th0, thf);
-
-  for (std::vector<arcVar>::size_type z=0; z < plan.size(); z++){
-      std::cout << "pt: " << plan[z].x << ", " << plan[z].y << ", " << plan[z].th << "\n";  ;
-  }
-
-
-  return 0;
-}*/
