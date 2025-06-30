@@ -27,6 +27,11 @@ gnome-terminal --title="followPath" -- bash -c "
     -p goal_checker_id:=goal_checker;
   exec bash"
 
+# Follow Path
+gnome-terminal --title="create_map_pgm" -- bash -c "
+  ros2 run map_pkg create_map_pgm.py --ros-args --params-file /home/sincerejuliya/Documents/ra/src/Shelfino_ROS2/map_pkg/config/demos/victims/victims4.yaml;
+  exec bash"
+
 # Victim Launcher
 gnome-terminal --title="victims.launch.py" -- bash -c "
   ros2 launch projects victims.launch.py \
@@ -34,5 +39,5 @@ gnome-terminal --title="victims.launch.py" -- bash -c "
     use_gui:=false \
     use_sim_time:=true \
     spawn_shelfino:=true \
-    gen_map_params_file:=/home/sincerejuliya/Documents/ra/src/Shelfino_ROS2/map_pkg/config/demos/victims/victims3.yaml;
+    gen_map_params_file:=/home/sincerejuliya/Documents/ra/src/Shelfino_ROS2/map_pkg/config/demos/victims/victims4.yaml;
   exec bash"

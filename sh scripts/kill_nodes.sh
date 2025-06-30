@@ -10,10 +10,12 @@ pkill -f "/opt/ros/humble/bin/ros2"
 pkill -f "/opt/ros/humble"
 pkill -9 -f "/opt/ros/humble/bin/ros2"
 pkill ros2
-pkill -f "gzserver /home/sincerejuliya/"
-pkill -9 -f "gzserver /home/sincerejuliya/"
-pkill -f "/home/sincerejuliya/Documents/ra/src/"
-pkill -9 -f "/home/sincerejuliya/Documents/ra/src/"
+
+# if you want to kill gzserver processes, uncomment the following lines and change the path accordingly
+#pkill -f "gzserver /home/sincerejuliya/"
+#pkill -9 -f "gzserver /home/sincerejuliya/"
+#pkill -f "/home/sincerejuliya/Documents/ra/src/"
+#pkill -9 -f "/home/sincerejuliya/Documents/ra/src/"
 
 pkill -f "ros2 launch projects victims.launch.py"
 pkill -f "ros2 run robot_planning mapGeneratorNode"
