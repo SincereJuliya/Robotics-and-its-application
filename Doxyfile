@@ -1,0 +1,37 @@
+# Project info
+PROJECT_NAME           = "Robot Planning and it's Application"
+PROJECT_BRIEF          = "Documentation for victims rescue project"
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+OUTPUT_LANGUAGE        = English
+EXTRACT_ALL            = YES
+
+# Input 
+INPUT                  = robot_planning
+RECURSIVE              = YES
+FILE_PATTERNS          = *.cpp *.h *.hpp *.msg *.srv *.action
+
+# Build options
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Preprocessing
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+
+# Source Browser
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+
+# HTML Output
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+# LaTeX Output
+GENERATE_LATEX         = NO
+
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+DOT_NUM_THREADS        = 2
