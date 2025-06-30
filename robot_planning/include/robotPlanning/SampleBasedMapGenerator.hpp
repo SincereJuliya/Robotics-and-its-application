@@ -6,6 +6,8 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <random>
 
 class SampleBasedMapGenerator : public IMapGenerator {
 public:
@@ -13,7 +15,6 @@ public:
     ~SampleBasedMapGenerator() override = default;
 
     // IMapGenerator interface
-    
     void setGates(const std::vector<Point>& gates) override;
     void setBorders(const std::vector<Point>& borders) override;
     void setObstacles(const std::vector<Obstacle>& obstacles) override;

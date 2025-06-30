@@ -12,6 +12,7 @@
 #include "../include/robotPlanning/multiPointMarkovDubins.hpp"
 #include "../include/robotPlanning/obstacles.hpp"
 
+#define VELOCITY 0.26              // Robot velocity 
 const float minDistObs = 0.3f;     // Minimum distance to obstacles
 const float minDistBorder = 0.35f; // Minimum distance to borders
 

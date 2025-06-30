@@ -38,11 +38,10 @@ public:
     std::unique_ptr<AStarGreedy> planner;
 
 private:
-    std::unique_ptr<IPathPlanner> planner_;
     Graph graph_;
-
+    // default
     int attempt_count_ = 0;
-    int victimsTimeout_ = 40;
+    int victimsTimeout_ = 40; 
     double th_current_goal_ = 0.0;
     Point start;
     std::vector<double> th_gates_;
@@ -73,7 +72,6 @@ private:
     rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr victims_timeout_subscriber_;
 
     rclcpp::Client<motion_planner_msgs::srv::ValidatePath>::SharedPtr motion_planner_client_;
-
 
     rclcpp::QoS get_transient_qos(size_t depth = 10);
 

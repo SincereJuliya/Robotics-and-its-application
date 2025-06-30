@@ -142,6 +142,23 @@ void TaskPlannerNode::startCallback(const geometry_msgs::msg::PoseWithCovariance
 
 /// @brief
 /// @param msg
+/**
+ * @brief Callback function to process the received graph message and initialize the planner.
+ *
+ * This function is triggered when a new graph message is received. It processes the vertices
+ * and edges from the message to construct a graph representation. If a graph has already
+ * been received, the function logs a warning and ignores the new message. Once the graph
+ * is constructed, it initializes an A* Greedy planner instance and attempts to generate a path.
+ *
+ * @param msg Shared pointer to the received graph message of type graph_for_task_planner_msg::msg::Graph.
+ *
+ * The graph message contains:
+ * - A list of vertices, each represented by x and y coordinates.
+ * - A list of edges, each defined by a start point and an end point with x and y coordinates.
+ *
+ * @note This function ensures that only the first received graph is processed. Subsequent
+ * messages are ignored to prevent overwriting the existing graph.
+ */
 void TaskPlannerNode::graphCallback(const graph_for_task_planner_msg::msg::Graph::SharedPtr msg)
 {
     if (graph_received_)
@@ -167,8 +184,16 @@ void TaskPlannerNode::graphCallback(const graph_for_task_planner_msg::msg::Graph
     attemptGenerate(); // Start path generation attempt
 }
 
-/// @brief
-/// @param msg
+/**
+ * @brief Callback function to process received victim obstacle messages.
+ * 
+ * This function processes an incoming ObstacleArrayMsg to extract victim information.
+ * It clears any previously stored victims, constructs Victim objects from the received
+ * obstacles, and stores them in the victims_ list. If victims have already been received,
+ * the function logs a warning and ignores the new message.
+ * 
+ * @param msg Shared pointer to the received ObstacleArrayMsg containing obstacle data.
+ */
 void TaskPlannerNode::victimsCallback(const obstacles_msgs::msg::ObstacleArrayMsg::SharedPtr msg)
 {
     if (victims_received_)
@@ -176,7 +201,6 @@ void TaskPlannerNode::victimsCallback(const obstacles_msgs::msg::ObstacleArrayMs
         RCLCPP_WARN(this->get_logger(), "Victims already received, ignoring new message.");
         return; // Ignore if victims are already set
     }
-}
 
     victims_.clear();
     for (const auto &obstacle : msg->obstacles)
@@ -333,7 +357,7 @@ void TaskPlannerNode::attemptGenerate()
 
     RCLCPP_INFO(this->get_logger(), "Generating path on attempt %d", attempt_count_);
 
-    std::vector<Point> path = generatePath(attempt_count_);
+    std::vector<Point> path = generatePath(attempt_count_); // Generation!! 
 
     validatePath(path); // Use the async version with callback
 }
@@ -450,20 +474,14 @@ std::vector<Point> TaskPlannerNode::generatePath(int attempt)
         RCLCPP_INFO(this->get_logger(), "Planning A* from (%.2f, %.2f) to (%.2f, %.2f)", start.getX(), start.getY(), goal.getX(), goal.getY());
 
         double timeLimit = victimsTimeout_;
-
-        double baseLimit = timeLimit * VELOCITY; // Normal base length
-
-        double decayFactor = 0.9;                                            // Try reducing by 10% per attempt (for example)
-        double pathLimit = baseLimit /* * std::pow(decayFactor, attempt) */; // Reduce path limit based on attempt number
-
-        RCLCPP_INFO(this->get_logger(), "Time limit for A* Greedy: %.2f seconds, Path limit: %.2f meters", timeLimit, pathLimit);
+        RCLCPP_INFO(this->get_logger(), "Time limit for A* Greedy: %.2f seconds", timeLimit);
 
         planner = std::make_unique<AStarGreedy>(graph, victims_, start, goal, timeLimit, obstacles_, borders_);
 
         // print failed segments if any
         if (!failedSegments_.empty())
         {
-            processFailedSegments(*planner, failedSegments_, 1000);
+            processFailedSegments(*planner, failedSegments_, 1000); // add a penalty of 1000 to failed segments - didnt make define
             planner->buildMetaGraph();
             RCLCPP_WARN(this->get_logger(), "Processing %zu failed segments from previous attempts.", failedSegments_.size());
         }
@@ -480,6 +498,7 @@ std::vector<Point> TaskPlannerNode::generatePath(int attempt)
         std::vector<Point> bestPath = planner->run(valueCollected, attempt);
 
         std::cout << "Collected value: " << valueCollected << std::endl;
+        
         std::cout << "--------------------------------------------------------------------" << std::endl;
         std::cout << "--------------------------------------------------------------------" << std::endl;
 

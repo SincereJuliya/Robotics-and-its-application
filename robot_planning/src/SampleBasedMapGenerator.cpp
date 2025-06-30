@@ -1,17 +1,30 @@
 
 // SampleBasedMapGenerator.cpp
 #include "../include/robotPlanning/SampleBasedMapGenerator.hpp"
-#include <iostream>
-#include <random>
 
 const float minDistObs = 0.55f; // Minimum distance to obstacles
 const float minDistBor = 0.6f;  // Minimum distance to obstacles
 
+/**
+ * @brief Constructor for the SampleBasedMapGenerator class.
+ *
+ * This constructor initializes the random number generator with the current
+ * time as the seed. This ensures that the generated random numbers are
+ * different each time the program is run.
+ */
 SampleBasedMapGenerator::SampleBasedMapGenerator()
 {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 }
 
+/**
+ * @brief Retrieves the search radius used in the sample-based map generation.
+ * 
+ * This function returns a constant value representing the radius within which
+ * the search is performed during the map generation process.
+ * 
+ * @return The search radius as a floating-point value.
+ */
 float SampleBasedMapGenerator::getSearchRadius() const
 {
     return 5.0f;
@@ -32,6 +45,17 @@ void SampleBasedMapGenerator::setObstacles(const std::vector<Obstacle> &obstacle
     obstacles_ = obstacles;
 }
 
+/**
+ * @brief Generates a random floating-point position within a specified range.
+ *
+ * This function generates a random position within the range 
+ * [middle - r, middle + r] using a uniform distribution.
+ *
+ * @param middle The central value around which the random position is generated.
+ * @param r The range radius. The random position will be within the interval 
+ *          [middle - r, middle + r].
+ * @return A random floating-point value within the specified range.
+ */
 float SampleBasedMapGenerator::getRandomPosition(float middle, float r) const
 {
     /* return (middle - r) + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (2 * r))); */
@@ -41,6 +65,18 @@ float SampleBasedMapGenerator::getRandomPosition(float middle, float r) const
     return dis(gen);
 }
 
+/**
+ * @brief Generates a random point within a specified radius around an initial point, ensuring it satisfies certain constraints.
+ *
+ * This function generates a random point within a circular area defined by the given radius around the initial point.
+ * The generated point must meet the following conditions:
+ * 1. It must be inside the defined border and not too close to the border.
+ * 2. It must not be inside or too close to any obstacle in the environment.
+ *
+ * @param initP The initial point around which the random point is generated.
+ * @param radius The radius within which the random point is generated.
+ * @return A valid random point that satisfies the constraints.
+ */
 Point SampleBasedMapGenerator::getRandomPoint(const Point &initP, float radius) const
 {
     Point newP;
@@ -76,6 +112,16 @@ Point SampleBasedMapGenerator::getRandomPoint(const Point &initP, float radius) 
     return newP;
 }
 
+/**
+ * @brief Determines if a given point is inside the polygonal border.
+ *
+ * This function uses the ray-casting algorithm to check whether a point lies
+ * inside a polygon defined by the borders_ member variable. The polygon is
+ * assumed to be closed, with the last point connecting back to the first.
+ *
+ * @param p The point to check.
+ * @return True if the point is inside the border, false otherwise.
+ */
 bool SampleBasedMapGenerator::isInsideBorder(const Point &p) const
 {
     int n = static_cast<int>(borders_.size());
@@ -93,6 +139,19 @@ bool SampleBasedMapGenerator::isInsideBorder(const Point &p) const
     return inside;
 }
 
+/**
+ * @brief Checks if a given point is too close to the border of a defined area.
+ *
+ * This function determines whether a point lies within a specified margin
+ * from the borders of a polygonal area. The borders are defined as a series
+ * of connected points forming a closed loop.
+ *
+ * @param p The point to check.
+ * @param margin The minimum allowable distance from the border.
+ * @return true if the point is closer to the border than the specified margin,
+ *         or if the borders are not initialized (less than 2 points).
+ * @return false otherwise.
+ */
 bool SampleBasedMapGenerator::isTooCloseToBorder(const Point &p, double margin) const
 {
     if (borders_.size() < 2)
@@ -129,6 +188,17 @@ bool SampleBasedMapGenerator::isTooCloseToBorder(const Point &p, double margin) 
     return false;
 }
 
+/**
+ * @brief Checks if a given point is inside or too close to any obstacle.
+ * 
+ * This function iterates through all obstacles and determines whether the 
+ * specified point is either inside any obstacle or within a minimum distance 
+ * from any obstacle.
+ * 
+ * @param p The point to be checked.
+ * @return true If the point is inside or too close to any obstacle.
+ * @return false If the point is neither inside nor too close to any obstacle.
+ */
 bool SampleBasedMapGenerator::isInsideAnyObstacle(const Point &p) const
 {
     for (const auto &obs : obstacles_)
@@ -139,6 +209,16 @@ bool SampleBasedMapGenerator::isInsideAnyObstacle(const Point &p) const
     return false;
 }
 
+/**
+ * @brief Checks if a given point has reached any of the gates.
+ * 
+ * This function iterates through all the gates and determines if the 
+ * specified point is within or at a distance of zero from any gate.
+ * 
+ * @param p The point to check.
+ * @return true If the point has reached any gate.
+ * @return false If the point has not reached any gate.
+ */
 bool SampleBasedMapGenerator::isReachedGate(const Point &p) const
 {
     for (const auto &gate : gates_)
@@ -149,6 +229,17 @@ bool SampleBasedMapGenerator::isReachedGate(const Point &p) const
     return false;
 }
 
+/**
+ * @brief Computes the squared Euclidean distance between two points.
+ * 
+ * This function calculates the squared distance between two points `a` and `b`
+ * in a 2D space. The squared distance is used to avoid the computational cost
+ * of calculating the square root when the exact distance is not required.
+ * 
+ * @param a The first point.
+ * @param b The second point.
+ * @return The squared Euclidean distance between points `a` and `b`.
+ */
 float SampleBasedMapGenerator::computeDistance(const Point &a, const Point &b) const
 {
     float dx = b.getX() - a.getX();
@@ -156,6 +247,17 @@ float SampleBasedMapGenerator::computeDistance(const Point &a, const Point &b) c
     return dx * dx + dy * dy;
 }
 
+/**
+ * @brief Finds the nearest point in the graph to the given point.
+ * 
+ * This function iterates through all the vertices in the provided graph
+ * and computes the distance between each vertex and the given point. It
+ * returns the vertex that is closest to the given point.
+ * 
+ * @param graph The graph containing the vertices to search.
+ * @param p The point to which the nearest vertex is to be found.
+ * @return The vertex in the graph that is closest to the given point.
+ */
 Point SampleBasedMapGenerator::findNearest(const Graph &graph, const Point &p) const
 {
     const auto &verts = graph.getVertices();
@@ -173,6 +275,26 @@ Point SampleBasedMapGenerator::findNearest(const Graph &graph, const Point &p) c
     return nearest;
 }
 
+/**
+ * @brief Checks if the line segment between two points collides with any obstacle or border.
+ *
+ * This function interpolates points along the line segment between the given points `p1` and `p2`,
+ * and checks if any of these points are too close to an obstacle, inside an obstacle, or otherwise
+ * in collision with the environment.
+ *
+ * @param p1 The starting point of the line segment.
+ * @param p2 The ending point of the line segment.
+ * @return True if the line segment collides with an obstacle or border, false otherwise.
+ *
+ * @details
+ * - The number of interpolated points is determined by the distance between `p1` and `p2`,
+ *   with 3 samples per unit of distance.
+ * - For each interpolated point, the function checks:
+ *   - If the point is too close to any obstacle (using `isTooCloseToObstacle`).
+ *   - If the point is inside any obstacle (using `isInsideObstacle`).
+ * - If any of these checks return true, the function immediately returns true.
+ * - If no collisions are detected after checking all interpolated points, the function returns false.
+ */
 bool SampleBasedMapGenerator::collidesWithObstacleOrBorder(const Point &p1, const Point &p2) const
 {
     double distance = std::hypot(p2.getX() - p1.getX(), p2.getY() - p1.getY());
@@ -200,6 +322,20 @@ bool SampleBasedMapGenerator::collidesWithObstacleOrBorder(const Point &p1, cons
     return false; // No collision detected
 }
 
+/**
+ * @brief Connects a new point to all visible vertices in the graph.
+ *
+ * This function iterates through all vertices in the graph and attempts to 
+ * connect the given point to each vertex. A connection (edge) is added only 
+ * if the following conditions are met:
+ * - The vertex is not the same as the new point.
+ * - An edge between the new point and the vertex does not already exist.
+ * - The line segment between the new point and the vertex does not collide 
+ *   with any obstacles or borders.
+ *
+ * @param graph The graph to which the new point and edges belong.
+ * @param newP The new point to be connected to visible vertices in the graph.
+ */
 void SampleBasedMapGenerator::connectVisibleEdges(Graph &graph, const Point &newP) const
 {
     const auto &verts = graph.getVertices();
@@ -216,6 +352,30 @@ void SampleBasedMapGenerator::connectVisibleEdges(Graph &graph, const Point &new
 }
 
 // attempt to generate a graph based on random sampling
+/**
+ * @brief Generates a graph using a sample-based map generation algorithm.
+ * 
+ * This function creates a graph by sampling random points within a defined 
+ * search radius and connecting them with edges based on visibility and proximity 
+ * constraints. The graph is initialized with a starting point and iteratively 
+ * expanded by adding new vertices and edges.
+ * 
+ * @param init The initial point from which the graph generation starts.
+ * @return Graph The generated graph containing vertices and edges.
+ * 
+ * @note The function requires that gates, borders, and obstacles are properly 
+ *       initialized before calling. If any of these are missing, the function 
+ *       will return an empty graph and log an error message.
+ * 
+ * @details
+ * - The function clears any existing graph data before starting.
+ * - A maximum of 90 iterations is performed to sample new points.
+ * - Points are validated to ensure they are not inside obstacles, too close 
+ *   to borders, or duplicates of existing vertices.
+ * - New points are connected to the graph by adding edges to visible and 
+ *   valid neighbors.
+ * - The initial point is updated to the last added point after each iteration.
+ */
 Graph SampleBasedMapGenerator::generateGraph(const Point &init)
 {
     G_.clear();
